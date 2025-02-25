@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SPR25_SWD392_ClothingCustomization.props" />
+</Project>
