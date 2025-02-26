@@ -134,17 +134,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequestDTO"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequestDTO"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequestDTO"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           }
@@ -210,20 +210,16 @@
   },
   "components": {
     "schemas": {
-      "LoginRequestDTO": {
-        "required": [
-          "password",
-          "username"
-        ],
+      "LoginRequest": {
         "type": "object",
         "properties": {
-          "username": {
-            "minLength": 1,
-            "type": "string"
+          "userName": {
+            "type": "string",
+            "nullable": true
           },
           "password": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

@@ -9,6 +9,7 @@ namespace Repository.IRepository
 {
     public interface IUserRepository : IGenericRepository<User>
     {
+      Task<User> GetUserAccount(string username, string password);
 
     }
 }

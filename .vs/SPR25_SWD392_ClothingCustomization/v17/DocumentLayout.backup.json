@@ -1,0 +1,342 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{69F3CE45-2879-44F7-AA68-42B75BE4D33F}|Service\\Service.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\service\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F3CE45-2879-44F7-AA68-42B75BE4D33F}|Service\\Service.csproj|solutionrelative:service\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F3CE45-2879-44F7-AA68-42B75BE4D33F}|Service\\Service.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\service\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F3CE45-2879-44F7-AA68-42B75BE4D33F}|Service\\Service.csproj|solutionrelative:service\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\paymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\paymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\orderstagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\orderstagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\feedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\feedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\designelementrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\designelementrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\designarearepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\designarearepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\customizeproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\customizeproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\repository\\repository\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8217701B-587C-4DC6-8F42-94EAA4289AAA}|Repository\\Repository.csproj|solutionrelative:repository\\repository\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EB133F7-9CA2-4792-A7EF-FA7118807DC5}|SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\spr25_swd392_clothingcustomization\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EB133F7-9CA2-4792-A7EF-FA7118807DC5}|SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj|solutionrelative:spr25_swd392_clothingcustomization\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EB133F7-9CA2-4792-A7EF-FA7118807DC5}|SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj|d:\\fpt\\spr2025\\swd392\\spr25_swd392_clothingcustomization\\spr25_swd392_clothingcustomization\\spr25_swd392_clothingcustomization.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{0EB133F7-9CA2-4792-A7EF-FA7118807DC5}|SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj|solutionrelative:spr25_swd392_clothingcustomization\\spr25_swd392_clothingcustomization.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 21,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RoleRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\RoleRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\RoleRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\RoleRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\RoleRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:19:01.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\ProductRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\ProductRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\ProductRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:18:59.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{873151d0-cf2e-48cc-b4bf-ad0394f6a3c3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PaymentRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\PaymentRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\PaymentRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\PaymentRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\PaymentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:18:55.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OrderStageRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\OrderStageRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\OrderStageRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\OrderStageRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\OrderStageRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:18:51.006Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "OrderRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\OrderRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\OrderRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\OrderRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\OrderRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:18:46.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "NotificationRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\NotificationRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\NotificationRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\NotificationRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\NotificationRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:18:41.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FeedbackRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\FeedbackRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\FeedbackRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\FeedbackRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\FeedbackRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:18:35.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DesignElementRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\DesignElementRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\DesignElementRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\DesignElementRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\DesignElementRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:18:15.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DesignAreaRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\DesignAreaRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\DesignAreaRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\DesignAreaRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\DesignAreaRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:18:06.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\UserRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\UserRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:17:26.253Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CustomizeProductRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\CustomizeProductRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\CustomizeProductRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\CustomizeProductRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\CustomizeProductRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:12:47.318Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\Repository\\CategoryRepository.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository\\CategoryRepository.cs",
+              "RelativeToolTip": "Repository\\Repository\\CategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:12:43.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Service\\UnitOfWork.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\UnitOfWork.cs",
+              "RelativeToolTip": "Service\\UnitOfWork.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAAwJMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:07:34.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "Service\\IUnitOfWork.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\IUnitOfWork.cs",
+              "RelativeToolTip": "Service\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:07:32.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\Program.cs",
+              "RelativeDocumentMoniker": "SPR25_SWD392_ClothingCustomization\\Program.cs",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\Program.cs",
+              "RelativeToolTip": "SPR25_SWD392_ClothingCustomization\\Program.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAE0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-26T07:04:47.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SPR25_SWD392_ClothingCustomization.http",
+              "DocumentMoniker": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.http",
+              "RelativeDocumentMoniker": "SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.http",
+              "ToolTip": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.http",
+              "RelativeToolTip": "SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-02-26T07:04:42.57Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 932,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "BusinessObject.RequestDTO.RequestDTO\u002BLoginRequestDTO",
+        "Type": "SPR25_SWD392_ClothingCustomization.Controllers.UserController\u002BLoginRequest",
         "IsRequired": true
       }
     ],

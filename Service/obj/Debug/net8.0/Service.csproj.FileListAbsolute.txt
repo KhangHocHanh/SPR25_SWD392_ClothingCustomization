@@ -15,3 +15,4 @@ D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Service\obj\Debug\net8.
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Service\obj\Debug\net8.0\refint\Service.dll
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Service\obj\Debug\net8.0\Service.pdb
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Service\obj\Debug\net8.0\ref\Service.dll
+D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Service\obj\Debug\net8.0\Service.sourcelink.json

@@ -12,3 +12,4 @@ D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debu
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.pdb
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.genruntimeconfig.cache
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\ref\BusinessObject.dll
+D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.sourcelink.json

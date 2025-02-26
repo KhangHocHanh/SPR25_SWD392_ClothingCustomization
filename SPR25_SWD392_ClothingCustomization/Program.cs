@@ -80,10 +80,32 @@ builder.Services.AddScoped<IJWTService, JWTService>();
 //Đăng ký Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICustomizeProductRepository, CustomizeProductRepository>();
+builder.Services.AddScoped<IDesignAreaRepository, DesignAreaRepository>();
+builder.Services.AddScoped<IDesignElementRepository, DesignElementRepository>();
+builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IOrderStageRepository, OrderStageRepository>();
+
 
 // Đăng ký Service
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICustomizeProductService, CustomizeProductService>();
+builder.Services.AddScoped<IDesignAreaService, DesignAreaService>();
+builder.Services.AddScoped<IDesignElementService, DesignElementService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderStageService, OrderStageService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IRoleRepository,RoleRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 // Đăng ký AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));

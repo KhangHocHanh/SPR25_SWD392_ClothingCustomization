@@ -13,3 +13,4 @@ D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Repository\obj\Debug\ne
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Repository\obj\Debug\net8.0\refint\Repository.dll
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Repository\obj\Debug\net8.0\Repository.pdb
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Repository\obj\Debug\net8.0\ref\Repository.dll
+D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\Repository\obj\Debug\net8.0\Repository.sourcelink.json

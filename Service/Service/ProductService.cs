@@ -12,7 +12,7 @@ using static BusinessObject.ResponseDTO.ResponseDTO;
 
 namespace Service.Service
 {
-    public interface IProductService
+    public interface IProductService 
     {
         Task<ResponseDTO> GetListProductsAsync();
         Task<ResponseDTO> GetProductByIdAsync(int id);

@@ -90,3 +90,4 @@ D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\SPR25_SWD392_ClothingCu
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\SPR25_SWD392_ClothingCustomization\obj\Debug\net8.0\SPR25_SWD392_ClothingCustomization.pdb
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\SPR25_SWD392_ClothingCustomization\obj\Debug\net8.0\SPR25_SWD392_ClothingCustomization.genruntimeconfig.cache
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\SPR25_SWD392_ClothingCustomization\obj\Debug\net8.0\ref\SPR25_SWD392_ClothingCustomization.dll
+D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\SPR25_SWD392_ClothingCustomization\obj\Debug\net8.0\SPR25_SWD392_ClothingCustomization.sourcelink.json

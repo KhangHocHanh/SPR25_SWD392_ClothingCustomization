@@ -15,12 +15,13 @@ using static BusinessObject.ResponseDTO.ResponseDTO;
 
 namespace Service.Service
 {
-    public interface IUserService
+    public interface IUserService 
     {
         Task<ResponseDTO> GetListUsersAsync();
         Task<ResponseDTO> Login(LoginRequestDTO request);
+        Task<User> Authenticate(string username, string password);
     }
-    public class UserService : GenericRepository<User>, IUserService
+    public class UserService : IUserService
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -31,6 +32,10 @@ namespace Service.Service
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _jWTService = jWTService;
+        }
+        public async Task<User> Authenticate(string username, string password)
+        {
+            return await _unitOfWork.UserRepository.GetUserAccount(username, password);
         }
 
         public async Task<ResponseDTO> GetListUsersAsync()
@@ -60,9 +65,7 @@ namespace Service.Service
         {
             try
             {
-                var account = _unitOfWork.UserRepository.GetAll()
-                             .FirstOrDefault(x => x.Username!.ToLower() == request.Username.ToLower()
-                             && x.Password == request.Password);
+                var account = await _unitOfWork.UserRepository.GetUserAccount(request.Username, request.Password);
 
                 if (account == null)
                 {             
