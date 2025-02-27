@@ -15,6 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b52a6e03450391199afe831b7260e635c5b943a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+884d42cb4ff6c0c2f6856c9d8b9f49a96ede0be5")]
 [assembly: System.Reflection.AssemblyProductAttribute("SPR25_SWD392_ClothingCustomization")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SPR25_SWD392_ClothingCustomization")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
