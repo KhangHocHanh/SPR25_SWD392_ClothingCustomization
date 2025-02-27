@@ -12,3 +12,37 @@ D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debu
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.pdb
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.genruntimeconfig.cache
 D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\ref\BusinessObject.dll
+<<<<<<< Updated upstream
+=======
+D:\FPT\SPR2025\SWD392\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.sourcelink.json
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\bin\Debug\net8.0\BusinessObject.deps.json
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\bin\Debug\net8.0\BusinessObject.runtimeconfig.json
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\bin\Debug\net8.0\BusinessObject.dll
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\bin\Debug\net8.0\BusinessObject.pdb
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.csproj.AssemblyReference.cache
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.AssemblyInfoInputs.cache
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.AssemblyInfo.cs
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.csproj.CoreCompileInputs.cache
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.sourcelink.json
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.dll
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\refint\BusinessObject.dll
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.pdb
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\BusinessObject.genruntimeconfig.cache
+D:\GitHub\SPR25_SWD392_ClothingCustomization\BusinessObject\obj\Debug\net8.0\ref\BusinessObject.dll
+>>>>>>> Stashed changes
+D:\GitHub\SWD392_Project\BusinessObject\bin\Debug\net8.0\BusinessObject.deps.json
+D:\GitHub\SWD392_Project\BusinessObject\bin\Debug\net8.0\BusinessObject.runtimeconfig.json
+D:\GitHub\SWD392_Project\BusinessObject\bin\Debug\net8.0\BusinessObject.dll
+D:\GitHub\SWD392_Project\BusinessObject\bin\Debug\net8.0\BusinessObject.pdb
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.csproj.AssemblyReference.cache
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.AssemblyInfoInputs.cache
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.AssemblyInfo.cs
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.csproj.CoreCompileInputs.cache
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.sourcelink.json
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.dll
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\refint\BusinessObject.dll
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.pdb
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\BusinessObject.genruntimeconfig.cache
+D:\GitHub\SWD392_Project\BusinessObject\obj\Debug\net8.0\ref\BusinessObject.dll

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj": {}
+    "D:\\GitHub\\SWD392_Project\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj": {}
   },
   "projects": {
-    "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\BusinessObject\\BusinessObject.csproj": {
+    "D:\\GitHub\\SWD392_Project\\BusinessObject\\BusinessObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\BusinessObject\\BusinessObject.csproj",
+        "projectUniqueName": "D:\\GitHub\\SWD392_Project\\BusinessObject\\BusinessObject.csproj",
         "projectName": "BusinessObject",
-        "projectPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\BusinessObject\\BusinessObject.csproj",
-        "packagesPath": "C:\\Users\\zubek\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\BusinessObject\\obj\\",
+        "projectPath": "D:\\GitHub\\SWD392_Project\\BusinessObject\\BusinessObject.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\SWD392_Project\\BusinessObject\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\zubek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -42,9 +39,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -107,25 +103,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository.csproj": {
+    "D:\\GitHub\\SWD392_Project\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository.csproj",
+        "projectUniqueName": "D:\\GitHub\\SWD392_Project\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\zubek\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\obj\\",
+        "projectPath": "D:\\GitHub\\SWD392_Project\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\SWD392_Project\\Repository\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\zubek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -133,14 +125,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\BusinessObject\\BusinessObject.csproj": {
-                "projectPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\BusinessObject\\BusinessObject.csproj"
+              "D:\\GitHub\\SWD392_Project\\BusinessObject\\BusinessObject.csproj": {
+                "projectPath": "D:\\GitHub\\SWD392_Project\\BusinessObject\\BusinessObject.csproj"
               }
             }
           }
@@ -153,9 +146,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -176,25 +168,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\Service.csproj": {
+    "D:\\GitHub\\SWD392_Project\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\Service.csproj",
+        "projectUniqueName": "D:\\GitHub\\SWD392_Project\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\Service.csproj",
-        "packagesPath": "C:\\Users\\zubek\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\obj\\",
+        "projectPath": "D:\\GitHub\\SWD392_Project\\Service\\Service.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\SWD392_Project\\Service\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\zubek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -202,14 +190,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository.csproj": {
-                "projectPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Repository\\Repository.csproj"
+              "D:\\GitHub\\SWD392_Project\\Repository\\Repository.csproj": {
+                "projectPath": "D:\\GitHub\\SWD392_Project\\Repository\\Repository.csproj"
               }
             }
           }
@@ -222,9 +211,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -245,25 +233,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj": {
+    "D:\\GitHub\\SWD392_Project\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj",
+        "projectUniqueName": "D:\\GitHub\\SWD392_Project\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj",
         "projectName": "SPR25_SWD392_ClothingCustomization",
-        "projectPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj",
-        "packagesPath": "C:\\Users\\zubek\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization\\obj\\",
+        "projectPath": "D:\\GitHub\\SWD392_Project\\SPR25_SWD392_ClothingCustomization\\SPR25_SWD392_ClothingCustomization.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\SWD392_Project\\SPR25_SWD392_ClothingCustomization\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\zubek\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -271,14 +255,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\Service.csproj": {
-                "projectPath": "D:\\FPT\\SPR2025\\SWD392\\SPR25_SWD392_ClothingCustomization\\Service\\Service.csproj"
+              "D:\\GitHub\\SWD392_Project\\Service\\Service.csproj": {
+                "projectPath": "D:\\GitHub\\SWD392_Project\\Service\\Service.csproj"
               }
             }
           }
@@ -291,9 +276,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -323,7 +307,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

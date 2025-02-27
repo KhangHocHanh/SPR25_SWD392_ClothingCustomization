@@ -42,6 +42,16 @@ namespace BusinessObject.RequestDTO
             public int UserId { get; set; }
             public int Rating { get; set; }
             public string Review { get; set; } = null!;
+            public DateTime CreatedDate { get; set; }
+        }
+
+        public class FeedbackUpdateDTO
+        {
+            public int FeedbackId { get; set; }
+            public int OrderId { get; set; }
+            public int UserId { get; set; }
+            public int Rating { get; set; }
+            public string Review { get; set; } = null!;
         }
 
     }

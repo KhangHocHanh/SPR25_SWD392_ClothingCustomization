@@ -10,6 +10,7 @@ namespace Service
     {
         IUserRepository UserRepository { get; }
         IProductRepository ProductRepository { get; }
+        IFeedbackRepository FeedbackRepository { get; }
         Task<int> SaveChangesAsync();
         void Dispose();
 

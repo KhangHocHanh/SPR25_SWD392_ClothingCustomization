@@ -16,6 +16,7 @@ namespace Service
 
         private IUserRepository _userRepository;
         private IProductRepository _productRepository;
+        private IFeedbackRepository _feedbackRepository;
 
         public UnitOfWork(ClothesCusShopContext context)
         {
@@ -26,6 +27,7 @@ namespace Service
         {
             _userRepository ??= new UserRepository();
             _productRepository ??= new ProductRepository();
+            _feedbackRepository ??= new FeedbackRepository();
         }
         public IUserRepository UserRepository
         {
@@ -34,11 +36,18 @@ namespace Service
                 return _userRepository ??= new UserRepository(_context);
             }
         }
-         public IProductRepository ProductRepository
+        public IProductRepository ProductRepository
         {
             get
             {
                 return _productRepository ??= new ProductRepository(_context);
+            }
+        }
+        public IFeedbackRepository FeedbackRepository
+        {
+            get
+            {
+                return _feedbackRepository ??= new FeedbackRepository(_context);
             }
         }
 

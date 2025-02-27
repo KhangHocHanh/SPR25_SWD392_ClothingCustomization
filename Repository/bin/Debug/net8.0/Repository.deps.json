@@ -662,10 +662,7 @@
           "Swashbuckle.AspNetCore": "7.0.0"
         },
         "runtime": {
-          "BusinessObject.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "BusinessObject.dll": {}
         }
       }
     }
