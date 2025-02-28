@@ -1,6 +1,0 @@
-@SPR25_SWD392_ClothingCustomization_HostAddress = http://localhost:5078
-
-GET {{SPR25_SWD392_ClothingCustomization_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

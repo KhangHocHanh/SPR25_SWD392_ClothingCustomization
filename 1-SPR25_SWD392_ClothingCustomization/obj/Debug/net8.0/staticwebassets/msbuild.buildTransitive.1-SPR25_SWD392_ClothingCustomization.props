@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\1-SPR25_SWD392_ClothingCustomization.props" />
+</Project>
