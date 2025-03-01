@@ -1,2 +1,4 @@
 .nuget/
 .vs/
+.cache/
+.json/
