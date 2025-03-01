@@ -62,3 +62,5 @@ Thumbs.db
 *.user
 *.csproj.nuget.g.props
 *.csproj.nuget.g.targets
+*.csproj.user
+
