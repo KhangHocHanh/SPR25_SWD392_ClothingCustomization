@@ -55,3 +55,10 @@ workspace.xml
 *.DS_Store
 Thumbs.db
 *.vsconfig
+
+/packages/
+/obj/
+/bin/
+*.user
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
