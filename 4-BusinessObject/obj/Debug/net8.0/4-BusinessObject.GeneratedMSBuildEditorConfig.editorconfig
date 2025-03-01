@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = _4_BusinessObject
-build_property.ProjectDir = E:\des\hoc tap\ki 7\SWD392\Code\SWD392_SP25_ClothingCustomization\ClothingCustomization\4-BusinessObject\
+build_property.ProjectDir = E:\2025\Github\SPR25_SWD392_ClothingCustomization\4-BusinessObject\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Msb8xUOh4Ok=",
+  "dgSpecHash": "/l1hcM6NnWo=",
   "success": true,
-  "projectFilePath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\2-Service.csproj",
+  "projectFilePath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

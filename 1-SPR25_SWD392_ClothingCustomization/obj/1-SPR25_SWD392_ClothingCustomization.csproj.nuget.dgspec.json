@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj": {}
+    "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj": {}
   },
   "projects": {
-    "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj": {
+    "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
+        "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
         "projectName": "1-SPR25_SWD392_ClothingCustomization",
-        "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
+        "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
         "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
-        "outputPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\obj\\",
+        "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\WINDOWS 10 PRO NEW\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\2-Service.csproj": {
-                "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\2-Service.csproj"
+              "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj": {
+                "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj"
               }
             }
           }
@@ -72,14 +72,14 @@
         }
       }
     },
-    "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\2-Service.csproj": {
+    "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\2-Service.csproj",
+        "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj",
         "projectName": "2-Service",
-        "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\2-Service.csproj",
+        "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj",
         "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
-        "outputPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\obj\\",
+        "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\WINDOWS 10 PRO NEW\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -97,8 +97,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\3-Repository\\3-Repository.csproj": {
-                "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\3-Repository\\3-Repository.csproj"
+              "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\3-Repository.csproj": {
+                "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\3-Repository.csproj"
               }
             }
           }
@@ -137,14 +137,14 @@
         }
       }
     },
-    "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\3-Repository\\3-Repository.csproj": {
+    "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\3-Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\3-Repository\\3-Repository.csproj",
+        "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\3-Repository.csproj",
         "projectName": "3-Repository",
-        "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\3-Repository\\3-Repository.csproj",
+        "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\3-Repository.csproj",
         "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
-        "outputPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\3-Repository\\obj\\",
+        "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\WINDOWS 10 PRO NEW\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -162,8 +162,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj": {
-                "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj"
+              "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj": {
+                "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj"
               }
             }
           }
@@ -202,14 +202,14 @@
         }
       }
     },
-    "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj": {
+    "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
+        "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
         "projectName": "4-BusinessObject",
-        "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
+        "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
         "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
-        "outputPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\obj\\",
+        "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\WINDOWS 10 PRO NEW\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -3249,11 +3249,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
+      "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
       "projectName": "1-SPR25_SWD392_ClothingCustomization",
-      "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
+      "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
       "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
-      "outputPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\obj\\",
+      "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\WINDOWS 10 PRO NEW\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3271,8 +3271,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\2-Service.csproj": {
-              "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\2-Service\\2-Service.csproj"
+            "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj": {
+              "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj"
             }
           }
         }

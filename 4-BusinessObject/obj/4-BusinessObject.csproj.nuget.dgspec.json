@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj": {}
+    "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj": {}
   },
   "projects": {
-    "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj": {
+    "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
+        "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
         "projectName": "4-BusinessObject",
-        "projectPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
+        "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
         "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
-        "outputPath": "E:\\des\\hoc tap\\ki 7\\SWD392\\Code\\SWD392_SP25_ClothingCustomization\\ClothingCustomization\\4-BusinessObject\\obj\\",
+        "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\WINDOWS 10 PRO NEW\\AppData\\Roaming\\NuGet\\NuGet.Config",
