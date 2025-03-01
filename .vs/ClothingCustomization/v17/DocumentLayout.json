@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FE7300EF-7493-4138-9FB1-4D362376C7C7}|1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj|e:\\2025\\github\\spr25_swd392_clothingcustomization\\1-spr25_swd392_clothingcustomization\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FE7300EF-7493-4138-9FB1-4D362376C7C7}|1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj|solutionrelative:1-spr25_swd392_clothingcustomization\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +27,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\appsettings.json",
+              "RelativeDocumentMoniker": "1-SPR25_SWD392_ClothingCustomization\\appsettings.json",
+              "ToolTip": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\appsettings.json",
+              "RelativeToolTip": "1-SPR25_SWD392_ClothingCustomization\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-01T01:58:00.643Z",
+              "EditorCaption": ""
             }
           ]
         },
