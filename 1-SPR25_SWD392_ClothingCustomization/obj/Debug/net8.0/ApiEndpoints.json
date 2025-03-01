@@ -224,29 +224,102 @@
     ]
   },
   {
-    "ContainingType": "SPR25_SWD392_ClothingCustomization.Controllers.UserController",
-    "Method": "Login",
-    "RelativePath": "api/v1/users/Login",
+    "ContainingType": "_1_SPR25_SWD392_ClothingCustomization.Controllers.UserController",
+    "Method": "GetAll",
+    "RelativePath": "api/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BusinessObject.Model.User, 4-BusinessObject, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "_1_SPR25_SWD392_ClothingCustomization.Controllers.UserController",
+    "Method": "Register",
+    "RelativePath": "api/Users",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "BusinessObject.RequestDTO.RequestDTO\u002BLoginRequestDTO",
+        "Name": "userDto",
+        "Type": "BusinessObject.RequestDTO.RequestDTO\u002BUserRegisterDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SPR25_SWD392_ClothingCustomization.Controllers.UserController",
-    "Method": "GetListUser",
-    "RelativePath": "api/v1/users/userList",
+    "ContainingType": "_1_SPR25_SWD392_ClothingCustomization.Controllers.UserController",
+    "Method": "GetById",
+    "RelativePath": "api/Users/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BusinessObject.Model.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "_1_SPR25_SWD392_ClothingCustomization.Controllers.UserController",
+    "Method": "Update",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userDto",
+        "Type": "BusinessObject.RequestDTO.RequestDTO\u002BUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "_1_SPR25_SWD392_ClothingCustomization.Controllers.UserController",
+    "Method": "Delete",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

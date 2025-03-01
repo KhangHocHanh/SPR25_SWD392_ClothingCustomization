@@ -1,89 +1,86 @@
-﻿using System;
+﻿using _3_Repository.IRepository;
+using _3_Repository.Repository;
+using BusinessObject.Model;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
-using BusinessObject;
-using BusinessObject.Enum;
-using BusinessObject.Model;
-using BusinessObject.RequestDTO;
-using BusinessObject.ResponseDTO;
-using Repository;
 using static BusinessObject.RequestDTO.RequestDTO;
-using static BusinessObject.ResponseDTO.ResponseDTO;
 
-namespace Service.Service
+namespace _2_Service.Service
 {
     public interface IUserService
     {
-        Task<ResponseDTO> GetListUsersAsync();
-        Task<ResponseDTO> Login(LoginRequestDTO request);
+        Task<IEnumerable<User>> GetAllUsers();
+        Task<User> GetUserById(int id);
+        Task AddUser(UserRegisterDTO userDto);
+        Task UpdateUser(int id, UserDTO userDto);
+        Task DeleteUser(int id);
     }
-    public class UserService : GenericRepository<User>, IUserService
+    public class UserService : IUserService
     {
-
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        private readonly IJWTService _jWTService;
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IJWTService jWTService)
+        private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _jWTService = jWTService;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
 
-        public async Task<ResponseDTO> GetListUsersAsync()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            try
-            {
-                var users = await _unitOfWork.UserRepository.GetAllAsync();
-
-                if (users == null || !users.Any())
-                {
-                    return new ResponseDTO(Const.SUCCESS_CREATE_CODE, "Empty List");
-                }
-
-                // Chỉ lấy UserId, UserName, Password
-                var result = _mapper.Map<List<UserListDTO>>(users);
-
-                return new ResponseDTO(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, result);
-            }
-            catch (Exception e)
-            {
-                return new ResponseDTO(Const.ERROR_EXCEPTION, e.Message);
-            }
+            return await _userRepository.GetAllAsync();
         }
 
-
-        public async Task<ResponseDTO> Login(LoginRequestDTO request)
+        public async Task<User> GetUserById(int id)
         {
-            try
-            {
-                var account = _unitOfWork.UserRepository.GetAll()
-                             .FirstOrDefault(x => x.Username!.ToLower() == request.Username.ToLower()
-                             && x.Password == request.Password);
-
-                if (account == null)
-                {
-                    return new ResponseDTO(Const.FAIL_READ_CODE, "Invalid username or password.");
-                }
-
-                if (account.Password != request.Password)  // Nếu dùng hash, cần giải mã password
-                {
-                    return new ResponseDTO(Const.FAIL_READ_CODE, "Invalid username or password.");
-                }
-
-                var jwt = _jWTService.GenerateToken(account);
-                return new ResponseDTO(Const.SUCCESS_READ_CODE, "Login successful", jwt);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"❌ Exception: {ex.Message}");
-                return new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message);
-            }
+            return await _userRepository.GetByIdAsync(id);
         }
 
+        public async Task AddUser(UserRegisterDTO userDto)
+        {
+            var role = await _roleRepository.GetIdByNameAsync(userDto.RoleName);
+            if (role == null) throw new Exception("Invalid role.");
+
+            var user = new User
+            {
+                Username = userDto.Username,
+                Password = userDto.Password, // Will be hashed in repository
+                FullName = userDto.FullName,
+                Email = userDto.Email,
+                Gender = userDto.Gender,
+                DateOfBirth = userDto.DateOfBirth,
+                Address = userDto.Address,
+                Phone = userDto.Phone,
+                Avatar = userDto.Avatar,
+                IsDeleted = false,
+                RoleId = role.RoleId
+            };
+            await _userRepository.AddAsync(user);
+        }
+
+        public async Task UpdateUser(int id, UserDTO userDto)
+        {
+            var existingUser = await _userRepository.GetByIdAsync(id);
+            if (existingUser == null) throw new Exception("User not found.");
+
+            existingUser.FullName = userDto.FullName;
+            existingUser.Email = userDto.Email;
+            existingUser.Gender = userDto.Gender;
+            existingUser.DateOfBirth = userDto.DateOfBirth;
+            existingUser.Address = userDto.Address;
+            existingUser.Phone = userDto.Phone;
+            existingUser.Avatar = userDto.Avatar;
+
+            await _userRepository.UpdateAsync(existingUser);
+        }
+
+        public async Task DeleteUser(int id)
+        {
+            await _userRepository.SoftDeleteAsync(id);
+        }
 
     }
 }

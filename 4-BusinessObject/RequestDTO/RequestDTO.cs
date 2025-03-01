@@ -48,10 +48,64 @@ namespace BusinessObject.RequestDTO
         public class RoleDTO
         {
             public string RoleName { get; set; } = string.Empty;
-
-
         }
 
+        public class UserDTO
+        {
+            [Required]
+            public string Username { get; set; } = string.Empty;
+
+            [Required, EmailAddress]
+            public string Email { get; set; } = string.Empty;
+
+            [Required]
+            public string FullName { get; set; } = string.Empty;
+
+            public bool Gender { get; set; }
+
+            [Required]
+            public DateTime DateOfBirth { get; set; }
+
+            public string? Address { get; set; }
+
+            [Phone]
+            public string? Phone { get; set; }
+
+            public string? Avatar { get; set; }
+
+            public bool IsDeleted { get; set; }
+
+            public string RoleName { get; set; } = string.Empty;
+        }
+
+        public class UserRegisterDTO
+        {
+            [Required]
+            public string Username { get; set; } = string.Empty;
+
+            [Required, EmailAddress]
+            public string Email { get; set; } = string.Empty;
+
+            [Required, MinLength(6)]
+            public string Password { get; set; } = string.Empty;
+
+            [Required]
+            public string FullName { get; set; } = string.Empty;
+
+            public bool Gender { get; set; }
+
+            [Required]
+            public DateTime DateOfBirth { get; set; }
+
+            public string? Address { get; set; }
+
+            [Phone]
+            public string? Phone { get; set; }
+
+            public string? Avatar { get; set; }
+
+            public string RoleName { get; set; } = "Customer"; // Default role
+        }
 
 
         #endregion
