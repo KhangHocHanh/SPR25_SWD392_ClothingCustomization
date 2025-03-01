@@ -10,6 +10,8 @@
 bin/
 obj/
 out/
+Debug/
+Release/
 
 # Ignore NuGet packages
 packages/
@@ -64,3 +66,7 @@ Thumbs.db
 *.csproj.nuget.g.targets
 *.csproj.user
 
+# Ignore auto-generated .NET files
+*.cache
+*.FileListAbsolute.txt
+apphost.exe
