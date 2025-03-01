@@ -10,7 +10,7 @@
         "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
         "projectName": "1-SPR25_SWD392_ClothingCustomization",
         "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization.csproj",
-        "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
+        "packagesPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages",
         "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\1-SPR25_SWD392_ClothingCustomization\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -22,8 +22,9 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -78,7 +79,7 @@
         "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj",
         "projectName": "2-Service",
         "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\2-Service.csproj",
-        "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
+        "packagesPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages",
         "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\2-Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -90,8 +91,9 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -143,7 +145,7 @@
         "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\3-Repository.csproj",
         "projectName": "3-Repository",
         "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\3-Repository.csproj",
-        "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
+        "packagesPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages",
         "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\3-Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -155,8 +157,9 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -208,7 +211,7 @@
         "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
         "projectName": "4-BusinessObject",
         "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
-        "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
+        "packagesPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages",
         "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -220,8 +223,9 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {

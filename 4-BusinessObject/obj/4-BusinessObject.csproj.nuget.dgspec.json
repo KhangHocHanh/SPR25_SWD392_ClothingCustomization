@@ -10,7 +10,7 @@
         "projectUniqueName": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
         "projectName": "4-BusinessObject",
         "projectPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\4-BusinessObject.csproj",
-        "packagesPath": "C:\\Users\\WINDOWS 10 PRO NEW\\.nuget\\packages\\",
+        "packagesPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages",
         "outputPath": "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\4-BusinessObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -22,8 +22,9 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "E:\\2025\\Github\\SPR25_SWD392_ClothingCustomization\\packages": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
