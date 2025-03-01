@@ -92,6 +92,7 @@ builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ICustomizeProductRepository, CustomizeProductRepository>();
 builder.Services.AddScoped<IDesignAreaRepository, DesignAreaRepository>();
+builder.Services.AddScoped<IDesignElementRepository, DesignElementRepository>();
 
 // Đăng ký Service
 builder.Services.AddScoped<IUserService, UserService>();
@@ -100,6 +101,7 @@ builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<ICustomizeProductService, CustomizeProductService>();
 builder.Services.AddScoped<IDesignAreaService, DesignAreaService>();
+builder.Services.AddScoped<IDesignElementService, DesignElementService>();
 
 
 // Đăng ký AutoMapper
