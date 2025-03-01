@@ -1,4 +1,5 @@
 # Ignore compiled and generated files
 bin/
 obj/
+packages/
 
