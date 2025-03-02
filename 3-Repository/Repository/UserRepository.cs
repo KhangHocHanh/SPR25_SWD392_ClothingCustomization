@@ -62,5 +62,12 @@ namespace _3_Repository.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<User?> GetByUsernameAsync(string username)
+        {
+            return await _context.Users
+                .Include(u => u.Role) // Ensure role is loaded
+                .FirstOrDefaultAsync(u => u.Username == username);
+        }
+
     }
 }

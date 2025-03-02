@@ -26,8 +26,8 @@ namespace BusinessObject.ResponseDTO
             public string Password { get; set; } = null!;
             public string? Phone { get; set; }
             public string? FullName { get; set; }
-            public UserStatus IsDeleted { get; set; }
-            public UserRole RoleId { get; set; }
+            public bool IsDeleted { get; set; }
+            public string RoleName { get; set; }
         }
         public class UserListDTO
         {

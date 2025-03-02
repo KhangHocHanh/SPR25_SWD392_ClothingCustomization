@@ -1,5 +1,7 @@
 ﻿using _2_Service.Service;
+using BusinessObject;
 using BusinessObject.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static BusinessObject.RequestDTO.RequestDTO;
 
@@ -22,6 +24,8 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         }
 
         [HttpGet("{id}")]
+        //  [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<User>> GetById(int id)
         {
             var user = await _userService.GetUserById(id);
@@ -41,6 +45,31 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO userDto)
+        {
+            try
+            {
+                var response = await _userService.Login(userDto);
+
+                if (response.Status == Const.FAIL_READ_CODE)
+                {
+                    return Unauthorized(response.Message);
+                }
+
+                if (response.Data == null) // Check if the token is missing
+                {
+                    return StatusCode(500, new { message = "Login failed due to internal error." });
+                }
+                return Ok(response.Data);
+            }
+            catch (Exception ex)
+            {
+                // return BadRequest(ex.Message);
+                return StatusCode(500, new { message = "Internal Server Error", details = ex.Message });
             }
         }
 

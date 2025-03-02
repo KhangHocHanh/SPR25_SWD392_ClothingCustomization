@@ -1,6 +1,11 @@
 ﻿using _3_Repository.IRepository;
 using _3_Repository.Repository;
+using Azure.Core;
+using BusinessObject;
 using BusinessObject.Model;
+using BusinessObject.ResponseDTO;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static BusinessObject.RequestDTO.RequestDTO;
+using static BusinessObject.ResponseDTO.ResponseDTO;
 
 namespace _2_Service.Service
 {
@@ -16,17 +22,22 @@ namespace _2_Service.Service
         Task<IEnumerable<User>> GetAllUsers();
         Task<User> GetUserById(int id);
         Task AddUser(UserRegisterDTO userDto);
+        Task<ResponseDTO> Login(LoginRequestDTO userDto);
         Task UpdateUser(int id, UserDTO userDto);
         Task DeleteUser(int id);
+
+
     }
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
-        public UserService(IUserRepository userRepository, IRoleRepository roleRepository)
+        private readonly IJWTService _jWTService;
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository, IJWTService jWTService)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _jWTService = jWTService;
         }
 
         public async Task<IEnumerable<User>> GetAllUsers()
@@ -60,6 +71,50 @@ namespace _2_Service.Service
             };
             await _userRepository.AddAsync(user);
         }
+
+        public async Task<ResponseDTO> Login(LoginRequestDTO userDto)
+        {
+            try
+            {
+                var account = await _userRepository.GetByUsernameAsync(userDto.Username);
+
+                if (account == null)
+                {
+                    return new ResponseDTO(Const.FAIL_READ_CODE, "Invalid username or password.");
+                }
+
+                if (account.Password != userDto.Password)  // Nếu dùng hash, cần giải mã password
+                {
+                    return new ResponseDTO(Const.FAIL_READ_CODE, "Invalid username or password.");
+                }
+
+                var jwt = _jWTService.GenerateToken(account);
+
+                //var loginResponse = new ResponseDTO.LoginResponse
+                //{
+                //    UserId = account.UserId,
+                //    UserName = account.Username,
+                //    Password = account.Password,
+                //    Phone = account.Phone,
+                //    FullName = account.FullName,
+                //    IsDeleted = account.IsDeleted,
+                //    RoleName = account.Role.RoleName,
+                //};
+                //return new ResponseDTO(Const.SUCCESS_READ_CODE, "Login successful", new
+                //{
+                //    Token = jwt,
+                //    UserData = loginResponse
+                //});
+
+                return new ResponseDTO(Const.SUCCESS_READ_CODE, "Login successful", jwt);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Exception: {ex.Message}");
+                return new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message);
+            }
+        }
+
 
         public async Task UpdateUser(int id, UserDTO userDto)
         {
