@@ -18,12 +18,18 @@ namespace _3_Repository.Repository
 
         public async Task<IEnumerable<DesignElement>> GetAllAsync()
         {
-            return await _context.DesignElements.ToListAsync();
+            return await _context.DesignElements
+                .Include(de => de.DesignArea)
+                .Include(de => de.CustomizeProduct)
+                .ToListAsync();
         }
 
         public async Task<DesignElement> GetByIdAsync(int id)
         {
-            return await _context.DesignElements.FindAsync(id);
+            return await _context.DesignElements
+                .Include(de => de.DesignArea)
+                .Include(de => de.CustomizeProduct)
+                .FirstOrDefaultAsync(de => de.DesignElementId == id);
         }
 
         public async Task AddAsync(DesignElement designElement)

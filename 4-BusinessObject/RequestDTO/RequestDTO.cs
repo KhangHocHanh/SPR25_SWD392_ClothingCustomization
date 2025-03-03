@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessObject.RequestDTO
 {
@@ -16,6 +17,7 @@ namespace BusinessObject.RequestDTO
             [Required]
             public string Password { get; set; }
         }
+        #region Khang
         public class ProductCreateDTO
         {
             public int CategoryId { get; set; }
@@ -36,6 +38,28 @@ namespace BusinessObject.RequestDTO
             public string? Description { get; set; }
             public bool IsDeleted { get; set; }
         }
+
+        // DesignElement
+        public class DesignElementCreateDTO
+        {
+            [Required]
+            public int DesignAreaId { get; set; }  // Chọn từ danh sách DesignArea (Dropdown)
+
+            [Required]
+            public int CustomizeProductId { get; set; }  // Chọn từ danh sách CustomizeProduct (Dropdown)
+
+            public IFormFile? Image { get; set; }  // Upload hình ảnh
+
+            [MaxLength(250)]
+            public string? Text { get; set; }  // Văn bản thiết kế
+
+            [MaxLength(10)]
+            public string? Size { get; set; }
+
+            [MaxLength(20)]
+            public string? ColorArea { get; set; }
+        }
+        #endregion
         #region Hai
         public class FeedbackDTO
         {

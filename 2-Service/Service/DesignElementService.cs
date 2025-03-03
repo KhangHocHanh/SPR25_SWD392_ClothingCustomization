@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using _3_Repository.IRepository;
 using BusinessObject.Model;
+using Microsoft.EntityFrameworkCore;
+using static BusinessObject.ResponseDTO.ResponseDTO;
 
 namespace _2_Service.Service
 {
     public interface IDesignElementService
     {
-        Task<IEnumerable<DesignElement>> GetAllDesignElements();
-        Task<DesignElement> GetDesignElementById(int id);
+        Task<IEnumerable<DesignElementDTO>> GetAllDesignElements();
+        Task<DesignElementDTO?> GetDesignElementById(int id);
         Task AddDesignElement(DesignElement designElement);
         Task UpdateDesignElement(DesignElement designElement);
         Task DeleteDesignElement(int id);
+
     }
     public class DesignElementService : IDesignElementService
     {
@@ -32,21 +35,51 @@ namespace _2_Service.Service
         {
             await _designElementRepository.DeleteAsync(id);
         }
-
-        public async Task<IEnumerable<DesignElement>> GetAllDesignElements()
+            
+       
+        public async Task<IEnumerable<DesignElementDTO>> GetAllDesignElements()
         {
-            return await _designElementRepository.GetAllAsync();
+            var designElements = await _designElementRepository.GetAllAsync();
+            return designElements.Select(de => new DesignElementDTO
+            {
+                DesignElementId = de.DesignElementId,
+                Image = de.Image,
+                Text = de.Text,
+                Size = de.Size,
+                ColorArea = de.ColorArea,
+                DesignAreaId = de.DesignAreaId,
+                AreaName = de.DesignArea.AreaName,
+                CustomizeProductId = de.CustomizeProductId,
+                ShirtColor = de.CustomizeProduct.ShirtColor,
+                FullImage = de.CustomizeProduct.FullImage
+            }).ToList();
         }
 
-        public Task<DesignElement> GetDesignElementById(int id)
+        public async Task<DesignElementDTO?> GetDesignElementById(int id)
         {
-            return _designElementRepository.GetByIdAsync(id);
+            var de = await _designElementRepository.GetByIdAsync(id);
+            if (de == null) return null;
+
+            return new DesignElementDTO
+            {
+                DesignElementId = de.DesignElementId,
+                Image = de.Image,
+                Text = de.Text,
+                Size = de.Size,
+                ColorArea = de.ColorArea,
+                DesignAreaId = de.DesignAreaId,
+                AreaName = de.DesignArea.AreaName,
+                CustomizeProductId = de.CustomizeProductId,
+                ShirtColor = de.CustomizeProduct.ShirtColor,
+                FullImage = de.CustomizeProduct.FullImage
+            };
         }
 
         public async Task UpdateDesignElement(DesignElement designElement)
         {
             await _designElementRepository.UpdateAsync(designElement);
         }
+
     }
 
 }
