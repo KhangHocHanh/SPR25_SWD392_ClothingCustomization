@@ -12,6 +12,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -87,5 +88,22 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             await _userService.DeleteUser(id);
             return NoContent();
         }
+
+
+        [HttpPost("GoogleLogin")]
+        public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginRequest request)
+        {
+            try
+            {
+                string jwtToken = await _userService.GoogleLoginAsync(request.IdToken);
+                return Ok(new { token = jwtToken });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
     }
 }

@@ -4,6 +4,7 @@ using Azure.Core;
 using BusinessObject;
 using BusinessObject.Model;
 using BusinessObject.ResponseDTO;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Service;
 using System;
@@ -26,6 +27,7 @@ namespace _2_Service.Service
         Task UpdateUser(int id, UserDTO userDto);
         Task DeleteUser(int id);
 
+        Task<string> GoogleLoginAsync(string idToken);
 
     }
     public class UserService : IUserService
@@ -136,6 +138,44 @@ namespace _2_Service.Service
         {
             await _userRepository.SoftDeleteAsync(id);
         }
+
+        public async Task<string> GoogleLoginAsync(string idToken)
+        {
+            try
+            {
+                // Verify Google ID Token
+                var payload = await GoogleJsonWebSignature.ValidateAsync(idToken);
+                string email = payload.Email;
+
+                if (string.IsNullOrEmpty(email))
+                {
+                    throw new Exception("Invalid Google token.");
+                }
+
+                // Check if user exists in database
+                var user = await _userRepository.GetByEmailAsync(email);
+                if (user == null)
+                {
+                    // Register new user if not found
+                    user = new User
+                    {
+                        Email = email,
+                        FullName = payload.Name,
+                        Avatar = payload.Picture,
+                    };
+
+                    await _userRepository.AddAsync(user);
+                }
+
+                // Generate JWT token
+                return _jWTService.GenerateToken(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Google login failed: " + ex.Message);
+            }
+        }
+
 
     }
 }

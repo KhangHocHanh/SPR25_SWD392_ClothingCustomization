@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using _2_Service.Service;
 using _3_Repository.Repository;
 using _3_Repository.IRepository;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -100,6 +102,14 @@ builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 // Đăng ký AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+// Load Firebase Private Key JSON File
+var firebaseJsonPath = Path.Combine(builder.Environment.WebRootPath, "firebase", "clothescustom.json");
+
+FirebaseApp.Create(new AppOptions
+{
+    Credential = GoogleCredential.FromFile(firebaseJsonPath)
+});
 
 // Xây dựng ứng dụng
 var app = builder.Build();

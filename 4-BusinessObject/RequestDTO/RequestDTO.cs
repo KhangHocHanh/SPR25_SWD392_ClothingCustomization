@@ -106,7 +106,10 @@ namespace BusinessObject.RequestDTO
 
             public string RoleName { get; set; } = "Customer"; // Default role
         }
-
+        public class GoogleLoginRequest
+        {
+            public string IdToken { get; set; }
+        }
 
         #endregion
     }

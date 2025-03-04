@@ -18,5 +18,8 @@ namespace _3_Repository.IRepository
         Task SoftDeleteAsync(int id);
 
         Task<User?> GetByUsernameAsync(string username);
+
+        Task<User?> GetByEmailAsync(string email);
+
     }
 }
