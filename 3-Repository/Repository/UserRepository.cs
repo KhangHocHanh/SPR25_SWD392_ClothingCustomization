@@ -13,10 +13,8 @@ namespace _3_Repository.Repository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public UserRepository()
-        {
-        }
-        public UserRepository(ClothesCusShopContext context)
+    
+        public UserRepository(ClothesCusShopContext context) :base(context) 
         {
             _context = context;
         }

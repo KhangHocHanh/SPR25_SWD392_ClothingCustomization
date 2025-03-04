@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿    using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repository.IRepository;
@@ -78,8 +78,10 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-//builder.Services.AddDbContext<ClothesCusShopContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
+builder.Services.AddDbContext<ClothesCusShopContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
+
+
 
 // Đăng ký DI (Dependency Injection)
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -96,7 +98,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // Đăng ký AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));

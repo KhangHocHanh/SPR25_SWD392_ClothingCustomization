@@ -12,11 +12,12 @@ namespace Repository
     {
         protected ClothesCusShopContext _context;
         protected readonly DbSet<T> _dbSet;
-        public GenericRepository()
+        public GenericRepository(ClothesCusShopContext context)
         {
-            _context = new ClothesCusShopContext();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             _dbSet = _context.Set<T>();
         }
+
         public void Create(T entity)
         {
             _dbSet.Add(entity);

@@ -18,16 +18,27 @@ namespace BusinessObject.RequestDTO
         }
         public class ProductCreateDTO
         {
+            [Required(ErrorMessage = "Category ID is required")]
             public int CategoryId { get; set; }
+
+            [Required(ErrorMessage = "Product name is required")]
+            [StringLength(100, ErrorMessage = "Product name cannot exceed 100 characters")]
             public string ProductName { get; set; } = null!;
+
+            [Required(ErrorMessage = "Price is required")]
+            [Range(0, double.MaxValue, ErrorMessage = "Price must be greater than 0")]
             public decimal Price { get; set; }
+
+            [Required(ErrorMessage = "Stock is required")]
+            [Range(0, int.MaxValue, ErrorMessage = "Stock must be greater than 0")]
             public int StockInStorage { get; set; }
+
             public string? Image { get; set; }
             public string? Description { get; set; }
         }
         public class ProductUpdateDTO
         {
-            public int ProductId { get; set; }
+            public int ProductId { get; set; } 
             public int CategoryId { get; set; }
             public string ProductName { get; set; } = null!;
             public decimal Price { get; set; }
@@ -35,6 +46,30 @@ namespace BusinessObject.RequestDTO
             public string? Image { get; set; }
             public string? Description { get; set; }
             public bool IsDeleted { get; set; }
+        }
+        public class CategoryCreateDTO
+        {
+            [Required]
+            public string CategoryName { get; set; } = null!;
+            public string? Description { get; set; }
+        }
+
+        public class CategoryUpdateDTO
+        {
+            public int CategoryId { get; set; }
+            [Required]
+            public string CategoryName { get; set; } = null!;
+            public string? Description { get; set; }
+            public bool IsDeleted { get; set; }
+        }
+
+        public class CategoryListDTO
+        {
+            public int CategoryId { get; set; }
+            public string CategoryName { get; set; } = null!;
+            public string? Description { get; set; }
+            public bool IsDeleted { get; set; }
+            public int ProductCount { get; set; }
         }
         #region Hai
         public class FeedbackDTO

@@ -14,38 +14,41 @@ namespace Service
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly ClothesCusShopContext _context;
-
-
-        private IUserRepository _userRepository;
         private IProductRepository _productRepository;
+        private IUserRepository _userRepository;
         private IFeedbackRepository _feedbackRepository;
         private IRoleRepository _roleRepository;
+        private ICategoryRepository _categoryRepository;
 
         public UnitOfWork(ClothesCusShopContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public UnitOfWork()
+        public ICategoryRepository CategoryRepository
         {
-            _userRepository ??= new UserRepository();
-            _productRepository ??= new ProductRepository();
-            _feedbackRepository ??= new FeedbackRepository();
-            _roleRepository ??= new RoleRepository();
+            get
+            {
+                _categoryRepository ??= new CategoryRepository(_context);
+                return _categoryRepository;
+            }
+        }
+
+        public IProductRepository ProductRepository
+        {
+            get
+            {
+                _productRepository ??= new ProductRepository(_context);
+                return _productRepository;
+            }
         }
 
         public IUserRepository UserRepository
         {
             get
             {
-                return _userRepository ??= new UserRepository(_context);
-            }
-        }
-        public IProductRepository ProductRepository
-        {
-            get
-            {
-                return _productRepository ??= new ProductRepository(_context);
+                _userRepository ??= new UserRepository(_context);
+                return _userRepository;
             }
         }
 
@@ -53,28 +56,48 @@ namespace Service
         {
             get
             {
-                return _feedbackRepository ??= new FeedbackRepository(_context);
+                _feedbackRepository ??= new FeedbackRepository(_context);
+                return _feedbackRepository;
             }
         }
+
         public IRoleRepository RoleRepository
         {
             get
             {
-                return _roleRepository ??= new RoleRepository(_context);
+                _roleRepository ??= new RoleRepository(_context);
+                return _roleRepository;
+            }
+        }
+
+        // Xóa dòng này đi:
+        // object IUnitOfWork.CategoryRepository => throw new NotImplementedException();
+
+        public async Task<int> SaveChangesAsync()
+        {
+            try
+            {
+                return await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error saving changes to database", ex);
             }
         }
 
         public void Dispose()
         {
-            if (_context != null)
-            {
-                _context.Dispose();
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        public async Task<int> SaveChangesAsync()
+        protected virtual void Dispose(bool disposing)
         {
-            return await _context.SaveChangesAsync();
+            if (disposing)
+            {
+                _context?.Dispose();
+            }
         }
     }
+
 }

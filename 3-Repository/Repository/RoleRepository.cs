@@ -14,11 +14,9 @@ namespace _3_Repository.Repository
 {
     public class RoleRepository : GenericRepository<Role>, IRoleRepository
     {
-        public RoleRepository()
-        {
-        }
+ 
 
-        public RoleRepository(ClothesCusShopContext context)
+        public RoleRepository(ClothesCusShopContext context) :base(context) 
         {
             _context = context;
         }

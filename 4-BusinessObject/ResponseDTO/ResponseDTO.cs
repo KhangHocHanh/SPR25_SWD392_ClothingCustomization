@@ -57,7 +57,24 @@ namespace BusinessObject.ResponseDTO
             public string Review { get; set; } = null!;
             public DateTime? CreatedDate { get; set; }
         }
+       
 
+            public class CategoryListDTO
+            {
+                public int CategoryId { get; set; }
+                public string CategoryName { get; set; } = null!;
+                public string? Description { get; set; }
+                public bool IsDeleted { get; set; }
+            
+                public int ProductCount { get; set; }
+            }
+
+          
+            public class CategoryDetailDTO : CategoryListDTO
+            {
+                public ICollection<ProductListDTO> Products { get; set; } = new List<ProductListDTO>();
+            }
+        }
 
     }
-}
+

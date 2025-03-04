@@ -29,7 +29,10 @@ namespace BusinessObject.Mapper
 
             // Feedback
             CreateMap<FeedbackDTO, Feedback>().ReverseMap();
-            
+            CreateMap<Category, RequestDTO.RequestDTO.CategoryListDTO>();
+            CreateMap<CategoryCreateDTO, Category>();
+            CreateMap<CategoryUpdateDTO, Category>();
+            CreateMap<Category, CategoryDetailDTO>();
         }
     }
 }

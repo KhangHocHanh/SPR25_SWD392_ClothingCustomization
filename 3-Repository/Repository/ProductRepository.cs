@@ -12,13 +12,10 @@ namespace Repository.Repository
     {
         private ClothesCusShopContext context;
 
-        public ProductRepository()
-        {
-        }
 
-        public ProductRepository(ClothesCusShopContext context)
+
+        public ProductRepository(ClothesCusShopContext context) : base(context)
         {
-            this.context = context;
         }
 
         public async Task AddAsync(Product product)

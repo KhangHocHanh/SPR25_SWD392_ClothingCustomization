@@ -1,10 +1,13 @@
 ﻿using BusinessObject;
+using BusinessObject.ResponseDTO;
 using Microsoft.AspNetCore.Mvc;
 using Service.Service;
 using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace SPR25_SWD392_ClothingCustomization.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -13,29 +16,93 @@ namespace SPR25_SWD392_ClothingCustomization.Controllers
         {
             _productService = productService;
         }
-        [HttpGet("productList")]
+
+        [HttpGet]
         public async Task<IActionResult> GetListProduct()
         {
-            var result = await _productService.GetListProductsAsync();
-
-            if (result.Status != Const.SUCCESS_READ_CODE)
+            try
             {
-                return BadRequest(result);
+                var result = await _productService.GetListProductsAsync();
+                return result.Status == Const.SUCCESS_READ_CODE
+                    ? Ok(result)
+                    : BadRequest(result);
             }
-            return Ok(result);
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message));
+            }
         }
-        [HttpGet("getProductBy{id}")]
-        public async Task<IActionResult> GetProductById(int id) => Ok(await _productService.GetProductByIdAsync(id));
-        [HttpPost("createProduct")]
-        public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDTO productDto) =>
-      Ok(await _productService.CreateProductAsync(productDto));
 
-        [HttpPut("updateProduct")]
-        public async Task<IActionResult> UpdateProduct([FromBody] ProductUpdateDTO productDto) =>
-            Ok(await _productService.UpdateProductAsync(productDto));
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            try
+            {
+                if (id <= 0) return BadRequest(new ResponseDTO(Const.ERROR_EXCEPTION, "Invalid ID"));
+                var result = await _productService.GetProductByIdAsync(id);
+                return result.Status == Const.SUCCESS_READ_CODE
+                    ? Ok(result)
+                    : NotFound(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message));
+            }
+        }
 
-        [HttpDelete("deleteProductBy{id}")]
-        public async Task<IActionResult> DeleteProduct(int id) => Ok(await _productService.DeleteProductAsync(id));
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDTO productDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var result = await _productService.CreateProductAsync(productDto);
+                return result.Status == Const.SUCCESS_CREATE_CODE
+                    ? CreatedAtAction(nameof(GetProductById), new { id = result.Data }, result)
+                    : BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message));
+            }
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateProduct([FromBody] ProductUpdateDTO productDto)
+        {
+            try
+            {
+                if (productDto.ProductId <= 0)
+                    return BadRequest(new ResponseDTO(Const.ERROR_EXCEPTION, "Invalid Product ID"));
+
+                var result = await _productService.UpdateProductAsync(productDto);
+                return result.Status == Const.SUCCESS_UPDATE_CODE
+                    ? Ok(result)
+                    : BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message));
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            try
+            {
+                if (id <= 0) return BadRequest(new ResponseDTO(Const.ERROR_EXCEPTION, "Invalid ID"));
+                var result = await _productService.DeleteProductAsync(id);
+                return result.Status == Const.SUCCESS_DELETE_CODE
+                    ? Ok(result)
+                    : BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message));
+            }
+        }
     }
 }
 

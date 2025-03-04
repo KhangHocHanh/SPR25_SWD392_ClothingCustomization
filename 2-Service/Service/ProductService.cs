@@ -23,7 +23,7 @@ namespace Service.Service
     public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+    private readonly IMapper _mapper;
 
         public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
         {
@@ -33,11 +33,21 @@ namespace Service.Service
 
         public async Task<ResponseDTO> CreateProductAsync(ProductCreateDTO productDto)
         {
-            var product = _mapper.Map<Product>(productDto);
-            await _unitOfWork.ProductRepository.AddAsync(product);
-            await _unitOfWork.SaveChangesAsync();
+            try
+            {
+                var product = _mapper.Map<Product>(productDto);
+                await _unitOfWork.ProductRepository.AddAsync(product);
+                await _unitOfWork.SaveChangesAsync();
 
-            return new ResponseDTO(Const.SUCCESS_CREATE_CODE, "Product created successfully");
+                return new ResponseDTO(
+                    Const.SUCCESS_CREATE_CODE,
+                    "Product created successfully",
+                    product.ProductId);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message);
+            }
         }
 
         public async Task<ResponseDTO> DeleteProductAsync(int id)
@@ -56,19 +66,15 @@ namespace Service.Service
             try
             {
                 var products = await _unitOfWork.ProductRepository.GetAllAsync();
-
-                if (products == null || !products.Any())
-                {
-                    return new ResponseDTO(Const.SUCCESS_CREATE_CODE, "Empty List");
-                }
+                if (!products.Any())
+                    return new ResponseDTO(Const.SUCCESS_READ_CODE, "No products found");
 
                 var result = _mapper.Map<List<ProductListDTO>>(products);
-
-                return new ResponseDTO(Const.SUCCESS_READ_CODE, Const.SUCCESS_READ_MSG, result);
+                return new ResponseDTO(Const.SUCCESS_READ_CODE, "Products retrieved successfully", result);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return new ResponseDTO(Const.ERROR_EXCEPTION, e.Message);
+                return new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message);
             }
         }
 
