@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObject.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -104,8 +105,20 @@ namespace BusinessObject.RequestDTO
 
             public string? Avatar { get; set; }
 
-            public string RoleName { get; set; } = "Customer"; // Default role
+            public string RoleName { get; set; } = "Member"; // Default role
         }
+
+        public class UserUpdateDTO
+        {
+            public string FullName { get; set; }
+            public string Email { get; set; }
+            public bool Gender { get; set; }
+            public DateTime DateOfBirth { get; set; }
+            public string Address { get; set; }
+            public string Phone { get; set; }
+            public string Avatar { get; set; }
+        }
+
         public class GoogleLoginRequest
         {
             public string IdToken { get; set; }

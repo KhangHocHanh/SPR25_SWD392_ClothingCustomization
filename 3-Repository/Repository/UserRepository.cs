@@ -55,7 +55,15 @@ namespace _3_Repository.Repository
                 await _context.SaveChangesAsync();
             }
         }
-
+        public async Task RecoverAsync(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user != null)
+            {
+                user.IsDeleted = false;
+                await _context.SaveChangesAsync();
+            }
+        }
         public async Task UpdateAsync(User user)
         {
             _context.Users.Update(user);

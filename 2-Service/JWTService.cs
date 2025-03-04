@@ -55,7 +55,7 @@ namespace Service
                     new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim("User_Id",account.UserId.ToString()),
-                    new Claim("Taikhoan", account.Username.ToString()),
+                    new Claim("Username", account.Username.ToString()),
                     new Claim(ClaimTypes.Role, account.Role.RoleName.ToLower())  // Store Role in Token
                 };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));

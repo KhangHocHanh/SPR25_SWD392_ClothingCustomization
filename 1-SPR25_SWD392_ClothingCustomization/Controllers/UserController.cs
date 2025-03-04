@@ -25,14 +25,20 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         }
 
         [HttpGet("{id}")]
-        //  [Authorize]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, staff")]
         public async Task<ActionResult<User>> GetById(int id)
         {
-            var user = await _userService.GetUserById(id);
-            if (user == null)
-                return NotFound();
-            return Ok(user);
+            try
+            {
+                var user = await _userService.GetUserById(id);
+                if (user == null)
+                    return NotFound();
+                return Ok(user);
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -79,15 +85,64 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         {
             await _userService.UpdateUser(id, userDto);
             return NoContent();
-
         }
 
+        [Authorize(Roles = "admin, staff")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             await _userService.DeleteUser(id);
             return NoContent();
         }
+
+        [Authorize(Roles = "admin, staff")]
+        [HttpPut("Recover/{id}")]
+        public async Task<ActionResult> Recover(int id)
+        {
+            await _userService.RecoverUser(id);
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpGet("Profile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            try
+            {
+                var response = await _userService.GetUserProfile();
+                if (response.Status == Const.FAIL_READ_CODE)
+                {
+                    return BadRequest(response.Message);
+                }
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Internal Server Error", details = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpPut("Profile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UserUpdateDTO userDto)
+        {
+            try
+            {
+                var response = await _userService.UpdateUserProfile(userDto);
+                if (response.Status == Const.FAIL_READ_CODE)
+                {
+                    return BadRequest(response.Message);
+                }
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Internal Server Error", details = ex.Message });
+            }
+        }
+
 
 
         [HttpPost("GoogleLogin")]

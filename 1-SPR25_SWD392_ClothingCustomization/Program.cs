@@ -44,6 +44,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+
+
 // Cấu hình Swagger
 builder.Services.AddSwaggerGen(c =>
 {
@@ -79,6 +81,8 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.Services.AddHttpContextAccessor();
 
 //builder.Services.AddDbContext<ClothesCusShopContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
