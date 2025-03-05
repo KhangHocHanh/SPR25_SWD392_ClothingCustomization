@@ -80,6 +80,27 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             }
         }
 
+        [HttpPost("Change-Password")]
+        public async Task<ActionResult> ChangePassword(ChangePasswordDTO userDto)
+        {
+            try
+            {
+                var response = await _userService.ChangePassword(userDto);
+
+                if (response.Status == Const.FAIL_READ_CODE)
+                {
+                    return BadRequest(response.Message);
+                }
+
+                return Ok(response);
+            }
+
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { message = "Internal Server Error", details = ex.Message });
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] UserDTO userDto)
         {

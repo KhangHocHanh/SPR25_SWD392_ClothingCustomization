@@ -31,6 +31,8 @@ namespace _2_Service.Service
         Task UpdateUser(int id, UserDTO userDto);
         Task DeleteUser(int id);
 
+        Task<ResponseDTO> ChangePassword(ChangePasswordDTO userDto);
+
         Task<string> GoogleLoginAsync(string idToken);
         Task RecoverUser(int id);
         Task<ResponseDTO> GetUserProfile();
@@ -68,7 +70,7 @@ namespace _2_Service.Service
                                 .FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
             // Prevent staff from viewing admin users and other staffs
-            if (currentUserRole.ToLower() == "staff" && (user.RoleId == adminId.RoleId || user.RoleId == staffId.RoleId ) )
+            if (currentUserRole.ToLower() == "staff" && (user.RoleId == adminId.RoleId || user.RoleId == staffId.RoleId))
             {
                 return null;
             }
@@ -184,6 +186,8 @@ namespace _2_Service.Service
 
             await _userRepository.UpdateAsync(existingUser);
         }
+
+        
 
         public async Task DeleteUser(int id)
         {
@@ -303,7 +307,18 @@ namespace _2_Service.Service
             return new ResponseDTO(Const.SUCCESS_READ_CODE, "Profile updated successfully.", user);
         }
 
+        public async Task<ResponseDTO> ChangePassword(ChangePasswordDTO userDto)
+        {
+            var existingUser = await _userRepository.GetByUsernameAsync(userDto.Username);
+            if (existingUser == null) return new ResponseDTO(Const.FAIL_READ_CODE, "User is not existing");
+            if (userDto.Password != userDto.ConfirmPassword) return new ResponseDTO(Const.FAIL_READ_CODE, "Confirm Password must be similar to Password");
 
+            existingUser.Password = userDto.Password;
+            await _userRepository.UpdateAsync(existingUser);
+
+
+            return new ResponseDTO(Const.SUCCESS_READ_CODE, "Password changed successfully.");
+        }
 
     }
 }
