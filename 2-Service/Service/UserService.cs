@@ -219,12 +219,19 @@ namespace _2_Service.Service
                     // Register new user if not found
                     user = new User
                     {
+                        Username = string.Empty,
+                        Password = string.Empty,
                         Email = email,
                         FullName = payload.Name,
+                        Gender = true,
+                        DateOfBirth = DateTime.UtcNow,
                         Avatar = payload.Picture,
+                        IsDeleted = false,
+                        RoleId = 3,
                     };
 
                     await _userRepository.AddAsync(user);
+                    await _userRepository.GetByEmailAsync(email);
                 }
 
                 // Generate JWT token
@@ -232,7 +239,8 @@ namespace _2_Service.Service
             }
             catch (Exception ex)
             {
-                throw new Exception("Google login failed: " + ex.Message);
+                Console.WriteLine("Google Login Error: " + ex.ToString());
+                throw new Exception("Google login failed: " + (ex.InnerException?.Message ?? ex.Message));
             }
         }
 

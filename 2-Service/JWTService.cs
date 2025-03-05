@@ -50,6 +50,12 @@ namespace Service
             var token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
             */
+            if (account == null)
+                throw new ArgumentNullException(nameof(account), "User account is null in GenerateToken!");
+
+            if (account.Role == null)
+                throw new Exception("User role is null in GenerateToken!");
+
             var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
