@@ -34,12 +34,18 @@ namespace _3_Repository.Repository
 
         public async Task<IEnumerable<DesignArea>> GetAllDesignAreaAsync()
         {
-            return await _context.DesignAreas.ToListAsync();
+            return await _context.DesignAreas
+        .Include(cp => cp.DesignElements)  
+        .Include(cp => cp.Product)         
+        .ToListAsync();
         }
 
         public async Task<DesignArea> GetDesignAreaByIdAsync(int id)
         {
-            return await _context.DesignAreas.FindAsync(id);
+            return await _context.DesignAreas
+       .Include(cp => cp.DesignElements)
+       .Include(cp => cp.Product)
+       .FirstOrDefaultAsync(cp => cp.DesignAreaId == id);
         }
 
         public async Task UpdateDesignAreaAsync(DesignArea designArea)

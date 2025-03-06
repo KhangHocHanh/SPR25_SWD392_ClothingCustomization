@@ -45,12 +45,20 @@ namespace _3_Repository.Repository
         }
         public async Task<CustomizeProduct> GetByIdAsync(int id)
         {
-            return await _context.CustomizeProducts.FindAsync(id);
+            return await _context.CustomizeProducts
+       .Include(cp => cp.DesignElements)
+       .Include(cp => cp.Product)
+       .Include(cp => cp.User)
+       .FirstOrDefaultAsync(cp => cp.CustomizeProductId == id);
         }
 
         public async Task<IEnumerable<CustomizeProduct>> GetAllAsync()
         {
-            return await _context.CustomizeProducts.ToListAsync();
+            return await _context.CustomizeProducts
+        .Include(cp => cp.DesignElements)  // Lấy danh sách các DesignElement liên quan
+        .Include(cp => cp.Product)         // Lấy thông tin sản phẩm
+        .Include(cp => cp.User)            // Lấy thông tin người dùng
+        .ToListAsync();
         }
     }
 
