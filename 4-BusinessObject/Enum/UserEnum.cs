@@ -25,9 +25,9 @@ namespace BusinessObject.Enum
     }
     public enum UserGender
     {
-        None = 0,
-        Male,
-        Female,
+    //    None = 0,
+        Male = 1,
+        Female = 0
     }
 
 }

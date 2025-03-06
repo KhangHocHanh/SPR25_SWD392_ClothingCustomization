@@ -23,8 +23,10 @@ namespace Service
             _config = config;
             _httpContextAccessor = httpContextAccessor;
         }
+
         public string GenerateToken(User account)
         {
+            /*
             var tokenSecret = _config["Jwt:Key"];
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(tokenSecret);
@@ -32,7 +34,7 @@ namespace Service
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, account.UserId.ToString()),
-                new Claim(ClaimTypes.Role, account.Role!.ToString()!.Trim())
+                new Claim(ClaimTypes.Role, account.Role!.RoleName.ToString()!.Trim())
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -47,6 +49,33 @@ namespace Service
 
             var token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+            */
+            if (account == null)
+                throw new ArgumentNullException(nameof(account), "User account is null in GenerateToken!");
+
+            if (account.Role == null)
+                throw new Exception("User role is null in GenerateToken!");
+
+            var claims = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim("User_Id",account.UserId.ToString()),
+                    new Claim("Username", account.Username.ToString()),
+                    new Claim(ClaimTypes.Role, account.Role.RoleName.ToLower())  // Store Role in Token
+                };
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                _config["Jwt:Issuer"],
+                _config["Jwt:Audience"],
+                claims,
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_config["Jwt:TokenExpiryMinutes"])),
+                signingCredentials: signIn
+            );
+            string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
+            return tokenValue;
+
         }
 
 

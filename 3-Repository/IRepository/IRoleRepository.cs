@@ -13,6 +13,7 @@ namespace _3_Repository.IRepository
         Task<IEnumerable<Role>> GetAllAsync();
         Task<Role> GetByIdAsync(int id);
         Task<Role> GetIdByNameAsync(string name);
+        Task<string> GetNameByIdAsync(int id);
         Task AddAsync(Role role);
         Task DeleteAsync(int id);
         Task UpdateAsync(Role role);

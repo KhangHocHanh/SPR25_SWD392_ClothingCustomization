@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using _2_Service.Service;
 using _3_Repository.Repository;
 using _3_Repository.IRepository;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +43,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Đăng ký Controllers
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+
 
 // Cấu hình Swagger
 builder.Services.AddSwaggerGen(c =>
@@ -78,6 +82,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddHttpContextAccessor();
+
 //builder.Services.AddDbContext<ClothesCusShopContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
 
@@ -106,6 +112,14 @@ builder.Services.AddScoped<IDesignElementService, DesignElementService>();
 
 // Đăng ký AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+// Load Firebase Private Key JSON File
+var firebaseJsonPath = Path.Combine(builder.Environment.WebRootPath, "firebase", "clothescustom.json");
+
+FirebaseApp.Create(new AppOptions
+{
+    Credential = GoogleCredential.FromFile(firebaseJsonPath)
+});
 
 // Xây dựng ứng dụng
 var app = builder.Build();

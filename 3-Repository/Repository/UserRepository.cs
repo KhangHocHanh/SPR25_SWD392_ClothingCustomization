@@ -55,12 +55,35 @@ namespace _3_Repository.Repository
                 await _context.SaveChangesAsync();
             }
         }
-
+        public async Task RecoverAsync(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user != null)
+            {
+                user.IsDeleted = false;
+                await _context.SaveChangesAsync();
+            }
+        }
         public async Task UpdateAsync(User user)
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<User?> GetByUsernameAsync(string username)
+        {
+            return await _context.Users
+                .Include(u => u.Role) // Ensure role is loaded
+                .FirstOrDefaultAsync(u => u.Username == username);
+        }
+
+        public async Task<User?> GetByEmailAsync(string email)
+        {
+            return await _context.Users
+                .Include(u => u.Role) // Ensure role is loaded if needed
+                .FirstOrDefaultAsync(u => u.Email == email);
+        }
+
 
     }
 }
