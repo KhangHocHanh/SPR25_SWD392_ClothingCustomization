@@ -27,6 +27,9 @@ namespace BusinessObject.Mapper
             CreateMap<ProductCreateDTO, Product>();
             CreateMap<ProductUpdateDTO, Product>();
 
+            // Notification
+            CreateMap<NotificationDTO, Notification>().ReverseMap();
+
             // Feedback
             CreateMap<FeedbackDTO, Feedback>().ReverseMap();
             

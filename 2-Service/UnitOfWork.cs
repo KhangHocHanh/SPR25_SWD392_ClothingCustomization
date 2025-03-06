@@ -20,7 +20,7 @@ namespace Service
         private IProductRepository _productRepository;
         private IFeedbackRepository _feedbackRepository;
         private IRoleRepository _roleRepository;
-
+        private INotificationRepository _notificationRepository;
         public UnitOfWork(ClothesCusShopContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -32,6 +32,7 @@ namespace Service
             _productRepository ??= new ProductRepository();
             _feedbackRepository ??= new FeedbackRepository();
             _roleRepository ??= new RoleRepository();
+            _notificationRepository ??= new NotificationRepository();
         }
 
         public IUserRepository UserRepository
@@ -61,6 +62,13 @@ namespace Service
             get
             {
                 return _roleRepository ??= new RoleRepository(_context);
+            }
+        }
+        public INotificationRepository NotificationRepository
+        {
+            get
+            {
+                return _notificationRepository ??= new NotificationRepository(_context);
             }
         }
 
