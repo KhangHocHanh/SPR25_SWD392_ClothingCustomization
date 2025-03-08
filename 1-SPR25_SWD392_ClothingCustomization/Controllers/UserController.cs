@@ -7,7 +7,7 @@ using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 {
-    [Route("api/Users")]
+    [Route("api/users")]
     [ApiController]
     public class UserController : Controller
     {
@@ -18,6 +18,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             _userService = userService;
         }
 
+        #region CRUD User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
@@ -54,8 +55,24 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, [FromBody] UserDTO userDto)
+        {
+            await _userService.UpdateUser(id, userDto);
+            return NoContent();
+        }
 
-        [HttpPost("Login")]
+        [Authorize(Roles = "admin, staff")]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _userService.DeleteUser(id);
+            return NoContent();
+        }
+        #endregion
+
+
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO userDto)
         {
             try
@@ -80,7 +97,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             }
         }
 
-        [HttpPost("Change-Password")]
+        [HttpPost("change-password")]
         public async Task<ActionResult> ChangePassword(ChangePasswordDTO userDto)
         {
             try
@@ -101,23 +118,10 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] UserDTO userDto)
-        {
-            await _userService.UpdateUser(id, userDto);
-            return NoContent();
-        }
+        
 
         [Authorize(Roles = "admin, staff")]
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            await _userService.DeleteUser(id);
-            return NoContent();
-        }
-
-        [Authorize(Roles = "admin, staff")]
-        [HttpPut("Recover/{id}")]
+        [HttpPut("recover/{id}")]
         public async Task<ActionResult> Recover(int id)
         {
             await _userService.RecoverUser(id);
@@ -125,7 +129,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         }
 
         [Authorize]
-        [HttpGet("Profile")]
+        [HttpGet("profile")]
         public async Task<IActionResult> GetProfile()
         {
             try
@@ -145,7 +149,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         }
 
         [Authorize]
-        [HttpPut("Profile")]
+        [HttpPut("profile")]
         public async Task<IActionResult> UpdateProfile([FromBody] UserUpdateDTO userDto)
         {
             try
@@ -166,7 +170,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 
 
 
-        [HttpPost("GoogleLogin")]
+        [HttpPost("google-login")]
         public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginRequest request)
         {
             try

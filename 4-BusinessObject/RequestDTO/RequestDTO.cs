@@ -147,6 +147,14 @@ namespace BusinessObject.RequestDTO
             public bool IsRead { get; set; }
         }
 
+        public class NotificationRoleDTO
+        {
+
+            public string Subject { get; set; }
+            public string Message { get; set; }
+            public string RoleName { get; set; }
+        }
+
         #endregion
     }
 }

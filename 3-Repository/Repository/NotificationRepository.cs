@@ -21,6 +21,7 @@ namespace _3_Repository.Repository
             _context = context;
         }
 
+        #region CRUD Notification
         public async Task AddAsync(Notification notification)
         {
             _context.AddAsync(notification);
@@ -53,5 +54,52 @@ namespace _3_Repository.Repository
         {
             return await _context.Notifications.ToListAsync();
         }
+        #endregion
+
+
+        public async Task AddRangeAsync(List<Notification> notifications)
+        {
+            await _context.Notifications.AddRangeAsync(notifications);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Notification>> GetNotificationsByRoleAsync(string role, DateTime? fromDate = null, DateTime? toDate = null)
+        {
+            var usersWithRole = await _context.Users
+                .Where(u => u.Role.RoleName.ToLower() == role.ToLower())
+                .Select(u => u.UserId)
+                .ToListAsync();
+
+            var query = _context.Notifications.Where(n => usersWithRole.Contains(n.UserId));
+
+            if (fromDate.HasValue)
+                query = query.Where(n => n.CreatedDate >= fromDate.Value);
+
+            if (toDate.HasValue)
+                query = query.Where(n => n.CreatedDate <= toDate.Value);
+
+            return await query.ToListAsync();
+        }
+
+        public async Task DeleteNotificationsByRoleAndTimeRangeAsync(string role, DateTime? fromDate = null, DateTime? toDate = null)
+        {
+            var usersWithRole = await _context.Users
+                .Where(u => u.Role.RoleName.ToLower() == role.ToLower())
+                .Select(u => u.UserId)
+                .ToListAsync();
+
+            var query = _context.Notifications.Where(n => usersWithRole.Contains(n.UserId));
+
+            if (fromDate.HasValue)
+                query = query.Where(n => n.CreatedDate >= fromDate.Value);
+
+            if (toDate.HasValue)
+                query = query.Where(n => n.CreatedDate <= toDate.Value);
+
+            _context.Notifications.RemoveRange(query);
+            await _context.SaveChangesAsync();
+        }
+
+
     }
 }

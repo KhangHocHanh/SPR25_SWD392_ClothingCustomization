@@ -24,15 +24,18 @@ namespace _2_Service.Service
 {
     public interface IUserService
     {
+        #region CRUD User
         Task<IEnumerable<User>> GetAllUsers();
         Task<User> GetUserById(int id);
         Task AddUser(UserRegisterDTO userDto);
-        Task<ResponseDTO> Login(LoginRequestDTO userDto);
         Task UpdateUser(int id, UserDTO userDto);
         Task DeleteUser(int id);
+        #endregion
 
+
+
+        Task<ResponseDTO> Login(LoginRequestDTO userDto);
         Task<ResponseDTO> ChangePassword(ChangePasswordDTO userDto);
-
         Task<string> GoogleLoginAsync(string idToken);
         Task RecoverUser(int id);
         Task<ResponseDTO> GetUserProfile();
@@ -52,6 +55,7 @@ namespace _2_Service.Service
             _httpContextAccessor = httpContextAccessor;
         }
 
+        #region CRUD User
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             return await _userRepository.GetAllAsync();
@@ -118,6 +122,32 @@ namespace _2_Service.Service
 
             await _userRepository.AddAsync(user);
         }
+        public async Task UpdateUser(int id, UserDTO userDto)
+        {
+            var existingUser = await _userRepository.GetByIdAsync(id);
+            if (existingUser == null) throw new Exception("User not found.");
+
+            var currentUserRole = _httpContextAccessor.HttpContext.User.Claims
+                                .FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            existingUser.FullName = userDto.FullName;
+            existingUser.Email = userDto.Email;
+            existingUser.Gender = userDto.Gender;
+            existingUser.DateOfBirth = userDto.DateOfBirth;
+            existingUser.Address = userDto.Address;
+            existingUser.Phone = userDto.Phone;
+            existingUser.Avatar = userDto.Avatar;
+
+            await _userRepository.UpdateAsync(existingUser);
+        }
+
+        public async Task DeleteUser(int id)
+        {
+            await _userRepository.SoftDeleteAsync(id);
+        }
+        #endregion
+
+
 
         public async Task<ResponseDTO> Login(LoginRequestDTO userDto)
         {
@@ -167,32 +197,6 @@ namespace _2_Service.Service
             }
         }
 
-
-        public async Task UpdateUser(int id, UserDTO userDto)
-        {
-            var existingUser = await _userRepository.GetByIdAsync(id);
-            if (existingUser == null) throw new Exception("User not found.");
-
-            var currentUserRole = _httpContextAccessor.HttpContext.User.Claims
-                                .FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            existingUser.FullName = userDto.FullName;
-            existingUser.Email = userDto.Email;
-            existingUser.Gender = userDto.Gender;
-            existingUser.DateOfBirth = userDto.DateOfBirth;
-            existingUser.Address = userDto.Address;
-            existingUser.Phone = userDto.Phone;
-            existingUser.Avatar = userDto.Avatar;
-
-            await _userRepository.UpdateAsync(existingUser);
-        }
-
-        
-
-        public async Task DeleteUser(int id)
-        {
-            await _userRepository.SoftDeleteAsync(id);
-        }
 
         public async Task RecoverUser(int id)
         {

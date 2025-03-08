@@ -13,12 +13,15 @@ namespace _2_Service.Service
 {
     public interface IRoleService
     {
+        #region CRUD Category
         Task<IEnumerable<Role>> GetAllRoles();
         Task<Role> GetRoleById(int id);
-        Task<Role> GetIdRoleByName(string name);
         Task AddRole(Role role);
         Task UpdateRole(Role role);
         Task DeleteRole(int id);
+        #endregion
+
+        Task<Role> GetIdRoleByName(string name);
     }
 
     public class RoleService : IRoleService
@@ -28,6 +31,8 @@ namespace _2_Service.Service
         {
             _roleRepository = roleRepository;
         }
+
+        #region CRUD Category
         public async Task<IEnumerable<Role>> GetAllRoles()
         {
             return await _roleRepository.GetAllAsync();
@@ -36,11 +41,6 @@ namespace _2_Service.Service
         public async Task<Role> GetRoleById(int id)
         {
             return await _roleRepository.GetByIdAsync(id);
-        }
-
-        public async Task<Role> GetIdRoleByName(string name)
-        {
-            return await _roleRepository.GetIdByNameAsync(name);
         }
 
         public async Task AddRole(Role role)
@@ -63,8 +63,14 @@ namespace _2_Service.Service
 
             await _roleRepository.DeleteAsync(id);
         }
+        #endregion
 
 
-        
+        public async Task<Role> GetIdRoleByName(string name)
+        {
+            return await _roleRepository.GetIdByNameAsync(name);
+        }
+
+
     }
 }

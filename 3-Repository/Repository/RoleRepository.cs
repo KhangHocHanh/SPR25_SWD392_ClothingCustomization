@@ -23,6 +23,7 @@ namespace _3_Repository.Repository
             _context = context;
         }
 
+        #region CRUD Category
         public async Task<IEnumerable<Role>> GetAllAsync()
         {
             return await _context.Roles.ToListAsync();
@@ -32,16 +33,6 @@ namespace _3_Repository.Repository
             return await _context.Roles.FindAsync(id);
         }
 
-        public async Task<Role> GetIdByNameAsync(string name)
-        {
-            return await _context.Roles.FirstOrDefaultAsync(r => r.RoleName.ToLower() == name.ToLower());
-        }
-
-        public async Task<string> GetNameByIdAsync(int id)
-        {
-            var roleName = await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == id);
-            return roleName.RoleName;
-        }
 
         public async Task AddAsync(Role role)
         {
@@ -64,6 +55,20 @@ namespace _3_Repository.Repository
         {
             _context.Roles.Update(role);
             await _context.SaveChangesAsync();
+        }
+        #endregion
+
+
+
+        public async Task<Role> GetIdByNameAsync(string name)
+        {
+            return await _context.Roles.FirstOrDefaultAsync(r => r.RoleName.ToLower() == name.ToLower());
+        }
+
+        public async Task<string> GetNameByIdAsync(int id)
+        {
+            var roleName = await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == id);
+            return roleName.RoleName;
         }
 
         public async Task<bool> IsRoleUsedAsync(int id)
