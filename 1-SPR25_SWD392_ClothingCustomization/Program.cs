@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using _2_Service.Service;
 using _3_Repository.Repository;
 using _3_Repository.IRepository;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,8 +41,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 // Đăng ký Controllers
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+        options.JsonSerializerOptions.WriteIndented = true;
+    });
+
 builder.Services.AddEndpointsApiExplorer();
+
+
 
 // Cấu hình Swagger
 builder.Services.AddSwaggerGen(c =>
@@ -78,10 +88,10 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddDbContext<ClothesCusShopContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
+builder.Services.AddHttpContextAccessor();
 
-
+//builder.Services.AddDbContext<ClothesCusShopContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
 
 // Đăng ký DI (Dependency Injection)
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -92,6 +102,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<ICustomizeProductRepository, CustomizeProductRepository>();
+builder.Services.AddScoped<IDesignAreaRepository, DesignAreaRepository>();
+builder.Services.AddScoped<IDesignElementRepository, DesignElementRepository>();
 
 // Đăng ký Service
 builder.Services.AddScoped<IUserService, UserService>();
@@ -99,9 +112,21 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICustomizeProductService, CustomizeProductService>();
+builder.Services.AddScoped<IDesignAreaService, DesignAreaService>();
+builder.Services.AddScoped<IDesignElementService, DesignElementService>();
+
 
 // Đăng ký AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+// Load Firebase Private Key JSON File
+var firebaseJsonPath = Path.Combine(builder.Environment.WebRootPath, "firebase", "clothescustom.json");
+
+FirebaseApp.Create(new AppOptions
+{
+    Credential = GoogleCredential.FromFile(firebaseJsonPath)
+});
 
 // Xây dựng ứng dụng
 var app = builder.Build();
@@ -114,6 +139,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

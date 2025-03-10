@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BusinessObject.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessObject.RequestDTO
 {
@@ -16,6 +18,7 @@ namespace BusinessObject.RequestDTO
             [Required]
             public string Password { get; set; }
         }
+        #region Khang
         public class ProductCreateDTO
         {
             [Required(ErrorMessage = "Category ID is required")]
@@ -71,6 +74,28 @@ namespace BusinessObject.RequestDTO
             public bool IsDeleted { get; set; }
             public int ProductCount { get; set; }
         }
+
+        // DesignElement
+        public class DesignElementCreateDTO
+        {
+            [Required]
+            public int DesignAreaId { get; set; }  // Chọn từ danh sách DesignArea (Dropdown)
+
+            [Required]
+            public int CustomizeProductId { get; set; }  // Chọn từ danh sách CustomizeProduct (Dropdown)
+
+            public IFormFile? Image { get; set; }  // Upload hình ảnh
+
+            [MaxLength(250)]
+            public string? Text { get; set; }  // Văn bản thiết kế
+
+            [MaxLength(10)]
+            public string? Size { get; set; }
+
+            [MaxLength(20)]
+            public string? ColorArea { get; set; }
+        }
+        #endregion
         #region Hai
         public class FeedbackDTO
         {
@@ -139,9 +164,33 @@ namespace BusinessObject.RequestDTO
 
             public string? Avatar { get; set; }
 
-            public string RoleName { get; set; } = "Customer"; // Default role
+            public string RoleName { get; set; } = "Member"; // Default role
         }
 
+        public class UserUpdateDTO
+        {
+            public string FullName { get; set; }
+            public string Email { get; set; }
+            public bool Gender { get; set; }
+            public DateTime DateOfBirth { get; set; }
+            public string Address { get; set; }
+            public string Phone { get; set; }
+            public string Avatar { get; set; }
+        }
+
+        public class ChangePasswordDTO
+        {
+            [Required]
+            public string Username { get; set; } = string.Empty;
+            [Required, MinLength(6)]
+            public string Password { get; set; } = string.Empty;
+            [Required, MinLength(6)]
+            public string ConfirmPassword { get; set; } = string.Empty;
+        }
+        public class GoogleLoginRequest
+        {
+            public string IdToken { get; set; }
+        }
 
         #endregion
     }

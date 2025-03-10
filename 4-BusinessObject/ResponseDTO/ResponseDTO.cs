@@ -26,8 +26,8 @@ namespace BusinessObject.ResponseDTO
             public string Password { get; set; } = null!;
             public string? Phone { get; set; }
             public string? FullName { get; set; }
-            public UserStatus IsDeleted { get; set; }
-            public UserRole RoleId { get; set; }
+            public bool IsDeleted { get; set; }
+            public string RoleName { get; set; }
         }
         public class UserListDTO
         {
@@ -58,6 +58,23 @@ namespace BusinessObject.ResponseDTO
             public DateTime? CreatedDate { get; set; }
         }
        
+        public class DesignElementDTO
+        {
+            public int DesignElementId { get; set; }
+            public string? Image { get; set; }
+            public string? Text { get; set; }
+            public string? Size { get; set; }
+            public string? ColorArea { get; set; }
+
+            // Thông tin từ bảng DesignArea
+            public int DesignAreaId { get; set; }
+            public string AreaName { get; set; } = string.Empty;
+
+            // Thông tin từ bảng CustomizeProduct
+            public int CustomizeProductId { get; set; }
+            public string ShirtColor { get; set; } = string.Empty;
+            public string? FullImage { get; set; }
+        }
 
             public class CategoryListDTO
             {

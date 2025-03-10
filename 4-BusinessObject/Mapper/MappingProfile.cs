@@ -33,6 +33,27 @@ namespace BusinessObject.Mapper
             CreateMap<CategoryCreateDTO, Category>();
             CreateMap<CategoryUpdateDTO, Category>();
             CreateMap<Category, CategoryDetailDTO>();
+
+            // DesignElement Mapping
+            CreateMap<DesignElement, DesignElementDTO>()
+                .ForMember(dest => dest.DesignElementId, opt => opt.MapFrom(src => src.DesignElementId))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Image))
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Text))
+                .ForMember(dest => dest.Size, opt => opt.MapFrom(src => src.Size))
+                .ForMember(dest => dest.ColorArea, opt => opt.MapFrom(src => src.ColorArea))
+                .ForMember(dest => dest.DesignAreaId, opt => opt.MapFrom(src => src.DesignAreaId))
+                .ForMember(dest => dest.AreaName, opt => opt.MapFrom(src => src.DesignArea.AreaName))
+                .ForMember(dest => dest.CustomizeProductId, opt => opt.MapFrom(src => src.CustomizeProductId))
+                .ForMember(dest => dest.ShirtColor, opt => opt.MapFrom(src => src.CustomizeProduct.ShirtColor))
+                .ForMember(dest => dest.FullImage, opt => opt.MapFrom(src => src.CustomizeProduct.FullImage))
+                .ReverseMap();
+            // Mapping DesignElementCreateDTO <-> DesignElement
+            CreateMap<DesignElementCreateDTO, DesignElement>()
+                .ForMember(dest => dest.Image, opt => opt.Ignore()) // Image sẽ xử lý riêng (upload file)
+                .ForMember(dest => dest.DesignElementId, opt => opt.Ignore()) // ID sẽ được tạo tự động
+                .ForMember(dest => dest.DesignArea, opt => opt.Ignore()) // Không map trực tiếp entity liên quan
+                .ForMember(dest => dest.CustomizeProduct, opt => opt.Ignore());
+
         }
     }
 }

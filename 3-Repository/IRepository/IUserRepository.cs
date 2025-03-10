@@ -16,5 +16,9 @@ namespace _3_Repository.IRepository
         Task DeleteAsync(int id);
         Task UpdateAsync(User user);
         Task SoftDeleteAsync(int id);
+        Task RecoverAsync(int id);
+        Task<User?> GetByUsernameAsync(string username);
+        Task<User?> GetByEmailAsync(string email);
+        
     }
 }

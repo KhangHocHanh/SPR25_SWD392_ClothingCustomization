@@ -35,6 +35,12 @@ namespace _3_Repository.Repository
             return await _context.Roles.FirstOrDefaultAsync(r => r.RoleName.ToLower() == name.ToLower());
         }
 
+        public async Task<string> GetNameByIdAsync(int id)
+        {
+            var roleName = await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == id);
+            return roleName.RoleName;
+        }
+
         public async Task AddAsync(Role role)
         {
             _context.AddAsync(role);
