@@ -50,17 +50,28 @@ namespace Service.Service
             }
         }
 
+        //public async Task<ResponseDTO> DeleteProductAsync(int id)
+        //{
+        //    var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+        //    if (product == null) return new ResponseDTO(Const.WARNING_NO_DATA_CODE, "Product not found");
+
+        //    _unitOfWork.ProductRepository.Delete(product);
+        //    await _unitOfWork.SaveChangesAsync();
+
+        //    return new ResponseDTO(Const.SUCCESS_DELETE_CODE, "Product deleted successfully");
+        //}
         public async Task<ResponseDTO> DeleteProductAsync(int id)
         {
             var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
             if (product == null) return new ResponseDTO(Const.WARNING_NO_DATA_CODE, "Product not found");
 
-            _unitOfWork.ProductRepository.Delete(product);
+            // Soft delete bằng cách cập nhật trạng thái IsDeleted
+            product.IsDeleted = true;
+            _unitOfWork.ProductRepository.Update(product);
             await _unitOfWork.SaveChangesAsync();
 
-            return new ResponseDTO(Const.SUCCESS_DELETE_CODE, "Product deleted successfully");
+            return new ResponseDTO(Const.SUCCESS_DELETE_CODE, "Product deleted successfully (soft delete)");
         }
-
         public async Task<ResponseDTO> GetListProductsAsync()
         {
             try
