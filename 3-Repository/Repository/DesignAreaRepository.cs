@@ -39,7 +39,7 @@ namespace _3_Repository.Repository
         {
             return await _context.DesignAreas
         .Include(cp => cp.DesignElements)  
-        .Include(cp => cp.Product)         
+        .Include(cp => cp.Product)    
         .ToListAsync();
         }
 

@@ -90,8 +90,8 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddHttpContextAccessor();
 
-//builder.Services.AddDbContext<ClothesCusShopContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
+builder.Services.AddDbContext<ClothesCusShopContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DB")));
 
 // Đăng ký DI (Dependency Injection)
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
