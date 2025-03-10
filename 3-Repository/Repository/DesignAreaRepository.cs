@@ -12,9 +12,12 @@ namespace _3_Repository.Repository
 {
     public class DesignAreaRepository : GenericRepository<DesignArea>, IDesignAreaRepository
     {
-        public DesignAreaRepository() { }
+        private readonly ClothesCusShopContext _context;
 
-        public DesignAreaRepository(ClothesCusShopContext context) => _context = context;
+        public DesignAreaRepository(ClothesCusShopContext context) : base(context)
+        {
+            _context = context;
+        }
 
         public async Task AddDesignAreaAsync(DesignArea designArea)
         {

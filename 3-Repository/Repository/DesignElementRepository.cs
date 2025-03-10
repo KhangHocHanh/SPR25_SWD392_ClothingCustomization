@@ -12,9 +12,9 @@ namespace _3_Repository.Repository
 {
     public class DesignElementRepository : GenericRepository<DesignElement>, IDesignElementRepository
     {
-        public DesignElementRepository() { }
+        private readonly ClothesCusShopContext _context;
 
-        public DesignElementRepository(ClothesCusShopContext context) => _context = context;
+        public DesignElementRepository(ClothesCusShopContext context) : base(context) { _context = context; }
 
         public async Task<IEnumerable<DesignElement>> GetAllAsync()
         {

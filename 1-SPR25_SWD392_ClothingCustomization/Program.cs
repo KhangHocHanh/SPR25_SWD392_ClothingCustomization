@@ -105,6 +105,7 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ICustomizeProductRepository, CustomizeProductRepository>();
 builder.Services.AddScoped<IDesignAreaRepository, DesignAreaRepository>();
 builder.Services.AddScoped<IDesignElementRepository, DesignElementRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 // Đăng ký Service
 builder.Services.AddScoped<IUserService, UserService>();
@@ -115,6 +116,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICustomizeProductService, CustomizeProductService>();
 builder.Services.AddScoped<IDesignAreaService, DesignAreaService>();
 builder.Services.AddScoped<IDesignElementService, DesignElementService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
 // Đăng ký AutoMapper

@@ -9,7 +9,12 @@ namespace Service
         IUserRepository UserRepository { get; }
         IProductRepository ProductRepository { get; }
         IFeedbackRepository FeedbackRepository { get; }
-        ICategoryRepository CategoryRepository { get; }  // Sửa kiểu object thành ICategoryRepository
+        ICategoryRepository CategoryRepository { get; }  
+        ICustomizeProductRepository CustomizeProductRepository { get; }
+        IRoleRepository RoleRepository { get; }
+        IDesignElementRepository DesignElementRepository { get; }
+        IDesignAreaRepository DesignAreaRepository { get; }
+
 
         Task<int> SaveChangesAsync();
     }

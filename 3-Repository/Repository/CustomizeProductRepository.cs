@@ -12,9 +12,12 @@ namespace _3_Repository.Repository
 {
     public class CustomizeProductRepository : GenericRepository<CustomizeProduct>, ICustomizeProductRepository
     {
-        public CustomizeProductRepository() { }
+        private readonly ClothesCusShopContext _context;
 
-        public CustomizeProductRepository(ClothesCusShopContext context) => _context = context;
+        public CustomizeProductRepository(ClothesCusShopContext context) : base(context)
+        {
+            _context = context;
+        }
 
         public async Task AddAsync(CustomizeProduct customizeProduct)
         {

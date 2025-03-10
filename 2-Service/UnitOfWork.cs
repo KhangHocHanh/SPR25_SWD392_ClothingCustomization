@@ -19,6 +19,9 @@ namespace Service
         private IFeedbackRepository _feedbackRepository;
         private IRoleRepository _roleRepository;
         private ICategoryRepository _categoryRepository;
+        private ICustomizeProductRepository _customizeProductRepository;
+        private IDesignElementRepository _designElementRepository;
+        private IDesignAreaRepository _designAreaRepository;
 
         public UnitOfWork(ClothesCusShopContext context)
         {
@@ -67,6 +70,32 @@ namespace Service
             {
                 _roleRepository ??= new RoleRepository(_context);
                 return _roleRepository;
+            }
+        }
+
+        public ICustomizeProductRepository CustomizeProductRepository
+        {
+            get
+            {
+                _customizeProductRepository ??= new CustomizeProductRepository(_context);
+                return _customizeProductRepository;
+            }
+        }
+
+        public IDesignElementRepository DesignElementRepository
+        {
+            get
+            {
+                _designElementRepository ??= new DesignElementRepository(_context);
+                return _designElementRepository;
+            }
+        }
+        public IDesignAreaRepository DesignAreaRepository
+        {
+            get
+            {
+                _designAreaRepository ??= new DesignAreaRepository(_context);
+                return _designAreaRepository;
             }
         }
 
