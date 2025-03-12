@@ -192,6 +192,47 @@ namespace BusinessObject.RequestDTO
             public string IdToken { get; set; }
         }
 
+        public class NotificationDTO
+        {
+
+            public int UserId { get; set; }
+
+            public string? Subject { get; set; }
+
+            public string? Message { get; set; }
+
+            public DateTime CreatedDate { get; set; }
+
+            public bool IsRead { get; set; }
+        }
+
+        public class PostNotificationDTO
+        {
+
+            public int UserId { get; set; }
+
+            public string? Subject { get; set; }
+
+            public string? Message { get; set; }
+
+        }
+
+        public class PutNotificationDTO
+        {
+            public string? Subject { get; set; }
+
+            public string? Message { get; set; }
+
+        }
+
+        public class NotificationRoleDTO
+        {
+            public string RoleName { get; set; }
+            public string Subject { get; set; }
+            public string Message { get; set; }
+
+        }
+
         #endregion
     }
 }

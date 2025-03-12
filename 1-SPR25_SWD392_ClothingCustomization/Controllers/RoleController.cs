@@ -6,7 +6,7 @@ using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 {
-    [Route("api/Roles")]
+    [Route("api/roles")]
     [ApiController]
     public class RoleController : Controller
     {
@@ -16,6 +16,8 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         {
             _roleService = roleService;
         }
+
+        #region CRUD Category
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Role>>> GetAll()
@@ -27,15 +29,6 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         public async Task<ActionResult<Role>> GetById(int id)
         {
             var role = await _roleService.GetRoleById(id);
-            if (role == null)
-                return NotFound();
-            return Ok(role);
-        }
-
-        [HttpGet("byname/{name}")]
-        public async Task<ActionResult<Role>> GetIdByName(string name)
-        {
-            var role = await _roleService.GetIdRoleByName(name);
             if (role == null)
                 return NotFound();
             return Ok(role);
@@ -84,5 +77,17 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 return BadRequest(new { message = ex.Message }); // 400 Bad Request if error
             }
         }
+        #endregion
+
+
+        [HttpGet("byname/{name}")]
+        public async Task<ActionResult<Role>> GetIdByName(string name)
+        {
+            var role = await _roleService.GetIdRoleByName(name);
+            if (role == null)
+                return NotFound();
+            return Ok(role);
+        }
+
     }
 }
