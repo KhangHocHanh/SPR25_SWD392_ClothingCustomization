@@ -18,6 +18,7 @@ namespace Service
         private IUserRepository _userRepository;
         private IFeedbackRepository _feedbackRepository;
         private IRoleRepository _roleRepository;
+        private INotificationRepository _notificationRepository;
         private ICategoryRepository _categoryRepository;
         private ICustomizeProductRepository _customizeProductRepository;
         private IDesignElementRepository _designElementRepository;
@@ -52,6 +53,13 @@ namespace Service
             {
                 _userRepository ??= new UserRepository(_context);
                 return _userRepository;
+            }
+        }
+        public INotificationRepository NotificationRepository
+        {
+            get
+            {
+                return _notificationRepository ??= new NotificationRepository(_context);
             }
         }
 

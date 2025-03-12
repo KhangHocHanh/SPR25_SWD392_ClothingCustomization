@@ -11,8 +11,6 @@ namespace Repository.Repository
 {
     public class FeedbackRepository : GenericRepository<Feedback>, IFeedbackRepository
     {
-
-
         public FeedbackRepository(ClothesCusShopContext context) : base(context)
         {
             _context = context;
