@@ -50,7 +50,18 @@ builder.Services.AddControllers()
 
 builder.Services.AddEndpointsApiExplorer();
 
-
+// Allow cross platform
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+       
+        });
+});
 
 // Cấu hình Swagger
 builder.Services.AddSwaggerGen(c =>
@@ -107,6 +118,8 @@ builder.Services.AddScoped<ICustomizeProductRepository, CustomizeProductReposito
 builder.Services.AddScoped<IDesignAreaRepository, DesignAreaRepository>();
 builder.Services.AddScoped<IDesignElementRepository, DesignElementRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderStageRepository, OrderStageRepository>();
 
 // Đăng ký Service
 builder.Services.AddScoped<IUserService, UserService>();
@@ -119,6 +132,8 @@ builder.Services.AddScoped<ICustomizeProductService, CustomizeProductService>();
 builder.Services.AddScoped<IDesignAreaService, DesignAreaService>();
 builder.Services.AddScoped<IDesignElementService, DesignElementService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderStageService, OrderStageService>();
 
 
 // Đăng ký AutoMapper
@@ -144,6 +159,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseCors("AllowAll");
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
