@@ -23,6 +23,8 @@ namespace Service
         private ICustomizeProductRepository _customizeProductRepository;
         private IDesignElementRepository _designElementRepository;
         private IDesignAreaRepository _designAreaRepository;
+        private IOrderRepository _orderRepository;
+        private IOrderStageRepository _orderStageRepository;
 
         public UnitOfWork(ClothesCusShopContext context)
         {
@@ -105,6 +107,16 @@ namespace Service
                 _designAreaRepository ??= new DesignAreaRepository(_context);
                 return _designAreaRepository;
             }
+        }
+
+        public IOrderRepository OrderRepository
+        {
+            get { return _orderRepository ??= new OrderRepository(_context); }
+        }
+
+        public IOrderStageRepository OrderStageRepository
+        {
+            get { return _orderStageRepository ??= new OrderStageRepository(_context); }
         }
 
         // Xóa dòng này đi:

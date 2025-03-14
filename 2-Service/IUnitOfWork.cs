@@ -14,7 +14,8 @@ namespace Service
         IRoleRepository RoleRepository { get; }
         IDesignElementRepository DesignElementRepository { get; }
         IDesignAreaRepository DesignAreaRepository { get; }
-
+        IOrderRepository OrderRepository { get; }
+        IOrderStageRepository OrderStageRepository { get; }
 
         Task<int> SaveChangesAsync();
     }

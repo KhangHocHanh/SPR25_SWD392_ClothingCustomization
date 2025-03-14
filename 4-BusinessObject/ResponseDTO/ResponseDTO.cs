@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +58,7 @@ namespace BusinessObject.ResponseDTO
             public string Review { get; set; } = null!;
             public DateTime? CreatedDate { get; set; }
         }
-       
+
         public class DesignElementDTO
         {
             public int DesignElementId { get; set; }
@@ -76,22 +77,77 @@ namespace BusinessObject.ResponseDTO
             public string? FullImage { get; set; }
         }
 
-            public class CategoryListDTO
-            {
-                public int CategoryId { get; set; }
-                public string CategoryName { get; set; } = null!;
-                public string? Description { get; set; }
-                public bool IsDeleted { get; set; }
-            
-                public int ProductCount { get; set; }
-            }
+        public class CategoryListDTO
+        {
+            public int CategoryId { get; set; }
+            public string CategoryName { get; set; } = null!;
+            public string? Description { get; set; }
+            public bool IsDeleted { get; set; }
 
-          
-            public class CategoryDetailDTO : CategoryListDTO
-            {
-                public ICollection<ProductListDTO> Products { get; set; } = new List<ProductListDTO>();
-            }
+            public int ProductCount { get; set; }
+        }
+
+
+        public class CategoryDetailDTO : CategoryListDTO
+        {
+            public ICollection<ProductListDTO> Products { get; set; } = new List<ProductListDTO>();
+        }
+
+        public class OrderStageListDTO
+        {
+            public int OrderStageId { get; set; }
+            public int OrderId { get; set; }
+            public string OrderStageName { get; set; } = null!;
+            public DateTime? UpdatedDate { get; set; }
+        }
+
+        public class OrderStageResponseDTO
+        {
+            public int OrderStageId { get; set; }
+            public int OrderId { get; set; }
+            public string OrderStageName { get; set; }
+            public DateTime? UpdatedDate { get; set; }
+        }
+
+        public class OrderDTO
+        {
+            [Required(ErrorMessage = "CustomizeProductId is required.")]
+            [Range(1, int.MaxValue, ErrorMessage = "CustomizeProductId must be greater than 0.")]
+            public int CustomizeProductId { get; set; }
+
+            [Required(ErrorMessage = "OrderDate is required.")]
+            public DateTime? OrderDate { get; set; }
+
+            public DateTime? DeliveryDate { get; set; }
+
+            [Required(ErrorMessage = "RecipientName is required.")]
+            [StringLength(100, ErrorMessage = "RecipientName must be between 3 and 100 characters.", MinimumLength = 3)]
+            public string RecipientName { get; set; }
+
+            [Required(ErrorMessage = "DeliveryAddress is required.")]
+            public string DeliveryAddress { get; set; }
+
+            public string? ShippingMethod { get; set; }
+
+            [Range(0, double.MaxValue, ErrorMessage = "ShippingFee must be non-negative.")]
+            public double? ShippingFee { get; set; }
+
+            public string? Notes { get; set; }
+
+            [Required(ErrorMessage = "Price is required.")]
+            [Range(1, double.MaxValue, ErrorMessage = "Price must be greater than 0.")]
+            public decimal? Price { get; set; }
+
+            [Required(ErrorMessage = "Quantity is required.")]
+            [Range(1, int.MaxValue, ErrorMessage = "Quantity must be greater than 0.")]
+            public int? Quantity { get; set; }
+
+            [Required(ErrorMessage = "TotalPrice is required.")]
+            [Range(1, double.MaxValue, ErrorMessage = "TotalPrice must be greater than 0.")]
+            public decimal? TotalPrice { get; set; }
         }
 
     }
+
+}
 
