@@ -32,7 +32,7 @@ public partial class ClothesCusShopContext : DbContext
 
     public virtual DbSet<OrderStage> OrderStages { get; set; }
 
-    public virtual DbSet<OrderStageName> OrderStageNames { get; set; }
+  
 
     public virtual DbSet<Payment> Payments { get; set; }
 
@@ -201,37 +201,30 @@ public partial class ClothesCusShopContext : DbContext
                 .HasConstraintName("FK_Order_CustomizeProduct");
         });
 
+
         modelBuilder.Entity<OrderStage>(entity =>
         {
-            entity.HasKey(e => e.OrderStageId).HasName("PK__OrderSta__B46B8F7218F73896");
+            entity.HasKey(e => e.OrderStageId).HasName("PK_OrderStage");
 
             entity.ToTable("OrderStage");
 
             entity.Property(e => e.OrderStageId).HasColumnName("OrderStage_ID");
             entity.Property(e => e.OrderId).HasColumnName("Order_ID");
-            entity.Property(e => e.OrderStageNameId).HasColumnName("OrderStageName_ID");
+
+            // ✅ Chỉ lưu OrderStageName dưới dạng số nguyên (int), KHÔNG có OrderStageNameId
+            entity.Property(e => e.OrderStageName)
+                  .HasColumnName("OrderStageName")
+                  .HasConversion<int>();
+
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderStages)
-                .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_OrderStage_Order");
-
-            entity.HasOne(d => d.OrderStageName).WithMany(p => p.OrderStages)
-                .HasForeignKey(d => d.OrderStageNameId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_OrderStage_OrderStageName");
+            entity.HasOne(d => d.Order)
+                  .WithMany(p => p.OrderStages)
+                  .HasForeignKey(d => d.OrderId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK_OrderStage_Order");
         });
 
-        modelBuilder.Entity<OrderStageName>(entity =>
-        {
-            entity.HasKey(e => e.OrderStageNameId).HasName("PK__OrderSta__2DC4BA368E98C250");
-
-            entity.ToTable("OrderStageName");
-
-            entity.Property(e => e.OrderStageNameId).HasColumnName("OrderStageName_ID");
-            entity.Property(e => e.StatusName).HasMaxLength(50);
-        });
 
         modelBuilder.Entity<Payment>(entity =>
         {

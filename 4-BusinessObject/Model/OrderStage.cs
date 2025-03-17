@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BusinessObject.Enum;
+using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace BusinessObject.Model;
 
@@ -9,11 +11,12 @@ public partial class OrderStage
 
     public int OrderId { get; set; }
 
-    public int OrderStageNameId { get; set; }
+    public OrderStageEnum OrderStageName { get; set; }
 
     public DateTime? UpdatedDate { get; set; }
 
+    [JsonIgnore]
     public virtual Order Order { get; set; } = null!;
 
-    public virtual OrderStageName OrderStageName { get; set; } = null!;
+
 }

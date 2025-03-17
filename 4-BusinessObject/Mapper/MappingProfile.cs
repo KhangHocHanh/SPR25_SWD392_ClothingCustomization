@@ -54,6 +54,25 @@ namespace BusinessObject.Mapper
                 .ForMember(dest => dest.DesignArea, opt => opt.Ignore()) // Không map trực tiếp entity liên quan
                 .ForMember(dest => dest.CustomizeProduct, opt => opt.Ignore());
 
+
+            //Oder
+            CreateMap<Order, OrderListDTO>().ReverseMap();
+            CreateMap<OrderCreateDTO, Order>().ReverseMap();
+            CreateMap<OrderUpdateDTO, Order>().ReverseMap();
+
+            // OrderStage
+            CreateMap<OrderStage, OrderStageListDTO>()
+                  .ForMember(dest => dest.OrderStageName,
+                             opt => opt.MapFrom(src => src.OrderStageName.ToString()))
+                  .ReverseMap()
+                  .ForMember(dest => dest.OrderStageName,
+                             opt => opt.MapFrom(src => (OrderStageEnum)Enum.OrderStageEnum.Parse(typeof(OrderStageEnum), src.OrderStageName)));
+
+
+
+            // Map từ OrderStageCreateDTO sang Entity
+            CreateMap<OrderStageCreateDTO, OrderStage>().ReverseMap();
+
         }
     }
 }

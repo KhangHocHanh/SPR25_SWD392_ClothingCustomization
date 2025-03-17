@@ -18,5 +18,6 @@ namespace Service
         IOrderStageRepository OrderStageRepository { get; }
 
         Task<int> SaveChangesAsync();
+        void Dispose();
     }
 }

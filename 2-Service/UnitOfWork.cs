@@ -138,6 +138,10 @@ namespace Service
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+            if (_context != null)
+            {
+                _context.Dispose();
+            }
         }
 
         protected virtual void Dispose(bool disposing)
