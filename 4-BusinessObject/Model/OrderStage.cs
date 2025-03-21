@@ -11,7 +11,9 @@ public partial class OrderStage
 
     public int OrderId { get; set; }
 
-    public OrderStageEnum OrderStageName { get; set; }
+    public string OrderStageName { get; set; } = null!;
+
+
 
     public DateTime? UpdatedDate { get; set; }
 

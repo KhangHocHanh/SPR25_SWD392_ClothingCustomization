@@ -64,10 +64,11 @@ namespace Service.Service
             }
 
             // Kiểm tra giá trị hợp lệ của OrderStageName
-            if (!Enum.IsDefined(typeof(OrderStageEnum), orderStageDto.OrderStageName))
+            if (string.IsNullOrWhiteSpace(orderStageDto.OrderStageName))
             {
-                return new ResponseDTO(400, $"Invalid OrderStageName '{orderStageDto.OrderStageName}'.");
+                return new ResponseDTO(400, "OrderStageName cannot be empty.");
             }
+
 
             var orderStage = _mapper.Map<OrderStage>(orderStageDto);
             await _unitOfWork.OrderStageRepository.AddOrderStageAsync(orderStage);

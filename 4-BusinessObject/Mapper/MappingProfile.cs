@@ -55,19 +55,15 @@ namespace BusinessObject.Mapper
                 .ForMember(dest => dest.CustomizeProduct, opt => opt.Ignore());
 
 
+
             //Oder
             CreateMap<Order, OrderListDTO>().ReverseMap();
             CreateMap<OrderCreateDTO, Order>().ReverseMap();
             CreateMap<OrderUpdateDTO, Order>().ReverseMap();
 
             // OrderStage
-            CreateMap<OrderStage, OrderStageListDTO>()
-                  .ForMember(dest => dest.OrderStageName,
-                             opt => opt.MapFrom(src => src.OrderStageName.ToString()))
-                  .ReverseMap()
-                  .ForMember(dest => dest.OrderStageName,
-                             opt => opt.MapFrom(src => (OrderStageEnum)Enum.OrderStageEnum.Parse(typeof(OrderStageEnum), src.OrderStageName)));
-
+            CreateMap<OrderStage, OrderStageListDTO>().ReverseMap();
+            CreateMap<OrderStageCreateDTO, OrderStage>().ReverseMap();
 
 
             // Map từ OrderStageCreateDTO sang Entity

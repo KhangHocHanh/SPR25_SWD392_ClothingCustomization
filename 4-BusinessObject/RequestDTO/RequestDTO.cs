@@ -319,11 +319,11 @@ namespace BusinessObject.RequestDTO
             public int OrderId { get; set; }
 
             [Required(ErrorMessage = "OrderStageName is required.")]
-            [EnumDataType(typeof(OrderStageEnum), ErrorMessage = "Invalid value for OrderStageName.")]
-            public OrderStageEnum OrderStageName { get; set; }
+            public string OrderStageName { get; set; } = null!; // 🔥 Dùng string thay vì enum
 
             public DateTime? UpdatedDate { get; set; } = DateTime.UtcNow;
         }
+
         #endregion
     }
 }

@@ -211,10 +211,10 @@ public partial class ClothesCusShopContext : DbContext
             entity.Property(e => e.OrderStageId).HasColumnName("OrderStage_ID");
             entity.Property(e => e.OrderId).HasColumnName("Order_ID");
 
-            // ✅ Chỉ lưu OrderStageName dưới dạng số nguyên (int), KHÔNG có OrderStageNameId
+            
             entity.Property(e => e.OrderStageName)
-                  .HasColumnName("OrderStageName")
-                  .HasConversion<int>();
+        .HasColumnName("OrderStageName")
+        .HasMaxLength(100); 
 
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
