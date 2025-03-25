@@ -158,9 +158,28 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         [HttpGet("revenue")]
         public async Task<ActionResult> GetRevenue([FromQuery] int? day, [FromQuery] int? month, [FromQuery] int? year)
         {
-            if (!day.HasValue && !month.HasValue && !year.HasValue)
+            if (!year.HasValue)
             {
-                return BadRequest(new { message = "Please provide at least one filter: day, month, or year." });
+                return BadRequest(new { message = "Please provide at least a year or a combination of month and year." });
+            }
+
+            if (day.HasValue && !month.HasValue)
+            {
+                return BadRequest(new { message = "Filtering by day requires both month and year." });
+            }
+
+            if (month.HasValue && !year.HasValue)
+            {
+                return BadRequest(new { message = "Filtering by month requires a year." });
+            }
+
+            // Validate against future dates
+            DateTime today = DateTime.UtcNow;
+            if (year > today.Year ||
+                (year == today.Year && month.HasValue && month > today.Month) ||
+                (year == today.Year && month.HasValue && day.HasValue && month == today.Month && day > today.Day))
+            {
+                return BadRequest(new { message = "Future dates are not allowed." });
             }
 
             try
@@ -174,7 +193,8 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             }
         }
 
-        
+
+
 
 
     }
