@@ -1,7 +1,8 @@
 ﻿    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
+using System.Linq.Expressions;
+using System.Text;
     using System.Threading.Tasks;
 
     namespace Repository
@@ -14,9 +15,10 @@
 
             IQueryable<T> GetAllWithTwoInclude(string entity1, string entity2);
 
-            Task<List<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate);
 
-            void Create(T entity);
+        void Create(T entity);
 
             Task<int> CreateAsync(T entity);
 

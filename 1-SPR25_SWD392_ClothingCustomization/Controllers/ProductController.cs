@@ -32,6 +32,21 @@ namespace SPR25_SWD392_ClothingCustomization.Controllers
                 return StatusCode(500, new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message));
             }
         }
+        [HttpGet("available")]
+        public async Task<IActionResult> GetAvailableProducts()
+        {
+            try
+            {
+                var result = await _productService.GetAvailableProductsAsync();
+                return result.Status == Const.SUCCESS_READ_CODE
+                    ? Ok(result)
+                    : BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message));
+            }
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)

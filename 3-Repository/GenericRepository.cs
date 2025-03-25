@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessObject.Model;
@@ -97,6 +98,10 @@ namespace Repository
             var tracker = _context.Attach(entity);
             tracker.State = EntityState.Modified;
             return await _context.SaveChangesAsync();
+        }
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).ToListAsync();
         }
     }
 }

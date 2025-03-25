@@ -15,6 +15,7 @@ namespace Service.Service
     public interface IProductService
     {
         Task<ResponseDTO> GetListProductsAsync();
+        Task<ResponseDTO> GetAvailableProductsAsync();
         Task<ResponseDTO> GetProductByIdAsync(int id);
         Task<ResponseDTO> CreateProductAsync(ProductCreateDTO productDto);
         Task<ResponseDTO> UpdateProductAsync(ProductUpdateDTO productDto);
@@ -82,6 +83,22 @@ namespace Service.Service
 
                 var result = _mapper.Map<List<ProductListDTO>>(products);
                 return new ResponseDTO(Const.SUCCESS_READ_CODE, "Products retrieved successfully", result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message);
+            }
+        }
+        public async Task<ResponseDTO> GetAvailableProductsAsync()
+        {
+            try
+            {
+                var products = await _unitOfWork.ProductRepository.GetAllAsync(p => !p.IsDeleted); // Lấy sản phẩm chưa bị xóa
+                if (!products.Any())
+                    return new ResponseDTO(Const.SUCCESS_READ_CODE, "No available products found");
+
+                var result = _mapper.Map<List<ProductListDTO>>(products);
+                return new ResponseDTO(Const.SUCCESS_READ_CODE, "Available products retrieved successfully", result);
             }
             catch (Exception ex)
             {
