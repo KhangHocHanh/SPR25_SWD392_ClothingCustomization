@@ -154,5 +154,28 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             }
         }
 
+
+        [HttpGet("revenue")]
+        public async Task<ActionResult> GetRevenue([FromQuery] int? day, [FromQuery] int? month, [FromQuery] int? year)
+        {
+            if (!day.HasValue && !month.HasValue && !year.HasValue)
+            {
+                return BadRequest(new { message = "Please provide at least one filter: day, month, or year." });
+            }
+
+            try
+            {
+                decimal revenue = await _orderService.CalculateRevenueAsync(day, month, year);
+                return Ok(new { revenue });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred.", error = ex.Message });
+            }
+        }
+
+        
+
+
     }
 }

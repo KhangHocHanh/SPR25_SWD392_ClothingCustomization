@@ -17,6 +17,7 @@ namespace _2_Service.Service
         Task DeleteOrderAsync(int id);
 
         Task<bool> CheckCustomizeProductExists(int customizeProductId);
+        Task<decimal> CalculateRevenueAsync(int? day, int? month, int? year);
     }
 
     public class OrderService : IOrderService
@@ -99,6 +100,21 @@ namespace _2_Service.Service
             }
 
             await _orderRepository.DeleteAsync(id);
+        }
+
+
+        // view revenue
+        public async Task<decimal> CalculateRevenueAsync(int? day, int? month, int? year)
+        {
+            var orders = await _orderRepository.GetAllAsync();
+
+            var filteredOrders = orders.Where(order =>
+                (!day.HasValue || (order.OrderDate.HasValue && order.OrderDate.Value.Day == day)) &&
+                (!month.HasValue || (order.OrderDate.HasValue && order.OrderDate.Value.Month == month)) &&
+                (!year.HasValue || (order.OrderDate.HasValue && order.OrderDate.Value.Year == year))
+            );
+
+            return filteredOrders.Sum(order => order.TotalPrice.GetValueOrDefault());
         }
 
     }
