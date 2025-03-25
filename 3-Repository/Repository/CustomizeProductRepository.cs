@@ -21,7 +21,7 @@ namespace _3_Repository.Repository
 
         public async Task AddAsync(CustomizeProduct customizeProduct)
         {
-            _context.AddAsync(customizeProduct);
+            await _context.CustomizeProducts.AddAsync(customizeProduct);
             await _context.SaveChangesAsync();
         }
 

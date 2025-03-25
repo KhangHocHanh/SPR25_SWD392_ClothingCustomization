@@ -1,6 +1,9 @@
 ﻿using _2_Service.Service;
+using AutoMapper;
 using BusinessObject.Model;
 using Microsoft.AspNetCore.Mvc;
+using static BusinessObject.RequestDTO.RequestDTO;
+using static BusinessObject.ResponseDTO.ResponseDTO;
 
 namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 {
@@ -9,12 +12,14 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
     public class CustomizeProductController : Controller
     {
         private readonly ICustomizeProductService _customizeProductService;
-        public CustomizeProductController(ICustomizeProductService customizeProductService)
+        private readonly IMapper _mapper;
+        public CustomizeProductController(ICustomizeProductService customizeProductService, IMapper mapper)
         {
             _customizeProductService = customizeProductService;
+            _mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CustomizeProduct>>> GetAll()
+        public async Task<ActionResult<IEnumerable<CustomizeProductResponseDTO>>> GetAll()
         {
             return Ok(await _customizeProductService.GetAllCustomizeProducts());
         }
@@ -28,10 +33,29 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             return Ok(customizeProduct);
         }
 
+        //[HttpPost]
+        //public async Task<ActionResult> Create([FromBody] CustomizeProduct customizeProduct)
+        //{
+        //    await _customizeProductService.AddCustomizeProduct(customizeProduct);
+        //    return CreatedAtAction(nameof(GetById), new { id = customizeProduct.CustomizeProductId }, customizeProduct);
+        //}
+        // POST api/customizeproduct
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CustomizeProduct customizeProduct)
+        public async Task<ActionResult> Create([FromBody] CreateCustomizeProductDTO createCustomizeProductDTO)
         {
+            // Kiểm tra dữ liệu hợp lệ
+            if (createCustomizeProductDTO == null)
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            // Ánh xạ DTO thành entity CustomizeProduct
+            var customizeProduct = _mapper.Map<CustomizeProduct>(createCustomizeProductDTO);
+
+            // Gọi service để lưu dữ liệu vào cơ sở dữ liệu
             await _customizeProductService.AddCustomizeProduct(customizeProduct);
+
+            // Trả về kết quả khi tạo thành công
             return CreatedAtAction(nameof(GetById), new { id = customizeProduct.CustomizeProductId }, customizeProduct);
         }
 

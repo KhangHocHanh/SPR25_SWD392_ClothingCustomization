@@ -146,6 +146,16 @@ namespace BusinessObject.ResponseDTO
             [Range(1, double.MaxValue, ErrorMessage = "TotalPrice must be greater than 0.")]
             public decimal? TotalPrice { get; set; }
         }
+        public class CustomizeProductResponseDTO
+        {
+            public int CustomizeProductId { get; set; }
+            public int ProductId { get; set; }
+            public int UserId { get; set; }
+            public string? ShirtColor { get; set; }
+            public string? FullImage { get; set; }
+            public string? Description { get; set; }
+            public decimal Price { get; set; }
+        }
 
     }
 

@@ -19,6 +19,28 @@ namespace BusinessObject.RequestDTO
             public string Password { get; set; }
         }
         #region Khang
+
+        public class CreateCustomizeProductDTO
+        {
+            public int CustomizeProductId { get; set; }
+            [Required]
+            public int ProductId { get; set; }
+            [Required]
+
+            public int UserId { get; set; }
+            [Required]
+
+            public string? ShirtColor { get; set; }
+            [Required]
+
+            public string? FullImage { get; set; }
+            [Required]
+
+            public string? Description { get; set; }
+            [Required]
+            [Range(0, double.MaxValue, ErrorMessage = "Price must be greater than 0")]
+            public decimal Price { get; set; }
+        }
         public class ProductCreateDTO
         {
             [Required(ErrorMessage = "Category ID is required")]

@@ -54,6 +54,25 @@ namespace BusinessObject.Mapper
                 .ForMember(dest => dest.DesignArea, opt => opt.Ignore()) // Không map trực tiếp entity liên quan
                 .ForMember(dest => dest.CustomizeProduct, opt => opt.Ignore());
 
+            CreateMap<CreateCustomizeProductDTO, CustomizeProduct>()
+                .ForMember(dest => dest.CustomizeProductId, opt => opt.MapFrom(src => src.CustomizeProductId))
+                .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
+                .ForMember(dest => dest.ShirtColor, opt => opt.MapFrom(src => src.ShirtColor))
+                .ForMember(dest => dest.FullImage, opt => opt.MapFrom(src => src.FullImage))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ReverseMap();
+            CreateMap<CustomizeProductResponseDTO, CustomizeProduct>()
+                .ForMember(dest => dest.CustomizeProductId, opt => opt.MapFrom(src => src.CustomizeProductId))
+                .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
+                .ForMember(dest => dest.ShirtColor, opt => opt.MapFrom(src => src.ShirtColor))
+                .ForMember(dest => dest.FullImage, opt => opt.MapFrom(src => src.FullImage))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ReverseMap();
+
 
 
             //Oder
