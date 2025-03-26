@@ -23,6 +23,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         private readonly IOrderService _orderService;
         private readonly IOrderStageService _orderStageService;
         private readonly IPaymentService _paymentService;
+        private readonly TimeZoneInfo vietnamTimeZone;
 
         public PaymentController(IVnpay vnPayservice, IConfiguration configuration, IOrderStageService orderStageService, IOrderService orderService, IPaymentService paymentService)
         {
@@ -168,6 +169,8 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 }
 
                 var ipAddress = NetworkHelper.GetIpAddress(HttpContext);
+                DateTime utcNow = DateTime.UtcNow; // Lấy thời gian hiện tại theo UTC
+                DateTime expireTime = utcNow.AddMinutes(15); // Đặt thời gian hết hạn giao dịch (15 phút sau)
 
                 var request = new VNPAY.NET.Models.PaymentRequest
                 {
@@ -176,7 +179,8 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                     Description = $"Thanh toán đơn hàng #{orderId}",
                     IpAddress = ipAddress,
                     BankCode = BankCode.ANY,
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = utcNow, // Thời gian tạo giao dịch UTC
+                       // Thời gian hết hạn giao dịch UTC
                     Currency = Currency.VND,
                     Language = DisplayLanguage.Vietnamese
                 };
@@ -189,6 +193,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
 
         //[HttpGet("Callback")]
@@ -280,7 +285,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                     TotalAmount = paymentDto.Amount,
                     DepositPaid = paymentDto.Amount, // Adjust if needed
                     DepositAmount = paymentDto.Amount, // Adjust if needed
-                    PaymentDate = DateTime.UtcNow
+                    PaymentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone)
                 };
 
                 // Save payment details
