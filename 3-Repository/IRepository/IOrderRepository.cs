@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BusinessObject.Model;
+using BusinessObject.RequestDTO;
 
 namespace Repository.IRepository
 {
@@ -13,5 +14,6 @@ namespace Repository.IRepository
         Task AddAsync(Order order);
         Task UpdateAsync(Order order);
         Task DeleteAsync(int id);
+        Task<List<RequestDTO.ProductOrderQuantityDto>> GetOrderedProductQuantities();
     }
 }

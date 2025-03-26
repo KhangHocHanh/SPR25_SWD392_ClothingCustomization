@@ -194,7 +194,12 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         }
 
 
-
+        [HttpGet("ordered-products")]
+        public async Task<IActionResult> GetOrderedProductQuantities()
+        {
+            var data = await _orderService.GetOrderedProductQuantities();
+            return Ok(data);
+        }
 
 
     }

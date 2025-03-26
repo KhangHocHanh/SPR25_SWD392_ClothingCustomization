@@ -355,5 +355,13 @@ namespace BusinessObject.RequestDTO
             public int CustomizationCount { get; set; }
             public bool IsDeleted { get; set; }
         }
+
+        public class ProductOrderQuantityDto
+        {
+            public int Product_ID { get; set; }
+            public string ProductName { get; set; }
+            public int TotalOrderedQuantity { get; set; }
+        }
+
     }
 }

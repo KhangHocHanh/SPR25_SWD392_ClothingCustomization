@@ -5,6 +5,7 @@ using _3_Repository.IRepository;
 using Repository.IRepository;
 using System;
 using Repository.Repository;
+using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace _2_Service.Service
 {
@@ -18,6 +19,7 @@ namespace _2_Service.Service
 
         Task<bool> CheckCustomizeProductExists(int customizeProductId);
         Task<decimal> CalculateRevenueAsync(int? day, int? month, int? year);
+        Task<List<ProductOrderQuantityDto>> GetOrderedProductQuantities();
     }
 
     public class OrderService : IOrderService
@@ -189,6 +191,20 @@ namespace _2_Service.Service
             );
 
             return filteredOrders.Sum(order => order.TotalPrice.GetValueOrDefault());
+        }
+
+
+        public async Task<List<ProductOrderQuantityDto>> GetOrderedProductQuantities()
+        {
+            var orders = await _orderRepository.GetOrderedProductQuantities();
+
+            // Business Logic: If no orders, return empty list
+            if (orders == null || !orders.Any())
+            {
+                return new List<ProductOrderQuantityDto>();
+            }
+
+            return orders;
         }
 
     }

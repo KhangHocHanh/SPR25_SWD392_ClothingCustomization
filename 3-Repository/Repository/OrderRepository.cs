@@ -4,6 +4,7 @@ using BusinessObject.Model;
 using Microsoft.EntityFrameworkCore;
 using _3_Repository.IRepository;
 using Repository.IRepository;
+using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace Repository.Repository
 {
@@ -57,6 +58,29 @@ namespace Repository.Repository
         {
             return await _context.CustomizeProducts.FindAsync(id);
         }
+
+        public async Task<List<ProductOrderQuantityDto>> GetOrderedProductQuantities()
+        {
+            return await _context.Orders
+                .Join(_context.CustomizeProducts,
+                      o => o.CustomizeProductId,
+                      cp => cp.CustomizeProductId,
+                      (o, cp) => new { Order = o, CustomizeProduct = cp }) // Assign names to properties
+                .Join(_context.Products,
+                      ocp => ocp.CustomizeProduct.ProductId,
+                      p => p.ProductId,
+                      (ocp, p) => new { ocp.Order, p }) // Assign correct structure
+                .GroupBy(x => new { x.p.ProductId, x.p.ProductName })
+                .Select(g => new ProductOrderQuantityDto
+                {
+                    Product_ID = g.Key.ProductId,
+                    ProductName = g.Key.ProductName,
+                    TotalOrderedQuantity = g.Sum(x => (x.Order.Quantity ?? 0)) // Correctly access order quantity
+                })
+                .OrderByDescending(x => x.TotalOrderedQuantity)
+                .ToListAsync();
+        }
+
 
 
 
