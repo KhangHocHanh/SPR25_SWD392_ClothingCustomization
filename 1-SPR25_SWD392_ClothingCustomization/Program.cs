@@ -136,6 +136,9 @@ builder.Services.AddScoped<IDesignElementService, DesignElementService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderStageService, OrderStageService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IPaymentMappingService, PaymentMappingService>();
+
 
 // Đăng ký VnPay Service
 builder.Services.AddScoped<IVnPayService, VnPayService>();

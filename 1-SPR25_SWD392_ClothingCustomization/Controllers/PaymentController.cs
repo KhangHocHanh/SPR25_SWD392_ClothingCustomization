@@ -21,13 +21,15 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         private readonly IConfiguration _configuration;
         private readonly IOrderService _orderService;
         private readonly IOrderStageService _orderStageService;
+        private readonly IPaymentService _paymentService;
 
-        public PaymentController(IVnpay vnPayservice, IConfiguration configuration, IOrderStageService orderStageService, IOrderService orderService)
+        public PaymentController(IVnpay vnPayservice, IConfiguration configuration, IOrderStageService orderStageService, IOrderService orderService, IPaymentService paymentService)
         {
             _vnpay = vnPayservice;
             _configuration = configuration;
             _orderService = orderService;
             _orderStageService = orderStageService;
+            _paymentService = paymentService;
 
             _vnpay.Initialize(_configuration["Vnpay:TmnCode"], _configuration["Vnpay:HashSecret"], _configuration["Vnpay:BaseUrl"], _configuration["Vnpay:CallbackUrl"]);
         }
@@ -168,7 +170,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 
                 var request = new VNPAY.NET.Models.PaymentRequest
                 {
-                    PaymentId = DateTime.Now.Ticks,
+                    PaymentId = orderId,
                     Money = (double)order.TotalPrice,
                     Description = $"Thanh toán đơn hàng #{orderId}",
                     IpAddress = ipAddress,
@@ -188,14 +190,58 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         }
 
 
+        //[HttpGet("Callback")]
+        //public async Task<ActionResult<ResponseDTO>> Callback()
+        //{
+        //    //if (!Request.QueryString.HasValue)
+        //    //{
+        //    //    return NotFound(new ResponseDTO(404, "Không tìm thấy thông tin thanh toán."));
+        //    //}
+
+        //    try
+        //    {
+        //        var paymentResult = _vnpay.GetPaymentResult(Request.Query);
+        //        if (!paymentResult.IsSuccess)
+        //        {
+        //            return BadRequest(new ResponseDTO(400, "Payment failed", new { RedirectUrl = "https://yourfrontend.com/payment-failed" }));
+        //        }
+
+        //        //var orderId = (int)paymentResult.PaymentId;
+        //        int orderId = 6;
+        //        var existingOrder = await _orderService.GetOrderByIdAsync(orderId);
+        //        if (existingOrder == null)
+        //        {
+        //            return BadRequest(new ResponseDTO(400, $"OrderId {orderId} does not exist."));
+        //        }
+
+        //        var orderStageDto = new OrderStageCreateDTO
+        //        {
+        //            OrderId = orderId,
+        //            OrderStageName = "Purchased",
+        //            UpdatedDate = DateTime.UtcNow
+        //        };
+
+        //        var response = await _orderStageService.CreateOrderStageAsync(orderStageDto);
+        //        if (response.Status != 201)
+        //        {
+        //            return BadRequest(response);
+        //        }
+
+        //        return Ok(new ResponseDTO(200, "Payment success", new { RedirectUrl = "https://yourfrontend.com/payment-success" }));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new ResponseDTO(500, "Internal server error", ex.Message));
+        //    }
+        //}
+
+
+
+
+        #region test call back
         [HttpGet("Callback")]
         public async Task<ActionResult<ResponseDTO>> Callback()
         {
-            if (!Request.QueryString.HasValue)
-            {
-                return NotFound(new ResponseDTO(404, "Không tìm thấy thông tin thanh toán."));
-            }
-
             try
             {
                 var paymentResult = _vnpay.GetPaymentResult(Request.Query);
@@ -203,17 +249,52 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 {
                     return BadRequest(new ResponseDTO(400, "Payment failed", new { RedirectUrl = "https://yourfrontend.com/payment-failed" }));
                 }
+                // Extract orderId from vnp_TxnRef
+                if (!int.TryParse(Request.Query["vnp_TxnRef"], out int orderId))
+                {
+                    return BadRequest(new ResponseDTO(400, "Invalid Order ID"));
+                }
+                // Extract payment data
+                var paymentDto = new PaymentAPIVNP
+                {
+                    OrderId = orderId, // Extract from vnp_OrderInfo or vnp_TxnRef
+                    Amount = decimal.Parse(Request.Query["vnp_Amount"]) / 100,
+                    BankCode = Request.Query["vnp_BankCode"],
+                    BankTranNo = Request.Query["vnp_BankTranNo"],
+                    CardType = Request.Query["vnp_CardType"],
+                    OrderInfo = Request.Query["vnp_OrderInfo"],
+                    PayDate = Request.Query["vnp_PayDate"],
+                    ResponseCode = Request.Query["vnp_ResponseCode"],
+                    TransactionNo = Request.Query["vnp_TransactionNo"],
+                    TransactionStatus = Request.Query["vnp_TransactionStatus"],
+                    TxnRef = Request.Query["vnp_TxnRef"],
+                    SecureHash = Request.Query["vnp_SecureHash"],
+                    CreatedAt = DateTime.UtcNow
+                };
 
-                var orderId = (int)paymentResult.PaymentId;
-                var existingOrder = await _orderService.GetOrderByIdAsync(orderId);
+                // Convert DTO to Entity (Payment)
+                var paymentEntity = new Payment
+                {
+                    OrderId = paymentDto.OrderId,
+                    TotalAmount = paymentDto.Amount,
+                    DepositPaid = paymentDto.Amount, // Adjust if needed
+                    DepositAmount = paymentDto.Amount, // Adjust if needed
+                    PaymentDate = DateTime.UtcNow
+                };
+
+                // Save payment details
+                await _paymentService.SavePaymentAsync(paymentEntity);
+
+                // Update order status
+                var existingOrder = await _orderService.GetOrderByIdAsync(paymentDto.OrderId);
                 if (existingOrder == null)
                 {
-                    return BadRequest(new ResponseDTO(400, $"OrderId {orderId} does not exist."));
+                    return BadRequest(new ResponseDTO(400, $"OrderId {paymentDto.OrderId} does not exist."));
                 }
 
                 var orderStageDto = new OrderStageCreateDTO
                 {
-                    OrderId = orderId,
+                    OrderId = paymentDto.OrderId,
                     OrderStageName = "Purchased",
                     UpdatedDate = DateTime.UtcNow
                 };
@@ -231,5 +312,12 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 return BadRequest(new ResponseDTO(500, "Internal server error", ex.Message));
             }
         }
+        #endregion
+
+
+
+
+
+
     }
 }

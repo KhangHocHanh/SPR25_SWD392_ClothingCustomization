@@ -375,5 +375,32 @@ namespace BusinessObject.RequestDTO
             public string Language { get; set; } = "vi"; // Ngôn ngữ hiển thị giao diện thanh toán (vi = Tiếng Việt, en = English)
         }
 
+
+        public class PaymentAPIVNP
+        {
+            public int Id { get; set; }
+            public int OrderId { get; set; }
+            public decimal Amount { get; set; }
+            public string BankCode { get; set; }
+            public string BankTranNo { get; set; }
+            public string CardType { get; set; }
+            public string OrderInfo { get; set; }
+            public string PayDate { get; set; }
+            public string ResponseCode { get; set; }
+            public string TransactionNo { get; set; }
+            public string TransactionStatus { get; set; }
+            public string TxnRef { get; set; }
+            public string SecureHash { get; set; }
+            public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        }
+
+        public class PaymentMapping
+        {
+            public int Id { get; set; }
+            public int OrderId { get; set; } // Your system's order ID
+            public string VnpTxnRef { get; set; } // VNPAY's transaction reference
+        }
+
+
     }
 }

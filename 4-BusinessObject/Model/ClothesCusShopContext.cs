@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace BusinessObject.Model;
 
@@ -15,6 +16,7 @@ public partial class ClothesCusShopContext : DbContext
         : base(options)
     {
     }
+    public DbSet<PaymentMapping> PaymentMappings { get; set; }
 
     public virtual DbSet<Category> Categories { get; set; }
 
