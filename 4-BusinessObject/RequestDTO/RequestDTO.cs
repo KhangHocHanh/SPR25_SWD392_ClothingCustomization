@@ -371,7 +371,6 @@ namespace BusinessObject.RequestDTO
             public string IpAddress { get; set; } = string.Empty; // Địa chỉ IP của khách hàng
             public string BankCode { get; set; } = "ANY"; // Mã ngân hàng, có thể là giá trị cụ thể hoặc mặc định "ANY"
             public DateTime CreatedDate { get; set; } = DateTime.UtcNow; // Ngày tạo thanh toán (UTC)
-            public DateTime ExpireDate { get; set; } = DateTime.UtcNow.AddMinutes(15); // Ngày hết hạn thanh toán (UTC)
             public string Currency { get; set; } = "VND"; // Loại tiền tệ (VND, USD, v.v.)
             public string Language { get; set; } = "vi"; // Ngôn ngữ hiển thị giao diện thanh toán (vi = Tiếng Việt, en = English)
         }

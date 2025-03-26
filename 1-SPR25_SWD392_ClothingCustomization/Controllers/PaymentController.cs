@@ -32,6 +32,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             _orderService = orderService;
             _orderStageService = orderStageService;
             _paymentService = paymentService;
+            vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Ho_Chi_Minh");
 
             _vnpay.Initialize(_configuration["Vnpay:TmnCode"], _configuration["Vnpay:HashSecret"], _configuration["Vnpay:BaseUrl"], _configuration["Vnpay:CallbackUrl"]);
         }
@@ -180,7 +181,6 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                     IpAddress = ipAddress,
                     BankCode = BankCode.ANY,
                     CreatedDate = utcNow, // Thời gian tạo giao dịch UTC
-                       // Thời gian hết hạn giao dịch UTC
                     Currency = Currency.VND,
                     Language = DisplayLanguage.Vietnamese
                 };
