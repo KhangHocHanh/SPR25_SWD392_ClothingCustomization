@@ -102,10 +102,13 @@ namespace _2_Service.Service
                     throw new ArgumentException($"CustomizeProductId {order.CustomizeProductId} does not exist. Please provide a valid CustomizeProductId.");
                 }
 
-                if (order.Price <= 0 || order.Quantity <= 0 || order.TotalPrice <= 0)
+                if (order.Price <= 0 || order.Quantity <= 0)
                 {
-                    throw new ArgumentException("Price, Quantity, and TotalPrice must be greater than zero.");
+                    throw new ArgumentException("Price and Quantity must be greater than zero.");
                 }
+
+                // ✅ Tự động tính TotalPrice
+                order.TotalPrice = order.Price * order.Quantity;
 
                 // Add order
                 await _orderRepository.AddAsync(order);
@@ -121,7 +124,7 @@ namespace _2_Service.Service
                 OrderStage orderStage = new OrderStage
                 {
                     OrderId = savedOrder.OrderId,
-                    OrderStageName = "Place Order",
+                    OrderStageName = "Place Order", // Nếu bạn dùng Enum, hãy chỉnh lại phần này
                     UpdatedDate = DateTime.Now
                 };
 
@@ -137,6 +140,7 @@ namespace _2_Service.Service
                 throw;
             }
         }
+
 
 
         public async Task UpdateOrderAsync(Order order)

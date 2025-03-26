@@ -296,7 +296,7 @@ namespace BusinessObject.RequestDTO
             [Required]
             public int Quantity { get; set; }
 
-            public decimal? TotalPrice { get; set; }
+            //public decimal? TotalPrice { get; set; }
         }
 
         public class OrderUpdateDTO
