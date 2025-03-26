@@ -11,6 +11,7 @@ using VNPAY.NET.Enums;
 using VNPAY.NET.Models;
 using VNPAY.NET.Utilities;
 using static BusinessObject.RequestDTO.RequestDTO;
+using static BusinessObject.ResponseDTO.ResponseDTO;
 
 namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 {
@@ -292,18 +293,67 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                     return BadRequest(new ResponseDTO(400, $"OrderId {paymentDto.OrderId} does not exist."));
                 }
 
-                var orderStageDto = new OrderStageCreateDTO
-                {
-                    OrderId = paymentDto.OrderId,
-                    OrderStageName = "Purchased",
-                    UpdatedDate = DateTime.UtcNow
-                };
+                #region Handle order stage
 
-                var response = await _orderStageService.CreateOrderStageAsync(orderStageDto);
-                if (response.Status != 201)
+
+
+                //var orderStageDto = new OrderStageCreateDTO
+                //{
+                //    OrderId = paymentDto.OrderId,
+                //    OrderStageName = "Purchased",
+                //    UpdatedDate = DateTime.UtcNow
+                //};
+
+                //var response = await _orderStageService.CreateOrderStageAsync(orderStageDto);
+                //if (response.Status != 201)
+                //{
+                //    return BadRequest(response);
+                //}
+
+                // Check if the order already has a payment stage
+                var response = await _orderStageService.GetOrderStageByOrderIdAsync(paymentDto.OrderId);
+                OrderStageResponseDTO? existingOrderStageDto = null;
+
+                if (response.Status == 200 && response.Data is OrderStageResponseDTO orderStageData)
                 {
-                    return BadRequest(response);
+                    existingOrderStageDto = orderStageData;
                 }
+                if (existingOrderStageDto != null)
+                {
+                    // Convert DTO to OrderStage model
+                    var existingOrderStage = new OrderStage
+                    {
+                        OrderStageId = existingOrderStageDto.OrderStageId,
+                        OrderId = existingOrderStageDto.OrderId,
+                        OrderStageName = "Purchased",  // Updating the stage
+                        UpdatedDate = DateTime.UtcNow
+                    };
+
+                    var updateResponse = await _orderStageService.UpdateOrderStageAsync(existingOrderStage);
+                    if (updateResponse.Status != 200) // Assuming 200 means successful update
+                    {
+                        return BadRequest(updateResponse);
+                    }
+                }
+                else
+                {
+                    // If no order stage exists, create a new one
+                    var orderStageDto = new OrderStageCreateDTO
+                    {
+                        OrderId = paymentDto.OrderId,
+                        OrderStageName = "Purchased",
+                        UpdatedDate = DateTime.UtcNow
+                    };
+
+                    var createResponse = await _orderStageService.CreateOrderStageAsync(orderStageDto);
+                    if (createResponse.Status != 201)
+                    {
+                        return BadRequest(response);
+                    }
+                }
+                #endregion
+
+
 
                 return Ok(new ResponseDTO(200, "Payment success", new { RedirectUrl = "https://yourfrontend.com/payment-success" }));
             }

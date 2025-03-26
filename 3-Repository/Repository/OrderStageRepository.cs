@@ -40,11 +40,30 @@ namespace Repository.Repository
         public async Task UpdateOrderStageAsync(OrderStage orderStage)
         {
             _context.OrderStages.Update(orderStage);
+            await _context.SaveChangesAsync(); // Ensure the changes are committed
         }
+
 
         public async Task DeleteOrderStageAsync(OrderStage orderStage)
         {
             _context.OrderStages.Remove(orderStage);
         }
+
+
+        // 🔹 New method to get OrderStage by OrderId
+        public async Task<OrderStage?> GetOrderStageByOrderIdAsync(int orderId)
+        {
+            return await _context.OrderStages
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+        }
+
+        public async Task<OrderStage?> GetLatestOrderStageByOrderIdAsync(int orderId)
+        {
+            return await _context.OrderStages
+                .Where(os => os.OrderId == orderId)
+                .OrderByDescending(os => os.UpdatedDate)
+                .FirstOrDefaultAsync(); // Only return the latest order stage
+        }
+
     }
 }

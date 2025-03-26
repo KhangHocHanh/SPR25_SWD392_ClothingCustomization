@@ -11,5 +11,7 @@ namespace Repository.IRepository
         Task AddOrderStageAsync(OrderStage orderStage);
         Task UpdateOrderStageAsync(OrderStage orderStage);
         Task DeleteOrderStageAsync(OrderStage orderStage);
+        Task<OrderStage?> GetOrderStageByOrderIdAsync(int orderId);
+        Task<OrderStage?> GetLatestOrderStageByOrderIdAsync(int orderId);
     }
 }

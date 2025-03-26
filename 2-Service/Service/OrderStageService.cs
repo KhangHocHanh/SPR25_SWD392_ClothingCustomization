@@ -18,7 +18,13 @@ namespace Service.Service
         Task<ResponseDTO> GetOrderStageByIdAsync(int id);
         Task<ResponseDTO> CreateOrderStageAsync(OrderStageCreateDTO orderStageDto);
         Task<ResponseDTO> DeleteOrderStageAsync(int id);
+
         //Task CreateOrderStageAsync(OrderStage orderStageDto);
+
+        // new method
+        Task<ResponseDTO> GetOrderStageByOrderIdAsync(int orderId);
+        Task<ResponseDTO> UpdateOrderStageAsync(OrderStage existingOrderStage);
+
     }
     public class OrderStageService : IOrderStageService
     {
@@ -95,6 +101,38 @@ namespace Service.Service
 
             return new ResponseDTO(200, "OrderStage deleted successfully.");
         }
+
+        // 🔹 New method to update an existing OrderStage
+        public async Task<ResponseDTO> UpdateOrderStageAsync(OrderStage existingOrderStage)
+        {
+            var orderStage = await _unitOfWork.OrderStageRepository.GetLatestOrderStageByOrderIdAsync(existingOrderStage.OrderId);
+            if (orderStage == null)
+            {
+                return new ResponseDTO(404, $"OrderStage with ID {existingOrderStage.OrderStageId} not found.");
+            }
+
+            // Update values
+            orderStage.OrderStageName = existingOrderStage.OrderStageName;
+            orderStage.UpdatedDate = DateTime.UtcNow;
+
+            await _unitOfWork.OrderStageRepository.UpdateOrderStageAsync(orderStage);
+            await _unitOfWork.SaveChangesAsync();
+
+            return new ResponseDTO(200, "OrderStage updated successfully.", orderStage);
+        }
+
+        public async Task<ResponseDTO> GetOrderStageByOrderIdAsync(int orderId)
+        {
+            var orderStage = await _unitOfWork.OrderStageRepository.GetOrderStageByOrderIdAsync(orderId);
+            if (orderStage == null)
+            {
+                return new ResponseDTO(404, $"OrderStage for OrderId {orderId} not found.");
+            }
+
+            return new ResponseDTO(200, "Success", orderStage);
+        }
+
+
 
     }
 }
