@@ -347,5 +347,13 @@ namespace BusinessObject.RequestDTO
         }
 
         #endregion
+
+        public class ProductCustomizationCountDto
+        {
+            public int ProductId { get; set; }
+            public string ProductName { get; set; } = string.Empty;
+            public int CustomizationCount { get; set; }
+            public bool IsDeleted { get; set; }
+        }
     }
 }

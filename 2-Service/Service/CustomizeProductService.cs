@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _3_Repository.IRepository;
 using BusinessObject.Model;
+using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace _2_Service.Service
 {
@@ -15,6 +16,7 @@ namespace _2_Service.Service
         Task AddCustomizeProduct(CustomizeProduct customizeProduct);
         Task UpdateCustomizeProduct(CustomizeProduct customizeProduct);
         Task DeleteCustomizeProduct(int id);
+        Task<List<ProductCustomizationCountDto>> GetProductCustomizationCounts();
     }
     public class CustomizeProductService : ICustomizeProductService
     {
@@ -46,6 +48,13 @@ namespace _2_Service.Service
         public async Task DeleteCustomizeProduct(int id)
         {
             await _customizeProductRepository.DeleteAsync(id);
+        }
+
+
+
+        public async Task<List<ProductCustomizationCountDto>> GetProductCustomizationCounts()
+        {
+            return await _customizeProductRepository.GetProductCustomizationCounts();
         }
     }
 

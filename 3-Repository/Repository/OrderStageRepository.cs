@@ -32,7 +32,9 @@ namespace Repository.Repository
 
         public async Task AddOrderStageAsync(OrderStage orderStage)
         {
+            //await _context.OrderStages.AddAsync(orderStage);
             await _context.OrderStages.AddAsync(orderStage);
+            await _context.SaveChangesAsync(); // Ensure changes are committed
         }
 
         public async Task UpdateOrderStageAsync(OrderStage orderStage)

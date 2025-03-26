@@ -7,6 +7,7 @@ using _3_Repository.IRepository;
 using BusinessObject.Model;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace _3_Repository.Repository
 {
@@ -63,6 +64,29 @@ namespace _3_Repository.Repository
         .Include(cp => cp.User)            // Lấy thông tin người dùng
         .ToListAsync();
         }
+
+
+        public async Task<List<ProductCustomizationCountDto>> GetProductCustomizationCounts()
+        {
+            var result = await _context.CustomizeProducts
+                .GroupBy(cp => new { cp.ProductId, cp.Product.ProductName, cp.Product.IsDeleted }) // Include IsDeleted in grouping
+                .Select(g => new ProductCustomizationCountDto
+                {
+                    ProductId = g.Key.ProductId,
+                    ProductName = g.Key.ProductName!,
+                    CustomizationCount = g.Count(),
+                    IsDeleted = g.Key.IsDeleted // Include IsDeleted in the DTO
+                })
+                .OrderBy(p => p.IsDeleted) // Non-deleted first (0 first)
+                .ThenByDescending(p => p.CustomizationCount) // Sort by customization count within each group
+                .ToListAsync();
+
+            return result;
+        }
+
+
+
+
     }
 
 }

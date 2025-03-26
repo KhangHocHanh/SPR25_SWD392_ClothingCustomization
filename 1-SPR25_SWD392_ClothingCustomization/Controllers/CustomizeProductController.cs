@@ -74,6 +74,19 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             await _customizeProductService.DeleteCustomizeProduct(id);
             return NoContent();
         }
+
+
+
+        [HttpGet("customization-count")]
+        public async Task<IActionResult> GetProductCustomizationCounts()
+        {
+            var result = await _customizeProductService.GetProductCustomizationCounts();
+            return Ok(result);
+        }
+
+
+
+
     }
 
 }
