@@ -260,6 +260,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 {
                     return BadRequest(new ResponseDTO(400, "Invalid Order ID"));
                 }
+
                 // Extract payment data
                 var paymentDto = new PaymentAPIVNP
                 {
@@ -277,6 +278,8 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                     SecureHash = Request.Query["vnp_SecureHash"],
                     CreatedAt = DateTime.UtcNow
                 };
+                TimeZoneInfo vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Ho_Chi_Minh");
+                DateTime nowVietnamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
 
                 // Convert DTO to Entity (Payment)
                 var paymentEntity = new Payment
@@ -285,7 +288,8 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                     TotalAmount = paymentDto.Amount,
                     DepositPaid = paymentDto.Amount, // Adjust if needed
                     DepositAmount = paymentDto.Amount, // Adjust if needed
-                    PaymentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone)
+                    //PaymentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone)
+                    PaymentDate = nowVietnamTime
                 };
 
                 // Save payment details
