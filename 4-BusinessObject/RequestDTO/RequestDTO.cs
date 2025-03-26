@@ -363,5 +363,17 @@ namespace BusinessObject.RequestDTO
             public int TotalOrderedQuantity { get; set; }
         }
 
+        public class PaymentRequest
+        {
+            public long PaymentId { get; set; }  // ID thanh toán, sử dụng timestamp để đảm bảo tính duy nhất
+            public string Description { get; set; } = string.Empty; // Mô tả đơn hàng
+            public double Money { get; set; }  // Số tiền thanh toán
+            public string IpAddress { get; set; } = string.Empty; // Địa chỉ IP của khách hàng
+            public string BankCode { get; set; } = "ANY"; // Mã ngân hàng, có thể là giá trị cụ thể hoặc mặc định "ANY"
+            public DateTime CreatedDate { get; set; } = DateTime.Now; // Ngày tạo thanh toán
+            public string Currency { get; set; } = "VND"; // Loại tiền tệ (VND, USD, v.v.)
+            public string Language { get; set; } = "vi"; // Ngôn ngữ hiển thị giao diện thanh toán (vi = Tiếng Việt, en = English)
+        }
+
     }
 }

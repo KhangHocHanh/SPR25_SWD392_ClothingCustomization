@@ -2,6 +2,7 @@
 using BusinessObject.Enum;
 using BusinessObject.Model;
 using BusinessObject.ResponseDTO;
+using Microsoft.EntityFrameworkCore;
 using Repository.IRepository;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +18,20 @@ namespace Service.Service
         Task<ResponseDTO> GetOrderStageByIdAsync(int id);
         Task<ResponseDTO> CreateOrderStageAsync(OrderStageCreateDTO orderStageDto);
         Task<ResponseDTO> DeleteOrderStageAsync(int id);
+        //Task CreateOrderStageAsync(OrderStage orderStageDto);
     }
     public class OrderStageService : IOrderStageService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IOrderStageRepository _orderStageRepository;
 
 
-        public OrderStageService(IUnitOfWork unitOfWork, IMapper mapper)
+        public OrderStageService(IUnitOfWork unitOfWork, IMapper mapper, IOrderStageRepository orderStageRepository)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _orderStageRepository = orderStageRepository;
         }
 
         public async Task<ResponseDTO> GetAllOrderStagesAsync()

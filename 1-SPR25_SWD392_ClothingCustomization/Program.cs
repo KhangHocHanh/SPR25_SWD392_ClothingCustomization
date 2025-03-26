@@ -15,6 +15,8 @@ using _3_Repository.Repository;
 using _3_Repository.IRepository;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using _2_Service.Vnpay;
+using VNPAY.NET;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -134,6 +136,11 @@ builder.Services.AddScoped<IDesignElementService, DesignElementService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderStageService, OrderStageService>();
+
+// Đăng ký VnPay Service
+builder.Services.AddScoped<IVnPayService, VnPayService>();
+// Add VNPAY service to the container.
+builder.Services.AddSingleton<IVnpay, Vnpay>();
 
 
 // Đăng ký AutoMapper
