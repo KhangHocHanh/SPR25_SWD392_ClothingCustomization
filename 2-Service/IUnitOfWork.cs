@@ -19,5 +19,8 @@ namespace Service
 
         Task<int> SaveChangesAsync();
         void Dispose();
+        Task BeginTransactionAsync();
+        Task CommitAsync();
+        Task RollbackAsync();
     }
 }

@@ -20,27 +20,41 @@ namespace BusinessObject.RequestDTO
         }
         #region Khang
 
-        public class CreateCustomizeProductDTO
+       
+            public class CreateCustomizeDto
         {
-            public int CustomizeProductId { get; set; }
             [Required]
             public int ProductId { get; set; }
-            [Required]
 
+            [Required]
             public int UserId { get; set; }
-            [Required]
 
-            public string? ShirtColor { get; set; }
             [Required]
+            public string ShirtColor { get; set; }
 
-            public string? FullImage { get; set; }
-            [Required]
+            public string Description { get; set; }
 
-            public string? Description { get; set; }
+            // Order related fields
             [Required]
-            [Range(0, double.MaxValue, ErrorMessage = "Price must be greater than 0")]
-            public decimal Price { get; set; }
+            public string RecipientName { get; set; }
+
+            [Required]
+            public string DeliveryAddress { get; set; }
+
+            public string ShippingMethod { get; set; } = "Standard";
+
+            [Range(0, double.MaxValue)]
+            public decimal ShippingFee { get; set; } = 0;
+
+            public string Notes { get; set; }
+
+            [Required]
+            [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1")]
+            public int Quantity { get; set; } = 1;
+
+            public DateTime? DeliveryDate { get; set; }
         }
+        
         public class ProductCreateDTO
         {
             [Required(ErrorMessage = "Category ID is required")]

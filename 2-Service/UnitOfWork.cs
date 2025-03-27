@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using _3_Repository.IRepository;
 using _3_Repository.Repository;
 using BusinessObject.Model;
+using Microsoft.EntityFrameworkCore.Storage;
 using Repository.IRepository;
 using Repository.Repository;
 
@@ -25,7 +26,7 @@ namespace Service
         private IDesignAreaRepository _designAreaRepository;
         private IOrderRepository _orderRepository;
         private IOrderStageRepository _orderStageRepository;
-
+        private IDbContextTransaction _transaction;
         public UnitOfWork(ClothesCusShopContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -151,6 +152,44 @@ namespace Service
                 _context?.Dispose();
             }
         }
+        // Transaction methods
+        public async Task BeginTransactionAsync()
+        {
+            _transaction = await _context.Database.BeginTransactionAsync();
+        }
+
+        public async Task CommitAsync()
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+                await _transaction.CommitAsync();
+            }
+            catch
+            {
+                await RollbackAsync();
+                throw;
+            }
+            finally
+            {
+                if (_transaction != null)
+                {
+                    await _transaction.DisposeAsync();
+                    _transaction = null;
+                }
+            }
+        }
+
+        public async Task RollbackAsync()
+        {
+            if (_transaction != null)
+            {
+                await _transaction.RollbackAsync();
+                await _transaction.DisposeAsync();
+                _transaction = null;
+            }
+        }
+
     }
 
 }

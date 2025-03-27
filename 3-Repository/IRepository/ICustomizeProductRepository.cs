@@ -18,5 +18,10 @@ namespace _3_Repository.IRepository
         Task DeleteAsync(int id);
 
         Task<List<ProductCustomizationCountDto>> GetProductCustomizationCounts();
+
+        Task<IEnumerable<CustomizeProduct>> GetByUserIdAsync(int userId);
+        Task<IEnumerable<CustomizeProduct>> GetByProductIdAsync(int productId);
+        Task<CustomizeProduct> GetWithElementsAsync(int id);
+        Task<IEnumerable<CustomizeProduct>> GetAllWithProductAndUserAsync();
     }
 }

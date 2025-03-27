@@ -40,24 +40,24 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         //    return CreatedAtAction(nameof(GetById), new { id = customizeProduct.CustomizeProductId }, customizeProduct);
         //}
         // POST api/customizeproduct
-        [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateCustomizeProductDTO createCustomizeProductDTO)
-        {
-            // Kiểm tra dữ liệu hợp lệ
-            if (createCustomizeProductDTO == null)
-            {
-                return BadRequest("Invalid data.");
-            }
+        //[HttpPost]
+        //public async Task<ActionResult> Create([FromBody] CreateCustomizeProductDTO createCustomizeProductDTO)
+        //{
+        //    // Kiểm tra dữ liệu hợp lệ
+        //    if (createCustomizeProductDTO == null)
+        //    {
+        //        return BadRequest("Invalid data.");
+        //    }
 
-            // Ánh xạ DTO thành entity CustomizeProduct
-            var customizeProduct = _mapper.Map<CustomizeProduct>(createCustomizeProductDTO);
+        //    // Ánh xạ DTO thành entity CustomizeProduct
+        //    var customizeProduct = _mapper.Map<CustomizeProduct>(createCustomizeProductDTO);
 
-            // Gọi service để lưu dữ liệu vào cơ sở dữ liệu
-            await _customizeProductService.AddCustomizeProduct(customizeProduct);
+        //    // Gọi service để lưu dữ liệu vào cơ sở dữ liệu
+        //    await _customizeProductService.AddCustomizeProduct(customizeProduct);
 
-            // Trả về kết quả khi tạo thành công
-            return CreatedAtAction(nameof(GetById), new { id = customizeProduct.CustomizeProductId }, customizeProduct);
-        }
+        //    // Trả về kết quả khi tạo thành công
+        //    return CreatedAtAction(nameof(GetById), new { id = customizeProduct.CustomizeProductId }, customizeProduct);
+        //}
 
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] CustomizeProduct customizeProduct)
@@ -83,7 +83,24 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             var result = await _customizeProductService.GetProductCustomizationCounts();
             return Ok(result);
         }
+        [HttpPost("create-with-order")]
+        public async Task<IActionResult> CreateCustomizeProductWithOrder([FromBody] CreateCustomizeDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            try
+            {
+                var result = await _customizeProductService.CreateCustomizeProductWithOrderAsync(dto);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
 
 

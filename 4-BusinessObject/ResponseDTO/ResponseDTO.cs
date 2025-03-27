@@ -156,6 +156,18 @@ namespace BusinessObject.ResponseDTO
             public string? Description { get; set; }
             public decimal Price { get; set; }
         }
+        public class CustomizeProductWithOrderResponse
+        {
+            public int CustomizeProductId { get; set; }
+            public int OrderStageId { get; set; }
+            public int ProductId { get; set; }
+            public string ShirtColor { get; set; }
+            public int OrderId { get; set; }
+            public decimal TotalPrice { get; set; }
+            public string OrderStatus { get; set; }
+            public DateTime OrderDate { get; set; }
+            public string Message { get; set; }
+        }
 
     }
 

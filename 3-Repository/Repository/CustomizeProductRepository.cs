@@ -84,9 +84,40 @@ namespace _3_Repository.Repository
             return result;
         }
 
+        public async Task<IEnumerable<CustomizeProduct>> GetByUserIdAsync(int userId)
+        {
+            return await _context.CustomizeProducts
+                 .Include(cp => cp.Product)
+                 .Include(cp => cp.DesignElements)
+                 .Where(cp => cp.UserId == userId)
+                 .ToListAsync();
+        }
 
+        public async Task<IEnumerable<CustomizeProduct>> GetByProductIdAsync(int productId)
+        {
+            return await _context.CustomizeProducts
+               .Include(cp => cp.User)
+               .Include(cp => cp.DesignElements)
+               .Where(cp => cp.ProductId == productId)
+               .ToListAsync();
+        }
 
+        public async Task<CustomizeProduct> GetWithElementsAsync(int id)
+        {
+            return await _context.CustomizeProducts
+                .Include(cp => cp.DesignElements)
+                .Include(cp => cp.Product)
+                .Include(cp => cp.User)
+                .FirstOrDefaultAsync(cp => cp.CustomizeProductId == id);
+        }
 
+        public async Task<IEnumerable<CustomizeProduct>> GetAllWithProductAndUserAsync()
+        {
+            return await _context.CustomizeProducts
+                .Include(cp => cp.Product)
+                .Include(cp => cp.User)
+                .ToListAsync();
+        }
     }
 
 }
