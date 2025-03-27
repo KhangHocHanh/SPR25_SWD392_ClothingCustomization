@@ -253,7 +253,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 var paymentResult = _vnpay.GetPaymentResult(Request.Query);
                 if (!paymentResult.IsSuccess)
                 {
-                    return BadRequest(new ResponseDTO(400, "Payment failed", new { RedirectUrl = "https://yourfrontend.com/payment-failed" }));
+                    return BadRequest(new ResponseDTO(400, "Payment failed", new { RedirectUrl = "https://swd-fe-nine.vercel.app/payment-failed" }));
                 }
                 // Extract orderId from vnp_TxnRef
                 if (!int.TryParse(Request.Query["vnp_TxnRef"], out int orderId))
@@ -364,7 +364,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 
 
 
-                return Ok(new ResponseDTO(200, "Payment success", new { RedirectUrl = "https://yourfrontend.com/payment-success" }));
+                return Ok(new ResponseDTO(200, "Payment success", new { RedirectUrl = "https://swd-fe-nine.vercel.app/payment-success" }));
             }
             catch (Exception ex)
             {
