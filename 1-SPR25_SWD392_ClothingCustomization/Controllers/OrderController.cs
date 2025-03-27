@@ -98,11 +98,12 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             }
 
             // 🛑 Kiểm tra các giá trị quan trọng
-            if (orderDto.Price <= 0 || orderDto.Quantity <= 0 || orderDto.TotalPrice <= 0)
+          
+            if (orderDto.Price <= 0 || orderDto.Quantity <= 0)
             {
-                return BadRequest(new { message = "Price, Quantity, and TotalPrice must be greater than zero." });
+                throw new ArgumentException("Price, Quantity must be greater than zero.");
             }
-
+            orderDto.TotalPrice = orderDto.Price * orderDto.Quantity;
             // ✅ Cập nhật dữ liệu Order
             existingOrder.CustomizeProductId = orderDto.CustomizeProductId;
             existingOrder.OrderDate = orderDto.OrderDate;

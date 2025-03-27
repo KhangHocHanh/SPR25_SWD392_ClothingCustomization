@@ -124,7 +124,7 @@ namespace _2_Service.Service
                 OrderStage orderStage = new OrderStage
                 {
                     OrderId = savedOrder.OrderId,
-                    OrderStageName = "Place Order", // Nếu bạn dùng Enum, hãy chỉnh lại phần này
+                    OrderStageName = "Place Order", 
                     UpdatedDate = DateTime.Now
                 };
 
@@ -158,10 +158,11 @@ namespace _2_Service.Service
             }
 
             // Kiểm tra các giá trị quan trọng
-            if (order.Price <= 0 || order.Quantity <= 0 || order.TotalPrice <= 0)
+            if (order.Price <= 0 || order.Quantity <= 0)
             {
                 throw new ArgumentException("Price, Quantity, and TotalPrice must be greater than zero.");
             }
+            order.TotalPrice = order.Price * order.Quantity;
 
             await _orderRepository.UpdateAsync(order);
         }
