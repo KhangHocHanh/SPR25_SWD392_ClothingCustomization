@@ -43,50 +43,6 @@ namespace _2_Service.Service
             return await _orderRepository.GetByIdAsync(id);
         }
 
-        //public async Task AddOrderAsync(Order order)
-        //{
-        //    if (order.CustomizeProductId <= 0)
-        //    {
-        //        throw new ArgumentException("CustomizeProductId must be greater than 0.");
-        //    }
-
-        //    // Kiểm tra `CustomizeProductId` có tồn tại trong database hay không
-        //    var existingProduct = await _orderRepository.GetCustomizeProductByIdAsync(order.CustomizeProductId);
-        //    if (existingProduct == null)
-        //    {
-        //        throw new ArgumentException($"CustomizeProductId {order.CustomizeProductId} does not exist. Please provide a valid CustomizeProductId.");
-        //    }
-
-        //    if (order.Price <= 0 || order.Quantity <= 0 || order.TotalPrice <= 0)
-        //    {
-        //        throw new ArgumentException("Price, Quantity, and TotalPrice must be greater than zero.");
-        //    }
-
-        //    await _orderRepository.AddAsync(order);
-
-
-        //    // Add order and ensure OrderId is generated
-        //    await _orderRepository.AddAsync(order); // Save order
-
-        //    // **Reload the order from DB to get the generated OrderId**
-        //    var savedOrder = await _orderRepository.GetByIdAsync(order.OrderId);
-
-        //    if (savedOrder == null)
-        //    {
-        //        throw new Exception("Failed to retrieve saved order.");
-        //    }
-
-        //    // Now, add order stage using the saved OrderId
-        //    OrderStage orderStage = new OrderStage
-        //    {
-        //        OrderId = savedOrder.OrderId,
-        //        OrderStageName = "Place Order",
-        //        UpdatedDate = DateTime.Now
-        //    };
-
-        //    await _orderStageRepository.AddOrderStageAsync(orderStage);
-        //}
-
         public async Task AddOrderAsync(Order order)
         {
             try
@@ -160,7 +116,7 @@ namespace _2_Service.Service
             // Kiểm tra các giá trị quan trọng
             if (order.Price <= 0 || order.Quantity <= 0)
             {
-                throw new ArgumentException("Price, Quantity, and TotalPrice must be greater than zero.");
+                throw new ArgumentException("Price, Quantity must be greater than zero.");
             }
             order.TotalPrice = order.Price * order.Quantity;
 

@@ -379,6 +379,17 @@ namespace BusinessObject.RequestDTO
 
             public DateTime? UpdatedDate { get; set; } = DateTime.UtcNow;
         }
+        public class OrderStageUpdateDTO
+        {
+            [Required(ErrorMessage = "OrderId is required.")]
+            [Range(1, int.MaxValue, ErrorMessage = "OrderId must be greater than 0.")]
+            public int OrderId { get; set; }
+
+            [Required(ErrorMessage = "OrderStageName is required.")]
+            public string OrderStageName { get; set; } = null!; // 🔥 Dùng string thay vì enum
+
+            public DateTime? UpdatedDate { get; set; } = DateTime.UtcNow;
+        }
 
         #endregion
 
