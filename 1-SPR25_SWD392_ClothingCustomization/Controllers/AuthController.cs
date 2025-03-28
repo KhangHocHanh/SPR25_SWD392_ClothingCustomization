@@ -61,7 +61,7 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 $"&code_challenge_method=S256" +
                 $"&code_challenge=YOUR_CODE_CHALLENGE_HERE";
 
-            return Ok(new { url = googleAuthUrl });
+            return Ok(googleAuthUrl);
         }
 
         [HttpPost("google-login")]

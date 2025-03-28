@@ -202,6 +202,11 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             return Ok(data);
         }
 
-
+        [HttpGet("revenue/{year}")]
+        public async Task<IActionResult> GetMonthlyRevenue(int year)
+        {
+            var revenueData = await _orderService.GetMonthlyRevenueAsync(year);
+            return Ok(revenueData);
+        }
     }
 }

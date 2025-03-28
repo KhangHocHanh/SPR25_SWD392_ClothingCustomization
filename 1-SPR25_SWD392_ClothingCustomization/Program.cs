@@ -244,7 +244,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction() || app.Env
 }
 
 app.UseHttpsRedirection();
-app.UseSession(); // 🔥 This must be added before authentication!
+app.UseSession(); 
 app.UseStaticFiles();
 app.UseCors("AllowFrontend");
 app.UseRouting();

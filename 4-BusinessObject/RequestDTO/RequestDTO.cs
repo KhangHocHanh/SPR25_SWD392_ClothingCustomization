@@ -446,6 +446,15 @@ namespace BusinessObject.RequestDTO
             public string VnpTxnRef { get; set; } // VNPAY's transaction reference
         }
 
+        public class RevenueDto
+        {
+            public List<string> Labels { get; set; } = new();
+            public List<RevenueDataset> Datasets { get; set; } = new();
+        }
 
+        public class RevenueDataset
+        {
+            public List<decimal> Data { get; set; } = new();
+        }
     }
 }
