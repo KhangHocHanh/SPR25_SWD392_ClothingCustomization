@@ -62,6 +62,7 @@ namespace _3_Repository.Repository
         .Include(cp => cp.DesignElements)  // Lấy danh sách các DesignElement liên quan
         .Include(cp => cp.Product)         // Lấy thông tin sản phẩm
         .Include(cp => cp.User)            // Lấy thông tin người dùng
+        .Include(cp => cp.Orders)          // Lấy danh sách các Order liên quan
         .ToListAsync();
         }
 

@@ -244,27 +244,156 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 
 
 
-        #region test call back
+        //#region test call back
+        //[HttpGet("Callback")]
+        //public async Task<ActionResult<ResponseDTO>> Callback()
+        //{
+        //    try
+        //    {
+        //        var paymentResult = _vnpay.GetPaymentResult(Request.Query);
+        //        if (!paymentResult.IsSuccess)
+        //        {
+        //            return BadRequest(new ResponseDTO(400, "Payment failed", new { RedirectUrl = "https://swd-fe-nine.vercel.app/payment-failed" }));
+        //        }
+        //        // Extract orderId from vnp_TxnRef
+        //        if (!int.TryParse(Request.Query["vnp_TxnRef"], out int orderId))
+        //        {
+        //            return BadRequest(new ResponseDTO(400, "Invalid Order ID"));
+        //        }
+
+        //        // Extract payment data
+        //        var paymentDto = new PaymentAPIVNP
+        //        {
+        //            OrderId = orderId, // Extract from vnp_OrderInfo or vnp_TxnRef
+        //            Amount = decimal.Parse(Request.Query["vnp_Amount"]) / 100,
+        //            BankCode = Request.Query["vnp_BankCode"],
+        //            BankTranNo = Request.Query["vnp_BankTranNo"],
+        //            CardType = Request.Query["vnp_CardType"],
+        //            OrderInfo = Request.Query["vnp_OrderInfo"],
+        //            PayDate = Request.Query["vnp_PayDate"],
+        //            ResponseCode = Request.Query["vnp_ResponseCode"],
+        //            TransactionNo = Request.Query["vnp_TransactionNo"],
+        //            TransactionStatus = Request.Query["vnp_TransactionStatus"],
+        //            TxnRef = Request.Query["vnp_TxnRef"],
+        //            SecureHash = Request.Query["vnp_SecureHash"],
+        //            CreatedAt = DateTime.UtcNow
+        //        };
+        //        TimeZoneInfo vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Ho_Chi_Minh");
+        //        DateTime nowVietnamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
+
+        //        // Convert DTO to Entity (Payment)
+        //        var paymentEntity = new Payment
+        //        {
+        //            OrderId = paymentDto.OrderId,
+        //            TotalAmount = paymentDto.Amount,
+        //            DepositPaid = paymentDto.Amount, // Adjust if needed
+        //            DepositAmount = paymentDto.Amount, // Adjust if needed
+        //            //PaymentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone)
+        //            PaymentDate = nowVietnamTime
+        //        };
+
+        //        // Save payment details
+        //        await _paymentService.SavePaymentAsync(paymentEntity);
+
+        //        // Update order status
+        //        var existingOrder = await _orderService.GetOrderByIdAsync(paymentDto.OrderId);
+        //        if (existingOrder == null)
+        //        {
+        //            return BadRequest(new ResponseDTO(400, $"OrderId {paymentDto.OrderId} does not exist."));
+        //        }
+
+        //        #region Handle order stage
+
+
+
+        //        //var orderStageDto = new OrderStageCreateDTO
+        //        //{
+        //        //    OrderId = paymentDto.OrderId,
+        //        //    OrderStageName = "Purchased",
+        //        //    UpdatedDate = DateTime.UtcNow
+        //        //};
+
+        //        //var response = await _orderStageService.CreateOrderStageAsync(orderStageDto);
+        //        //if (response.Status != 201)
+        //        //{
+        //        //    return BadRequest(response);
+        //        //}
+
+        //        // Check if the order already has a payment stage
+        //        var response = await _orderStageService.GetOrderStageByOrderIdAsync(paymentDto.OrderId);
+        //        OrderStageResponseDTO? existingOrderStageDto = null;
+
+        //        if (response.Status == 200 && response.Data is OrderStageResponseDTO orderStageData)
+        //        {
+        //            existingOrderStageDto = orderStageData;
+        //        }
+        //        if (existingOrderStageDto != null)
+        //        {
+        //            // Convert DTO to OrderStage model
+        //            var existingOrderStage = new OrderStage
+        //            {
+        //                OrderStageId = existingOrderStageDto.OrderStageId,
+        //                OrderId = existingOrderStageDto.OrderId,
+        //                OrderStageName = "Purchased",  // Updating the stage
+        //                UpdatedDate = DateTime.UtcNow
+        //            };
+
+        //            var updateResponse = await _orderStageService.UpdateOrderStageAsync(existingOrderStage);
+        //            if (updateResponse.Status != 200) // Assuming 200 means successful update
+        //            {
+        //                return BadRequest(updateResponse);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            // If no order stage exists, create a new one
+        //            var orderStageDto = new OrderStageCreateDTO
+        //            {
+        //                OrderId = paymentDto.OrderId,
+        //                OrderStageName = "Purchased",
+        //                UpdatedDate = DateTime.UtcNow
+        //            };
+
+        //            var createResponse = await _orderStageService.CreateOrderStageAsync(orderStageDto);
+        //            if (createResponse.Status != 201)
+        //            {
+        //                return BadRequest(response);
+        //            }
+        //        }
+        //        #endregion
+
+
+
+        //        return Ok(new ResponseDTO(200, "Payment success", new { RedirectUrl = "https://swd-fe-nine.vercel.app/payment-success" }));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new ResponseDTO(500, "Internal server error", ex.Message));
+        //    }
+        //}
+        //#endregion
         [HttpGet("Callback")]
-        public async Task<ActionResult<ResponseDTO>> Callback()
+        public async Task<IActionResult> Callback()
         {
             try
             {
                 var paymentResult = _vnpay.GetPaymentResult(Request.Query);
                 if (!paymentResult.IsSuccess)
                 {
-                    return BadRequest(new ResponseDTO(400, "Payment failed", new { RedirectUrl = "https://swd-fe-nine.vercel.app/payment-failed" }));
-                }
-                // Extract orderId from vnp_TxnRef
-                if (!int.TryParse(Request.Query["vnp_TxnRef"], out int orderId))
-                {
-                    return BadRequest(new ResponseDTO(400, "Invalid Order ID"));
+                    // Chuyển hướng đến trang thất bại nếu thanh toán không thành công
+                    return Redirect("https://swd-fe-nine.vercel.app/payment-failed");
                 }
 
-                // Extract payment data
+                // Extract orderId từ vnp_TxnRef
+                if (!int.TryParse(Request.Query["vnp_TxnRef"], out int orderId))
+                {
+                    return BadRequest("Invalid Order ID");
+                }
+
+                // Xử lý lưu thông tin thanh toán và cập nhật đơn hàng (giữ nguyên phần này)
                 var paymentDto = new PaymentAPIVNP
                 {
-                    OrderId = orderId, // Extract from vnp_OrderInfo or vnp_TxnRef
+                    OrderId = orderId,
                     Amount = decimal.Parse(Request.Query["vnp_Amount"]) / 100,
                     BankCode = Request.Query["vnp_BankCode"],
                     BankTranNo = Request.Query["vnp_BankTranNo"],
@@ -278,48 +407,27 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                     SecureHash = Request.Query["vnp_SecureHash"],
                     CreatedAt = DateTime.UtcNow
                 };
-                TimeZoneInfo vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Ho_Chi_Minh");
-                DateTime nowVietnamTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
 
-                // Convert DTO to Entity (Payment)
+                // Lưu thông tin thanh toán và cập nhật đơn hàng (giữ nguyên phần này)
                 var paymentEntity = new Payment
                 {
                     OrderId = paymentDto.OrderId,
                     TotalAmount = paymentDto.Amount,
-                    DepositPaid = paymentDto.Amount, // Adjust if needed
-                    DepositAmount = paymentDto.Amount, // Adjust if needed
-                    //PaymentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone)
-                    PaymentDate = nowVietnamTime
+                    DepositPaid = paymentDto.Amount,
+                    DepositAmount = paymentDto.Amount,
+                    PaymentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone)
                 };
 
-                // Save payment details
                 await _paymentService.SavePaymentAsync(paymentEntity);
 
-                // Update order status
+                // Cập nhật trạng thái đơn hàng (giữ nguyên phần này)
                 var existingOrder = await _orderService.GetOrderByIdAsync(paymentDto.OrderId);
                 if (existingOrder == null)
                 {
-                    return BadRequest(new ResponseDTO(400, $"OrderId {paymentDto.OrderId} does not exist."));
+                    return BadRequest($"OrderId {paymentDto.OrderId} does not exist.");
                 }
 
-                #region Handle order stage
-
-
-
-                //var orderStageDto = new OrderStageCreateDTO
-                //{
-                //    OrderId = paymentDto.OrderId,
-                //    OrderStageName = "Purchased",
-                //    UpdatedDate = DateTime.UtcNow
-                //};
-
-                //var response = await _orderStageService.CreateOrderStageAsync(orderStageDto);
-                //if (response.Status != 201)
-                //{
-                //    return BadRequest(response);
-                //}
-
-                // Check if the order already has a payment stage
+                // Xử lý OrderStage (giữ nguyên phần này)
                 var response = await _orderStageService.GetOrderStageByOrderIdAsync(paymentDto.OrderId);
                 OrderStageResponseDTO? existingOrderStageDto = null;
 
@@ -327,26 +435,25 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 {
                     existingOrderStageDto = orderStageData;
                 }
+
                 if (existingOrderStageDto != null)
                 {
-                    // Convert DTO to OrderStage model
                     var existingOrderStage = new OrderStage
                     {
                         OrderStageId = existingOrderStageDto.OrderStageId,
                         OrderId = existingOrderStageDto.OrderId,
-                        OrderStageName = "Purchased",  // Updating the stage
+                        OrderStageName = "Purchased",
                         UpdatedDate = DateTime.UtcNow
                     };
 
                     var updateResponse = await _orderStageService.UpdateOrderStageAsync(existingOrderStage);
-                    if (updateResponse.Status != 200) // Assuming 200 means successful update
+                    if (updateResponse.Status != 200)
                     {
                         return BadRequest(updateResponse);
                     }
                 }
                 else
                 {
-                    // If no order stage exists, create a new one
                     var orderStageDto = new OrderStageCreateDTO
                     {
                         OrderId = paymentDto.OrderId,
@@ -360,18 +467,16 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                         return BadRequest(response);
                     }
                 }
-                #endregion
 
-
-
-                return Ok(new ResponseDTO(200, "Payment success", new { RedirectUrl = "https://swd-fe-nine.vercel.app/payment-success" }));
+                // Chuyển hướng đến trang thành công
+                return Redirect("https://swd-fe-nine.vercel.app/payment-success");
             }
             catch (Exception ex)
             {
-                return BadRequest(new ResponseDTO(500, "Internal server error", ex.Message));
+                // Chuyển hướng đến trang lỗi nếu có exception
+                return Redirect("https://swd-fe-nine.vercel.app/payment-error?message=" + WebUtility.UrlEncode(ex.Message));
             }
         }
-        #endregion
 
 
 
