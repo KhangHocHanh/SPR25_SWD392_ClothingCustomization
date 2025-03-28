@@ -240,7 +240,11 @@ namespace BusinessObject.RequestDTO
         {
             public string IdToken { get; set; }
         }
-
+        public class TokenResponse
+        {
+            public string AccessToken { get; set; }
+            public string IdToken { get; set; }
+        }
         public class NotificationDTO
         {
 
@@ -281,6 +285,9 @@ namespace BusinessObject.RequestDTO
             public string Message { get; set; }
 
         }
+
+
+
 
         #endregion
         #region Hoang
