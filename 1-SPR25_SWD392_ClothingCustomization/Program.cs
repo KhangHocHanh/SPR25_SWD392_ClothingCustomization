@@ -96,28 +96,28 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 
 // Allow cross platform
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowAll",
-//        policy =>
-//        {
-//            policy.AllowAnyOrigin()
-//                  .AllowAnyMethod()
-//                  .AllowAnyHeader();
-
-//        });
-//});
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000") // Add frontend URL
+            policy.AllowAnyOrigin()
                   .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials(); // Only allow credentials with specific origins
+                  .AllowAnyHeader();
+
         });
 });
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAll",
+//        policy =>
+//        {
+//            policy.WithOrigins("http://localhost:3000") // Add frontend URL
+//                  .AllowAnyMethod()
+//                  .AllowAnyHeader()
+//                  .AllowCredentials(); // Only allow credentials with specific origins
+//        });
+//});
 
 
 // Cấu hình Swagger
