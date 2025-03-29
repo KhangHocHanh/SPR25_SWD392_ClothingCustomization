@@ -41,7 +41,7 @@ namespace BusinessObject.RequestDTO
             [Required]
             public string DeliveryAddress { get; set; }
 
-            public string ShippingMethod { get; set; } = "Standard";
+            public string ShippingMethod { get; set; } = "Giao hàng bình thường";
 
             [Range(0, double.MaxValue)]
             public decimal ShippingFee { get; set; } = 0;
@@ -49,7 +49,7 @@ namespace BusinessObject.RequestDTO
             public string Notes { get; set; }
 
             [Required]
-            [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1")]
+            [Range(10, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 10")]
             public int Quantity { get; set; } = 1;
 
             public DateTime? DeliveryDate { get; set; }
@@ -57,20 +57,20 @@ namespace BusinessObject.RequestDTO
         
             public class ProductCreateDTO
             {
-                [Required(ErrorMessage = "Category ID is required")]
+                [Required(ErrorMessage = "Mã danh mục là bắt buộc.")]
                 public int CategoryId { get; set; }
 
-                [Required(ErrorMessage = "Product name is required")]
-                [StringLength(100, ErrorMessage = "Product name cannot exceed 100 characters")]
+                [Required(ErrorMessage = "Tên sản phẩm là bắt buộc.")]
+                [StringLength(100, ErrorMessage = "Tên sản phẩm không được vượt quá 100 ký tự.")]
                 public string ProductName { get; set; } = null!;
 
-                [Required(ErrorMessage = "Price is required")]
-                [Range(1, double.MaxValue, ErrorMessage = "Price must be greater than 0")]
+                [Required(ErrorMessage = "Giá sản phẩm là bắt buộc.")]
+                [Range(1, double.MaxValue, ErrorMessage = "Giá sản phẩm phải lớn hơn 0.")]
    
             public decimal Price { get; set; }
 
-            [Required(ErrorMessage = "Stock is required")]
-            [Range(1, int.MaxValue, ErrorMessage = "Stock must be at least 1")]
+            [Required(ErrorMessage = "Số lượng trong kho là bắt buộc.")]
+            [Range(1, int.MaxValue, ErrorMessage = "Số lượng trong kho phải ít nhất là 1.")]
             public int StockInStorage { get; set; }
 
                 public string? Image { get; set; }
@@ -82,16 +82,16 @@ namespace BusinessObject.RequestDTO
 
             public int CategoryId { get; set; }
 
-            [Required(ErrorMessage = "Product name is required")]
-            [StringLength(100, ErrorMessage = "Product name cannot exceed 100 characters")]
+            [Required(ErrorMessage = "Tên sản phẩm là bắt buộc.")]
+            [StringLength(100, ErrorMessage = "Tên sản phẩm không được vượt quá 100 ký tự.")]
             public string ProductName { get; set; } = null!;
 
-            [Required(ErrorMessage = "Price is required")]
-            [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than 0")]
+            [Required(ErrorMessage = "Giá sản phẩm là bắt buộc.")]
+            [Range(0.01, double.MaxValue, ErrorMessage = "Giá sản phẩm phải lớn hơn 0.")]
             public decimal Price { get; set; }
 
-            [Required(ErrorMessage = "Stock is required")]
-            [Range(1, int.MaxValue, ErrorMessage = "Stock must be at least 1")]
+            [Required(ErrorMessage = "Số lượng trong kho là bắt buộc.")]
+            [Range(1, int.MaxValue, ErrorMessage = "Số lượng trong kho phải ít nhất là 1.")]
             public int StockInStorage { get; set; }
 
             public string? Image { get; set; }
@@ -240,7 +240,11 @@ namespace BusinessObject.RequestDTO
         {
             public string IdToken { get; set; }
         }
-
+        public class TokenResponse
+        {
+            public string AccessToken { get; set; }
+            public string IdToken { get; set; }
+        }
         public class NotificationDTO
         {
 
@@ -281,6 +285,9 @@ namespace BusinessObject.RequestDTO
             public string Message { get; set; }
 
         }
+
+
+
 
         #endregion
         #region Hoang
@@ -372,6 +379,17 @@ namespace BusinessObject.RequestDTO
 
             public DateTime? UpdatedDate { get; set; } = DateTime.UtcNow;
         }
+        public class OrderStageUpdateDTO
+        {
+            [Required(ErrorMessage = "OrderId is required.")]
+            [Range(1, int.MaxValue, ErrorMessage = "OrderId must be greater than 0.")]
+            public int OrderId { get; set; }
+
+            [Required(ErrorMessage = "OrderStageName is required.")]
+            public string OrderStageName { get; set; } = null!; // 🔥 Dùng string thay vì enum
+
+            public DateTime? UpdatedDate { get; set; } = DateTime.UtcNow;
+        }
 
         #endregion
 
@@ -389,7 +407,7 @@ namespace BusinessObject.RequestDTO
             public string ProductName { get; set; }
             public int TotalOrderedQuantity { get; set; }
         }
-
+        #region Thanh Toan
         public class PaymentRequest
         {
             public long PaymentId { get; set; } // ID thanh toán, sử dụng timestamp để đảm bảo tính duy nhất
@@ -427,7 +445,19 @@ namespace BusinessObject.RequestDTO
             public int OrderId { get; set; } // Your system's order ID
             public string VnpTxnRef { get; set; } // VNPAY's transaction reference
         }
+        #endregion
 
+        #region Doanh thu
+        public class RevenueDto
+        {
+            public List<string> Labels { get; set; } = new();
+            public List<RevenueDataset> Datasets { get; set; } = new();
+        }
 
+        public class RevenueDataset
+        {
+            public List<decimal> Data { get; set; } = new();
+        }
+        #endregion
     }
 }

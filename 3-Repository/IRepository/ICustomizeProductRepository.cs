@@ -23,5 +23,6 @@ namespace _3_Repository.IRepository
         Task<IEnumerable<CustomizeProduct>> GetByProductIdAsync(int productId);
         Task<CustomizeProduct> GetWithElementsAsync(int id);
         Task<IEnumerable<CustomizeProduct>> GetAllWithProductAndUserAsync();
+        Task<IEnumerable<CustomizeProduct>> GetAllAsync(int pageNumber, int pageSize);
     }
 }

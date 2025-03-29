@@ -18,12 +18,16 @@ namespace Service.Service
         Task<ResponseDTO> GetOrderStageByIdAsync(int id);
         Task<ResponseDTO> CreateOrderStageAsync(OrderStageCreateDTO orderStageDto);
         Task<ResponseDTO> DeleteOrderStageAsync(int id);
+                  
+
 
         //Task CreateOrderStageAsync(OrderStage orderStageDto);
 
         // new method
         Task<ResponseDTO> GetOrderStageByOrderIdAsync(int orderId);
         Task<ResponseDTO> UpdateOrderStageAsync(OrderStage existingOrderStage);
+        Task<OrderStage?> GetOrderStageByIdRawAsync(int id);
+        Task<bool> CheckOrderExists(int orderId);
 
     }
     public class OrderStageService : IOrderStageService
@@ -31,6 +35,7 @@ namespace Service.Service
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IOrderStageRepository _orderStageRepository;
+
 
 
         public OrderStageService(IUnitOfWork unitOfWork, IMapper mapper, IOrderStageRepository orderStageRepository)
@@ -62,7 +67,16 @@ namespace Service.Service
 
             return new ResponseDTO(200, "Success", result);
         }
+        public async Task<OrderStage?> GetOrderStageByIdRawAsync(int id)
+        {
+            return await _orderStageRepository.GetOrderStageByIdAsync(id);
+        }
 
+        public async Task<bool> CheckOrderExists(int orderId)
+        {
+            var order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
+            return order != null;
+        }
 
         public async Task<ResponseDTO> CreateOrderStageAsync(OrderStageCreateDTO orderStageDto)
         {

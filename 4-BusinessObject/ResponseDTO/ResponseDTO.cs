@@ -111,39 +111,39 @@ namespace BusinessObject.ResponseDTO
 
         public class OrderDTO
         {
-            [Required(ErrorMessage = "CustomizeProductId is required.")]
-            [Range(1, int.MaxValue, ErrorMessage = "CustomizeProductId must be greater than 0.")]
+            [Required(ErrorMessage = "Mã sản phẩm tùy chỉnh là bắt buộc.")]
+            [Range(1, int.MaxValue, ErrorMessage = "Mã sản phẩm tùy chỉnh phải lớn hơn 0.")]
             public int CustomizeProductId { get; set; }
 
-            [Required(ErrorMessage = "OrderDate is required.")]
+            [Required(ErrorMessage = "Ngày đặt hàng là bắt buộc.")]
             public DateTime? OrderDate { get; set; }
 
             public DateTime? DeliveryDate { get; set; }
 
-            [Required(ErrorMessage = "RecipientName is required.")]
-            [StringLength(100, ErrorMessage = "RecipientName must be between 3 and 100 characters.", MinimumLength = 3)]
+            [Required(ErrorMessage = "Tên người nhận là bắt buộc.")]
+            [StringLength(100, ErrorMessage = "Tên người nhận phải từ 3 đến 100 ký tự.", MinimumLength = 3)]
             public string RecipientName { get; set; }
 
-            [Required(ErrorMessage = "DeliveryAddress is required.")]
+            [Required(ErrorMessage = "Địa chỉ giao hàng là bắt buộc.")]
             public string DeliveryAddress { get; set; }
 
             public string? ShippingMethod { get; set; }
 
-            [Range(0, double.MaxValue, ErrorMessage = "ShippingFee must be non-negative.")]
+            [Range(0, double.MaxValue, ErrorMessage = "Phí vận chuyển không được là số âm.")]
             public double? ShippingFee { get; set; }
 
             public string? Notes { get; set; }
 
-            [Required(ErrorMessage = "Price is required.")]
-            [Range(1, double.MaxValue, ErrorMessage = "Price must be greater than 0.")]
+            [Required(ErrorMessage = "Giá là bắt buộc.")]
+            [Range(1, double.MaxValue, ErrorMessage = "Giá phải lớn hơn 0.")]
             public decimal? Price { get; set; }
 
-            [Required(ErrorMessage = "Quantity is required.")]
-            [Range(1, int.MaxValue, ErrorMessage = "Quantity must be greater than 0.")]
+            [Required(ErrorMessage = "Số lượng là bắt buộc.")]
+            [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0.")]
             public int? Quantity { get; set; }
 
-            [Required(ErrorMessage = "TotalPrice is required.")]
-            [Range(1, double.MaxValue, ErrorMessage = "TotalPrice must be greater than 0.")]
+            [Required(ErrorMessage = "Tổng giá là bắt buộc.")]
+            [Range(1, double.MaxValue, ErrorMessage = "Tổng giá phải lớn hơn 0.")]
             public decimal? TotalPrice { get; set; }
         }
         public class CustomizeProductResponseDTO

@@ -82,9 +82,14 @@ namespace _3_Repository.Repository
 
         public async Task<User?> GetByEmailAsync(string email)
         {
-            return await _context.Users
+            var user = await _context.Users
                 .Include(u => u.Role) // Ensure role is loaded if needed
                 .FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+            return user;
         }
 
         public async Task<List<User>> GetUsersByRoleAsync(string roleName)

@@ -16,6 +16,8 @@ namespace Service
         /// <param name="account">Đối tượng người dùng.</param>
         /// <returns>Token đã tạo.</returns>
         string GenerateToken(User account);
+        Task<User> GetUserByEmailAsync(string email);
+        Task<User> RegisterGoogleUser(string email, string name, string googleId);
 
         /// <summary>
         /// Xác thực và giải mã token JWT.

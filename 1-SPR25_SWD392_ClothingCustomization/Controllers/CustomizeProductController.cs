@@ -18,11 +18,19 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             _customizeProductService = customizeProductService;
             _mapper = mapper;
         }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CustomizeProductResponseDTO>>> GetAll()
+        public async Task<ActionResult<IEnumerable<CustomizeProductResponseDTO>>> GetAllCustomizeProductPaging(int pageNumber = 1, int pageSize = 10)
         {
-            return Ok(await _customizeProductService.GetAllCustomizeProducts());
+            var products = await _customizeProductService.GetAllCustomizeProducts(pageNumber, pageSize);
+            return Ok(products);
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<CustomizeProductResponseDTO>>> GetAll()
+        //{
+        //    return Ok(await _customizeProductService.GetAllCustomizeProducts());
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomizeProduct>> GetById(int id)

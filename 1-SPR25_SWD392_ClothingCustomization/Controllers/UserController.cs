@@ -1,8 +1,12 @@
 ﻿using _2_Service.Service;
 using BusinessObject;
 using BusinessObject.Model;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using System.Text.Json.Serialization;
 using static BusinessObject.RequestDTO.RequestDTO;
 
 namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
@@ -12,10 +16,14 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IConfiguration _config;
+        private readonly IAuthService _authService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IConfiguration config, IAuthService authService)
         {
             _userService = userService;
+            _config = config;
+            _authService = authService;
         }
 
         #region CRUD User
@@ -170,12 +178,33 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 
 
 
+        //[HttpPost("google-login")]
+        //public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginRequest request)
+        //{
+        //    try
+        //    {
+        //        string jwtToken = await _userService.GoogleLoginAsync(request.IdToken);
+        //        return Ok(new { token = jwtToken });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new { message = ex.Message });
+        //    }
+        //}
+
         [HttpPost("google-login")]
         public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginRequest request)
         {
             try
             {
-                string jwtToken = await _userService.GoogleLoginAsync(request.IdToken);
+                var tokenResponse = await _authService.ExchangeCodeForTokens(request.IdToken);
+                if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.IdToken))
+                {
+                    return BadRequest("Failed to authenticate with Google.");
+                }
+
+                // Authenticate and create a JWT for the user
+                string jwtToken = await _userService.GoogleLoginAsync(tokenResponse.IdToken);
                 return Ok(new { token = jwtToken });
             }
             catch (Exception ex)
@@ -183,6 +212,8 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+
 
 
     }

@@ -53,6 +53,7 @@ namespace _3_Repository.Repository
        .Include(cp => cp.DesignElements)
        .Include(cp => cp.Product)
        .Include(cp => cp.User)
+       .Include(cp => cp.Orders)
        .FirstOrDefaultAsync(cp => cp.CustomizeProductId == id);
         }
 
@@ -117,6 +118,20 @@ namespace _3_Repository.Repository
             return await _context.CustomizeProducts
                 .Include(cp => cp.Product)
                 .Include(cp => cp.User)
+                .ToListAsync();
+        }
+
+
+        // Paging Get All CustomizeProducts
+        public async Task<IEnumerable<CustomizeProduct>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            return await _context.CustomizeProducts
+                .Include(cp => cp.DesignElements)
+                .Include(cp => cp.Product)
+                .Include(cp => cp.User)
+                .Include(cp => cp.Orders)
+                .Skip((pageNumber - 1) * pageSize) // Bỏ qua số lượng sản phẩm không cần
+                .Take(pageSize) // Giới hạn số lượng sản phẩm trong trang
                 .ToListAsync();
         }
     }
