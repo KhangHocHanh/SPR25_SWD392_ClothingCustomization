@@ -150,7 +150,9 @@ namespace BusinessObject.RequestDTO
         {
             public int OrderId { get; set; }
             public int UserId { get; set; }
+            [Required]
             public int Rating { get; set; }
+            [Required]
             public string Review { get; set; } = string.Empty;
             public DateTime CreatedDate { get; set; }
         }
@@ -161,23 +163,27 @@ namespace BusinessObject.RequestDTO
 
         public class UserDTO
         {
-            [Required]
+            [Required(ErrorMessage = "Tên đăng nhập không được để trống")]
+            [StringLength(20, MinimumLength = 3, ErrorMessage = "Tên đăng nhập phải từ 3-20 ký tự")]
             public string Username { get; set; } = string.Empty;
 
-            [Required, EmailAddress]
+            [Required(ErrorMessage = "Email không được để trống")]
+            [EmailAddress(ErrorMessage = "Email không hợp lệ")]
             public string Email { get; set; } = string.Empty;
 
-            [Required]
+            [Required(ErrorMessage = "Họ và tên không được để trống")]
             public string FullName { get; set; } = string.Empty;
 
             public bool Gender { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Vui lòng chọn ngày sinh")]
+            [DataType(DataType.Date)]
             public DateTime DateOfBirth { get; set; }
-
+            [Required(ErrorMessage = "Địa chỉ không được để trống")]
             public string? Address { get; set; }
 
-            [Phone]
+            [Required(ErrorMessage = "Số điện thoại không được để trống")]
+            [RegularExpression(@"^(0[0-9]{9,10})$", ErrorMessage = "Số điện thoại không hợp lệ")]
             public string? Phone { get; set; }
 
             public string? Avatar { get; set; }
@@ -189,26 +195,32 @@ namespace BusinessObject.RequestDTO
 
         public class UserRegisterDTO
         {
-            [Required]
+            [Required(ErrorMessage = "Tên đăng nhập không được để trống")]
+            [StringLength(20, MinimumLength = 3, ErrorMessage = "Tên đăng nhập phải từ 3-20 ký tự")]
             public string Username { get; set; } = string.Empty;
 
-            [Required, EmailAddress]
+            [Required(ErrorMessage = "Email không được để trống")]
+            [EmailAddress(ErrorMessage = "Email không hợp lệ")]
             public string Email { get; set; } = string.Empty;
 
-            [Required, MinLength(6)]
+            [Required(ErrorMessage = "Mật khẩu không được để trống")]
+            [MinLength(6, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự")]
             public string Password { get; set; } = string.Empty;
 
-            [Required]
+            [Required(ErrorMessage = "Họ và tên không được để trống")]
             public string FullName { get; set; } = string.Empty;
 
             public bool Gender { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Vui lòng chọn ngày sinh")]
+            [DataType(DataType.Date)]
             public DateTime DateOfBirth { get; set; }
 
+            [Required(ErrorMessage = "Địa chỉ không được để trống")]
             public string? Address { get; set; }
 
-            [Phone]
+            [Required(ErrorMessage = "Số điện thoại không được để trống")]
+            [RegularExpression(@"^(0[0-9]{9,10})$", ErrorMessage = "Số điện thoại không hợp lệ")]
             public string? Phone { get; set; }
 
             public string? Avatar { get; set; }
@@ -218,11 +230,17 @@ namespace BusinessObject.RequestDTO
 
         public class UserUpdateDTO
         {
+            [Required(ErrorMessage = "Họ và tên không được để trống")]
             public string FullName { get; set; }
+            [Required(ErrorMessage = "Email không được để trống")]
+            [EmailAddress(ErrorMessage = "Email không hợp lệ")]
             public string Email { get; set; }
             public bool Gender { get; set; }
             public DateTime DateOfBirth { get; set; }
+            [Required(ErrorMessage = "Địa chỉ không được để trống")]
             public string Address { get; set; }
+            [Required(ErrorMessage = "Số điện thoại không được để trống")]
+            [RegularExpression(@"^(0[0-9]{9,10})$", ErrorMessage = "Số điện thoại không hợp lệ")]
             public string Phone { get; set; }
             public string Avatar { get; set; }
         }
@@ -231,9 +249,11 @@ namespace BusinessObject.RequestDTO
         {
             [Required]
             public string Username { get; set; } = string.Empty;
-            [Required, MinLength(6)]
+            [Required(ErrorMessage = "Mật khẩu không được để trống")]
+            [MinLength(6, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự")]
             public string Password { get; set; } = string.Empty;
-            [Required, MinLength(6)]
+            [Required(ErrorMessage = "Mật khẩu không được để trống")]
+            [MinLength(6, ErrorMessage = "Mật khẩu phải có ít nhất 6 ký tự")]
             public string ConfirmPassword { get; set; } = string.Empty;
         }
         public class GoogleLoginRequest
@@ -428,6 +448,16 @@ namespace BusinessObject.RequestDTO
             public string VnpTxnRef { get; set; } // VNPAY's transaction reference
         }
 
+        public class RevenueDto
+        {
+            public List<string> Labels { get; set; } = new();
+            public List<RevenueDataset> Datasets { get; set; } = new();
+        }
+
+        public class RevenueDataset
+        {
+            public List<decimal> Data { get; set; } = new();
+        }
 
     }
 }

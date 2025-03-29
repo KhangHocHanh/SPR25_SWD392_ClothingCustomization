@@ -20,6 +20,7 @@ namespace _2_Service.Service
         Task<bool> CheckCustomizeProductExists(int customizeProductId);
         Task<decimal> CalculateRevenueAsync(int? day, int? month, int? year);
         Task<List<ProductOrderQuantityDto>> GetOrderedProductQuantities();
+        Task<RevenueDto> GetMonthlyRevenueAsync(int year);
     }
 
     public class OrderService : IOrderService
@@ -211,6 +212,47 @@ namespace _2_Service.Service
 
             return orders;
         }
+
+        public async Task<RevenueDto> GetMonthlyRevenueAsync(int year)
+        {
+            var orders = await _orderRepository.GetAllOrdersAsync();
+
+            // Group by month and sum TotalPrice
+            var monthlyRevenue = orders
+                .Where(order => order.OrderDate.HasValue && order.OrderDate.Value.Year == year)
+                .GroupBy(order => order.OrderDate.Value.Month)
+                .OrderBy(g => g.Key)
+                .Select(g => new { Month = g.Key, Revenue = g.Sum(o => o.TotalPrice ?? 0) })
+                .ToList();
+
+            // Create a response in the required format
+            var revenueDto = new RevenueDto
+            {
+                //        Labels = new List<string>
+                //{
+                //    "January", "February", "March", "April", "May", "June",
+                //    "July", "August", "September", "October", "November", "December"
+                //},
+                Labels = new List<string>
+{
+    "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+    "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+},
+                Datasets = new List<RevenueDataset>
+        {
+            new RevenueDataset
+            {
+                Data = Enumerable.Range(1, 12)
+                    .Select(month => monthlyRevenue.FirstOrDefault(m => m.Month == month)?.Revenue ?? 0)
+                    .ToList()
+            }
+        }
+            };
+
+            return revenueDto;
+        }
+
+
 
     }
 }
