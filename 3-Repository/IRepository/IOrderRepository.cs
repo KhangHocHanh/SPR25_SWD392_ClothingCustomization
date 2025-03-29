@@ -15,5 +15,6 @@ namespace Repository.IRepository
         Task UpdateAsync(Order order);
         Task DeleteAsync(int id);
         Task<List<RequestDTO.ProductOrderQuantityDto>> GetOrderedProductQuantities();
+        Task<List<RequestDTO.OrderDetailDTO>> GetOrdersByCustomerIdAsync(int userId);
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using static BusinessObject.RequestDTO.RequestDTO;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
 {
@@ -207,6 +208,18 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         {
             var revenueData = await _orderService.GetMonthlyRevenueAsync(year);
             return Ok(revenueData);
+        }
+
+        [Authorize(Roles = "member")]
+        [HttpGet("customer/viewOrder")]
+        public async Task<IActionResult> GetOwnOrderAsync()
+        {
+
+            var orders = await _orderService.GetOwnOrderAsync();
+            if (orders == null || !orders.Any())
+                return NotFound("No orders found for this customer.");
+
+            return Ok(orders);
         }
     }
 }

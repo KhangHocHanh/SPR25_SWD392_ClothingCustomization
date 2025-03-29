@@ -185,7 +185,7 @@ namespace BusinessObject.RequestDTO
             [Required(ErrorMessage = "Số điện thoại không được để trống")]
             [RegularExpression(@"^(0[0-9]{9,10})$", ErrorMessage = "Số điện thoại không hợp lệ")]
             public string? Phone { get; set; }
-
+       
             public string? Avatar { get; set; }
 
             public bool IsDeleted { get; set; }
@@ -457,6 +457,23 @@ namespace BusinessObject.RequestDTO
         public class RevenueDataset
         {
             public List<decimal> Data { get; set; } = new();
+        }
+
+        public class OrderDetailDTO
+        {
+            public int Order_ID { get; set; }
+            public int CustomizeProduct_ID { get; set; }
+            public DateTime? OrderDate { get; set; }
+            public DateTime? DeliveryDate { get; set; }
+            public string RecipientName { get; set; }
+            public string DeliveryAddress { get; set; }
+            public string ShippingMethod { get; set; }
+            public float? ShippingFee { get; set; }
+            public string Notes { get; set; }
+            public decimal Price { get; set; }
+            public int Quantity { get; set; }
+            public decimal TotalPrice { get; set; }
+            public string LatestOrderStage { get; set; } // Order stage status (latest)
         }
 
     }

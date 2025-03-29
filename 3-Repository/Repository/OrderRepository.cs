@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using _3_Repository.IRepository;
 using Repository.IRepository;
 using static BusinessObject.RequestDTO.RequestDTO;
+using static BusinessObject.ResponseDTO.ResponseDTO;
 
 namespace Repository.Repository
 {
@@ -78,7 +79,115 @@ namespace Repository.Repository
                     TotalOrderedQuantity = g.Sum(x => (x.Order.Quantity ?? 0)) // Correctly access order quantity
                 })
                 .OrderByDescending(x => x.TotalOrderedQuantity)
-                .ToListAsync();
+            .ToListAsync();
+        }
+
+        public async Task<List<OrderDetailDTO>> GetOrdersByCustomerIdAsync(int userId)
+        {
+            //First time
+            //return await _context.Orders
+            //    .Join(_context.CustomizeProducts,
+            //          o => o.CustomizeProductId,
+            //          cp => cp.CustomizeProductId,
+            //          (o, cp) => new { Order = o, UserId = cp.UserId }) // Fetch UserId from CustomizeProduct
+            //    .Where(x => x.UserId == userId) // Filter by UserId
+            //    .GroupJoin(_context.OrderStages,
+            //               oc => oc.Order.OrderId,
+            //               os => os.OrderId,
+            //               (oc, os) => new { oc.Order, OrderStages = os }) // Left join with OrderStages
+            //    .Select(x => new OrderDetailDTO
+            //    {
+            //        Order_ID = x.Order.OrderId,
+            //        CustomizeProduct_ID = x.Order.CustomizeProductId,
+            //        OrderDate = x.Order.OrderDate,
+            //        DeliveryDate = x.Order.DeliveryDate,
+            //        RecipientName = x.Order.RecipientName,
+            //        DeliveryAddress = x.Order.DeliveryAddress,
+            //        ShippingMethod = x.Order.ShippingMethod,
+            //        ShippingFee = (float?)x.Order.ShippingFee ?? 0f, // Cast & set default to 0
+            //        Notes = x.Order.Notes,
+            //        Price = x.Order.Price ?? 0m, // Set default to 0m
+            //        Quantity = x.Order.Quantity ?? 0, // Set default to 0
+            //        TotalPrice = x.Order.TotalPrice ?? 0m, // Set default to 0m
+            //        LatestOrderStage = x.OrderStages.OrderByDescending(os => os.UpdatedDate)
+            //                                .Select(os => os.OrderStageName)
+            //                                .FirstOrDefault() // Fetch latest order stage
+            //    })
+            //    .OrderByDescending(x => x.OrderDate)
+            //    .ToListAsync();
+
+            //Second time
+            //        return await _context.Orders
+            //.Join(_context.CustomizeProducts,
+            //      o => o.CustomizeProductId,
+            //      cp => cp.CustomizeProductId,
+            //      (o, cp) => new { Order = o, UserId = cp.UserId }) // Fetch UserId from CustomizeProduct
+            //.Where(x => x.UserId == userId) // Filter by UserId
+            //.Select(x => new
+            //{
+            //    x.Order,
+            //    LatestOrderStage = _context.OrderStages
+            //        .Where(os => os.OrderId == x.Order.OrderId) // Filter OrderStages for this order
+            //        .OrderByDescending(os => os.UpdatedDate) // Order by latest UpdatedDate
+            //        .Select(os => os.OrderStageName)
+            //        .FirstOrDefault() // Get the latest order stage
+            //})
+            //.Select(x => new OrderDetailDTO
+            //{
+            //    Order_ID = x.Order.OrderId,
+            //    CustomizeProduct_ID = x.Order.CustomizeProductId,
+            //    OrderDate = x.Order.OrderDate,
+            //    DeliveryDate = x.Order.DeliveryDate,
+            //    RecipientName = x.Order.RecipientName,
+            //    DeliveryAddress = x.Order.DeliveryAddress,
+            //    ShippingMethod = x.Order.ShippingMethod,
+            //    ShippingFee = (float?)x.Order.ShippingFee ?? 0f, // Cast & set default to 0
+            //    Notes = x.Order.Notes,
+            //    Price = x.Order.Price ?? 0m, // Set default to 0m
+            //    Quantity = x.Order.Quantity ?? 0, // Set default to 0
+            //    TotalPrice = x.Order.TotalPrice ?? 0m, // Set default to 0m
+            //    LatestOrderStage = x.LatestOrderStage // Latest order stage from subquery
+            //})
+            //.OrderByDescending(x => x.OrderDate)
+            //.ToListAsync();
+
+
+            return await _context.Orders
+    .Join(_context.CustomizeProducts,
+          o => o.CustomizeProductId,
+          cp => cp.CustomizeProductId,
+          (o, cp) => new { Order = o, UserId = cp.UserId }) // Fetch UserId from CustomizeProduct
+    .Where(x => x.UserId == userId) // Filter by UserId
+    .GroupJoin(_context.OrderStages,
+               oc => oc.Order.OrderId,
+               os => os.OrderId,
+               (oc, os) => new {
+                   oc.Order,
+                   LatestOrderStage = os
+                                   .OrderByDescending(os => os.UpdatedDate) // Order by latest update
+                                   .Select(os => os.OrderStageName)
+                                   .FirstOrDefault()
+               }) // Fetch latest order stage
+    .Select(x => new OrderDetailDTO
+    {
+        Order_ID = x.Order.OrderId,
+        CustomizeProduct_ID = x.Order.CustomizeProductId,
+        OrderDate = x.Order.OrderDate,
+        DeliveryDate = x.Order.DeliveryDate,
+        RecipientName = x.Order.RecipientName,
+        DeliveryAddress = x.Order.DeliveryAddress,
+        ShippingMethod = x.Order.ShippingMethod,
+        ShippingFee = (float?)x.Order.ShippingFee ?? 0f, // Cast & set default to 0
+        Notes = x.Order.Notes,
+        Price = x.Order.Price ?? 0m, // Set default to 0m
+        Quantity = x.Order.Quantity ?? 0, // Set default to 0
+        TotalPrice = x.Order.TotalPrice ?? 0m, // Set default to 0m
+        LatestOrderStage = x.LatestOrderStage // Now this is correctly included before Select()
+    })
+    .OrderByDescending(x => x.OrderDate)
+    .ToListAsync();
+
+
         }
 
 

@@ -6,6 +6,9 @@ using Repository.IRepository;
 using System;
 using Repository.Repository;
 using static BusinessObject.RequestDTO.RequestDTO;
+using BusinessObject.ResponseDTO;
+using BusinessObject;
+using Microsoft.AspNetCore.Http;
 
 namespace _2_Service.Service
 {
@@ -21,17 +24,21 @@ namespace _2_Service.Service
         Task<decimal> CalculateRevenueAsync(int? day, int? month, int? year);
         Task<List<ProductOrderQuantityDto>> GetOrderedProductQuantities();
         Task<RevenueDto> GetMonthlyRevenueAsync(int year);
+        Task<List<OrderDetailDTO>> GetOrdersByCustomerIdAsync(int userId);
+        Task<List<OrderDetailDTO>> GetOwnOrderAsync();
     }
 
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderStageRepository _orderStageRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public OrderService(IOrderRepository orderRepository, IOrderStageRepository orderStageRepository)
+        public OrderService(IOrderRepository orderRepository, IOrderStageRepository orderStageRepository, IHttpContextAccessor httpContextAccessor)
         {
             _orderRepository = orderRepository;
             _orderStageRepository = orderStageRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IEnumerable<Order>> GetAllOrdersAsync()
@@ -252,6 +259,29 @@ namespace _2_Service.Service
             return revenueDto;
         }
 
+
+        public async Task<List<OrderDetailDTO>> GetOrdersByCustomerIdAsync(int userId)
+        {
+            return await _orderRepository.GetOrdersByCustomerIdAsync(userId);
+        }
+
+        public async Task<List<OrderDetailDTO>> GetOwnOrderAsync()
+        {
+            var userIdClaim = _httpContextAccessor.HttpContext?.User.Claims
+                                .FirstOrDefault(c => c.Type == "User_Id");
+
+            if (userIdClaim == null || string.IsNullOrEmpty(userIdClaim.Value))
+            {
+                return null;
+            }
+
+            if (!int.TryParse(userIdClaim.Value, out int userId))
+            {
+                return null;
+            }
+
+            return await _orderRepository.GetOrdersByCustomerIdAsync(userId);
+        }
 
 
     }
