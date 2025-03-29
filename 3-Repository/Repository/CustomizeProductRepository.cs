@@ -119,8 +119,8 @@ namespace _3_Repository.Repository
                 .Include(cp => cp.User)
                 .ToListAsync();
         }
-    }
-    public async Task<IEnumerable<CustomizeProduct>> GetAllAsync(int pageNumber, int pageSize)
+
+        public async Task<IEnumerable<CustomizeProduct>> GetAllAsync(int pageNumber, int pageSize)
         {
             return await _context.CustomizeProducts
                 .Include(cp => cp.DesignElements)
@@ -133,3 +133,4 @@ namespace _3_Repository.Repository
         }
 
     }
+}
