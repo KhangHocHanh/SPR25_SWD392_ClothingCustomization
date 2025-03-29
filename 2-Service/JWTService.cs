@@ -126,5 +126,36 @@ namespace Service
 
             return user;
         }
+
+        #region Google Login url
+
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
+            return user ?? null; // Explicitly returning null if not found
+        }
+
+        public async Task<User> RegisterGoogleUser(string email, string name, string googleId)
+        {
+            var newUser = new User
+            {
+                Username = name,
+                Email = email,
+                //GoogleId = googleId,
+                RoleId = 2 // Default role for users
+            };
+
+            await _unitOfWork.UserRepository.AddAsync(newUser);
+            await _unitOfWork.SaveChangesAsync();
+
+            return newUser;
+        }
+
+        #endregion
+
+
+
+
+
     }
 }

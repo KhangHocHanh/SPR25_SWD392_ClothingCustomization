@@ -32,6 +32,64 @@ namespace Service.Service
             _mapper = mapper;
         }
 
+        //public async Task<ResponseDTO> CreateProductAsync(ProductCreateDTO productDto)
+        //{
+        //    try
+        //    {
+        //        // Kiểm tra ProductName
+        //        if (string.IsNullOrWhiteSpace(productDto.ProductName))
+        //        {
+        //            throw new ArgumentException("Product name is required.");
+        //        }
+
+        //        // Kiểm tra CategoryId có hợp lệ không
+        //        var existingCategory = await _unitOfWork.CategoryRepository.GetByIdAsync(productDto.CategoryId);
+        //        if (existingCategory == null)
+        //        {
+        //            throw new ArgumentException($"CategoryId {productDto.CategoryId} does not exist. Please provide a valid CategoryId.");
+        //        }
+
+        //        // Kiểm tra Price & StockInStorage
+        //        if (productDto.Price == null || productDto.Price <= 0)
+        //        {
+        //            throw new ArgumentException("Price must be greater than 0.");
+        //        }
+        //        if (productDto.StockInStorage < 0)
+        //        {
+        //            throw new ArgumentException("Stock cannot be negative.");
+        //        }
+
+        //        // Map DTO sang Product
+        //        var product = _mapper.Map<Product>(productDto);
+        //        product.IsDeleted = false; // Khi tạo mới, mặc định sản phẩm chưa bị xóa
+
+        //        // Thêm vào database
+        //        await _unitOfWork.ProductRepository.AddAsync(product);
+        //        await _unitOfWork.SaveChangesAsync();
+
+        //        // Lấy lại sản phẩm vừa lưu
+        //        var savedProduct = await _unitOfWork.ProductRepository.GetByIdAsync(product.ProductId);
+        //        if (savedProduct == null)
+        //        {
+        //            throw new Exception("Failed to retrieve saved product.");
+        //        }
+
+        //        return new ResponseDTO(
+        //            Const.SUCCESS_CREATE_CODE,
+        //            "Product created successfully",
+        //            savedProduct.ProductId);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error: {ex.Message}");
+        //        if (ex.InnerException != null)
+        //        {
+        //            Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+        //        }
+        //        return new ResponseDTO(Const.ERROR_EXCEPTION, ex.Message);
+        //    }
+        //}
+
         public async Task<ResponseDTO> CreateProductAsync(ProductCreateDTO productDto)
         {
             try

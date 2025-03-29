@@ -20,6 +20,7 @@ namespace _2_Service.Service
         Task<bool> CheckCustomizeProductExists(int customizeProductId);
         Task<decimal> CalculateRevenueAsync(int? day, int? month, int? year);
         Task<List<ProductOrderQuantityDto>> GetOrderedProductQuantities();
+        Task<RevenueDto> GetMonthlyRevenueAsync(int year);
     }
 
     public class OrderService : IOrderService
@@ -42,50 +43,6 @@ namespace _2_Service.Service
         {
             return await _orderRepository.GetByIdAsync(id);
         }
-
-        //public async Task AddOrderAsync(Order order)
-        //{
-        //    if (order.CustomizeProductId <= 0)
-        //    {
-        //        throw new ArgumentException("CustomizeProductId must be greater than 0.");
-        //    }
-
-        //    // Kiểm tra `CustomizeProductId` có tồn tại trong database hay không
-        //    var existingProduct = await _orderRepository.GetCustomizeProductByIdAsync(order.CustomizeProductId);
-        //    if (existingProduct == null)
-        //    {
-        //        throw new ArgumentException($"CustomizeProductId {order.CustomizeProductId} does not exist. Please provide a valid CustomizeProductId.");
-        //    }
-
-        //    if (order.Price <= 0 || order.Quantity <= 0 || order.TotalPrice <= 0)
-        //    {
-        //        throw new ArgumentException("Price, Quantity, and TotalPrice must be greater than zero.");
-        //    }
-
-        //    await _orderRepository.AddAsync(order);
-
-
-        //    // Add order and ensure OrderId is generated
-        //    await _orderRepository.AddAsync(order); // Save order
-
-        //    // **Reload the order from DB to get the generated OrderId**
-        //    var savedOrder = await _orderRepository.GetByIdAsync(order.OrderId);
-
-        //    if (savedOrder == null)
-        //    {
-        //        throw new Exception("Failed to retrieve saved order.");
-        //    }
-
-        //    // Now, add order stage using the saved OrderId
-        //    OrderStage orderStage = new OrderStage
-        //    {
-        //        OrderId = savedOrder.OrderId,
-        //        OrderStageName = "Place Order",
-        //        UpdatedDate = DateTime.Now
-        //    };
-
-        //    await _orderStageRepository.AddOrderStageAsync(orderStage);
-        //}
 
         public async Task AddOrderAsync(Order order)
         {
@@ -160,7 +117,7 @@ namespace _2_Service.Service
             // Kiểm tra các giá trị quan trọng
             if (order.Price <= 0 || order.Quantity <= 0)
             {
-                throw new ArgumentException("Price, Quantity, and TotalPrice must be greater than zero.");
+                throw new ArgumentException("Price, Quantity must be greater than zero.");
             }
             order.TotalPrice = order.Price * order.Quantity;
 
@@ -211,6 +168,47 @@ namespace _2_Service.Service
 
             return orders;
         }
+
+        public async Task<RevenueDto> GetMonthlyRevenueAsync(int year)
+        {
+            var orders = await _orderRepository.GetAllOrdersAsync();
+
+            // Group by month and sum TotalPrice
+            var monthlyRevenue = orders
+                .Where(order => order.OrderDate.HasValue && order.OrderDate.Value.Year == year)
+                .GroupBy(order => order.OrderDate.Value.Month)
+                .OrderBy(g => g.Key)
+                .Select(g => new { Month = g.Key, Revenue = g.Sum(o => o.TotalPrice ?? 0) })
+                .ToList();
+
+            // Create a response in the required format
+            var revenueDto = new RevenueDto
+            {
+                //        Labels = new List<string>
+                //{
+                //    "January", "February", "March", "April", "May", "June",
+                //    "July", "August", "September", "October", "November", "December"
+                //},
+                Labels = new List<string>
+                {
+                    "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+                    "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+                },
+                Datasets = new List<RevenueDataset>
+        {
+            new RevenueDataset
+            {
+                Data = Enumerable.Range(1, 12)
+                    .Select(month => monthlyRevenue.FirstOrDefault(m => m.Month == month)?.Revenue ?? 0)
+                    .ToList()
+            }
+        }
+            };
+
+            return revenueDto;
+        }
+
+
 
     }
 }

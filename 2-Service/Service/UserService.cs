@@ -8,6 +8,7 @@ using BusinessObject.ResponseDTO;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Configuration;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -47,12 +48,14 @@ namespace _2_Service.Service
         private readonly IRoleRepository _roleRepository;
         private readonly IJWTService _jWTService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public UserService(IUserRepository userRepository, IRoleRepository roleRepository, IJWTService jWTService, IHttpContextAccessor httpContextAccessor)
+        private readonly IConfiguration _config;
+        public UserService(IUserRepository userRepository, IRoleRepository roleRepository, IJWTService jWTService, IHttpContextAccessor httpContextAccessor, IConfiguration config)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
             _jWTService = jWTService;
             _httpContextAccessor = httpContextAccessor;
+            _config = config;
         }
 
         #region CRUD User
@@ -331,6 +334,10 @@ namespace _2_Service.Service
 
             return new ResponseDTO(Const.SUCCESS_READ_CODE, "Password changed successfully.");
         }
+
+
+
+
 
     }
 }
