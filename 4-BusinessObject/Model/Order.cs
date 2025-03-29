@@ -15,6 +15,7 @@ public partial class Order
 
     public string? RecipientName { get; set; }
 
+
     public string? DeliveryAddress { get; set; }
 
     public string? ShippingMethod { get; set; }
