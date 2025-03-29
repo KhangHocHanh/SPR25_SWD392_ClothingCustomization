@@ -53,6 +53,7 @@ namespace _3_Repository.Repository
        .Include(cp => cp.DesignElements)
        .Include(cp => cp.Product)
        .Include(cp => cp.User)
+       .Include(cp => cp.Orders)
        .FirstOrDefaultAsync(cp => cp.CustomizeProductId == id);
         }
 
