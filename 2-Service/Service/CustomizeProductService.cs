@@ -28,6 +28,7 @@ namespace _2_Service.Service
         Task DeleteCustomizeProductAsync(int id);
         Task<CustomizeProduct> CreateCustomizeProductAsync(CustomizeProduct product);
         Task<CustomizeProductWithOrderResponse> CreateCustomizeProductWithOrderAsync(CreateCustomizeDto dto);
+        Task<IEnumerable<CustomizeProduct>> GetAllCustomizeProducts(int pageNumber, int pageSize);
 
 
     }
@@ -185,6 +186,11 @@ namespace _2_Service.Service
                 throw new Exception($"Error creating customize product and order: {ex.Message}", ex);
             }
         }
+        public async Task<IEnumerable<CustomizeProduct>> GetAllCustomizeProducts(int pageNumber, int pageSize)
+        {
+            return await _customizeProductRepository.GetAllAsync(pageNumber, pageSize);
+        }
+
     }
 
 }
