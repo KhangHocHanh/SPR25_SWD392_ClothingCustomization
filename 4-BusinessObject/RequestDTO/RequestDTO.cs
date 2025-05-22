@@ -420,6 +420,7 @@ namespace BusinessObject.RequestDTO
             public DateTime CreatedDate { get; set; } = DateTime.UtcNow; // Ngày tạo thanh toán (UTC)
             public string Currency { get; set; } = "VND"; // Loại tiền tệ (VND, USD, v.v.)
             public string Language { get; set; } = "vi"; // Ngôn ngữ hiển thị giao diện thanh toán (vi = Tiếng Việt, en = English)
+
         }
 
 

@@ -1,10 +1,19 @@
 ﻿using System.Net;
+using System.Text;
+using _2_Service.Momo;
 using _2_Service.Service;
 using _2_Service.Vnpay;
+using _4_BusinessObject.RequestDTO;
+using _4_BusinessObject.ResponseDTO;
 using _4_BusinessObject.VnPay;
+using AutoMapper.Internal;
 using BusinessObject.Model;
 using BusinessObject.ResponseDTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Service.Service;
 using VNPAY.NET;
 using VNPAY.NET.Enums;
@@ -24,17 +33,21 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         private readonly IOrderStageService _orderStageService;
         private readonly IPaymentService _paymentService;
         private readonly TimeZoneInfo vietnamTimeZone;
+        private readonly IVnPayService _vnPayService;
+        private readonly MoMoConfig _momoConfig;
 
-        public PaymentController(IVnpay vnPayservice, IConfiguration configuration, IOrderStageService orderStageService, IOrderService orderService, IPaymentService paymentService)
+        public PaymentController(IVnpay vnPayservice, IConfiguration configuration, IOrderStageService orderStageService, IOrderService orderService, IPaymentService paymentService, IOptions<MoMoConfig> config)
         {
             _vnpay = vnPayservice;
             _configuration = configuration;
             _orderService = orderService;
             _orderStageService = orderStageService;
             _paymentService = paymentService;
+            _momoConfig = config.Value;
             vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Ho_Chi_Minh");
 
             _vnpay.Initialize(_configuration["Vnpay:TmnCode"], _configuration["Vnpay:HashSecret"], _configuration["Vnpay:BaseUrl"], _configuration["Vnpay:CallbackUrl"]);
+            
         }
 
         /// <summary>
@@ -194,6 +207,45 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
             }
         }
 
+        [HttpPost("GenerateQR")]
+        public async Task<IActionResult> GenerateQr([FromBody] VNPayApiRequest apiRequest)
+        {
+            using var httpClient = new HttpClient();
+
+            var jsonRequest = JsonConvert.SerializeObject(apiRequest);
+            var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync("https://api.vietqr.io/v2/generate", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, "Error from VietQR API");
+            }
+
+            var responseString = await response.Content.ReadAsStringAsync();
+            var apiResponse = JsonConvert.DeserializeObject<VNPayApiResponse>(responseString);
+            var base64Image = apiResponse?.data?.qrDataURL?.Replace("data:image/png;base64,", "");
+
+            if (base64Image == null)
+                return BadRequest("Failed to parse QR code.");
+
+            // Convert base64 to byte array
+            byte[] imageBytes = Convert.FromBase64String(base64Image);
+
+            // Define the path where the image will be saved
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "qr_code.png");
+
+            // Save the image to a file
+            await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
+
+            return Ok(new
+            {
+                base64 = base64Image,
+                fullData = apiResponse,
+                imageUrl = "/images/qr_code.png" // Return the image URL
+            });
+
+        }
 
 
         //[HttpGet("Callback")]
@@ -479,7 +531,122 @@ namespace _1_SPR25_SWD392_ClothingCustomization.Controllers
         }
 
 
+        [HttpGet("MoMo/CreatePaymentUrl")]
+        public async Task<ActionResult<string>> CreateMoMoPaymentUrl(int orderId)
+        {
+            var order = await _orderService.GetOrderByIdAsync(orderId);
+            if (order == null)
+                return BadRequest("Order not found");
 
+            string endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+            string requestId = Guid.NewGuid().ToString();
+            string orderIdStr = orderId.ToString();
+            string orderInfo = $"Thanh toán đơn hàng #{orderId}";
+            string amount = ((int)order.TotalPrice).ToString();
+            string requestType = "captureWallet";
+            string extraData = "";
+
+            string rawHash = $"accessKey={_momoConfig.AccessKey}&amount={amount}&extraData={extraData}&ipnUrl={_momoConfig.NotifyUrl}&orderId={orderIdStr}&orderInfo={orderInfo}&partnerCode={_momoConfig.PartnerCode}&redirectUrl={_momoConfig.ReturnUrl}&requestId={requestId}&requestType={requestType}";
+            string signature = MoMoSecurity.SignSHA256(rawHash, _momoConfig.SecretKey);
+
+            var requestBody = new
+            {
+                partnerCode = _momoConfig.PartnerCode,
+                partnerName = "MoMoTest",
+                storeId = "SwdStore",
+                requestId = requestId,
+                amount = amount,
+                orderId = orderIdStr,
+                orderInfo = orderInfo,
+                redirectUrl = _momoConfig.ReturnUrl,
+                ipnUrl = _momoConfig.NotifyUrl,
+                lang = "vi",
+                extraData = extraData,
+                requestType = requestType,
+                signature = signature
+            };
+
+            using var client = new HttpClient();
+            var content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(endpoint, content);
+            var responseJson = await response.Content.ReadAsStringAsync();
+
+            var json = JObject.Parse(responseJson);
+            var payUrl = json["payUrl"]?.ToString();
+
+            if (string.IsNullOrEmpty(payUrl))
+                return BadRequest("Failed to generate payment URL");
+
+            return Created(payUrl, payUrl);
+        }
+
+        [HttpGet("MoMo/Callback")]
+        public async Task<IActionResult> Callback([FromBody] MoMoCallbackModel callback)
+        {
+            try
+            {
+                if (callback.ResultCode != 0)
+                    return Redirect("https://swd-fe-nine.vercel.app/payment-failed");
+
+                if (!int.TryParse(callback.OrderId, out int orderId))
+                    return BadRequest("Invalid Order ID");
+
+                var payment = new Payment
+                {
+                    OrderId = orderId,
+                    TotalAmount = callback.Amount,
+                    DepositPaid = callback.Amount,
+                    DepositAmount = callback.Amount,
+                    PaymentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone)
+                };
+
+                await _paymentService.SavePaymentAsync(payment);
+
+                var existingOrder = await _orderService.GetOrderByIdAsync(orderId);
+                if (existingOrder == null)
+                    return BadRequest($"OrderId {orderId} does not exist.");
+
+                var response = await _orderStageService.GetOrderStageByOrderIdAsync(orderId);
+                OrderStageResponseDTO? existingOrderStageDto = null;
+
+                if (response.Status == 200 && response.Data is OrderStageResponseDTO stageData)
+                    existingOrderStageDto = stageData;
+
+                if (existingOrderStageDto != null)
+                {
+                    var existingOrderStage = new OrderStage
+                    {
+                        OrderStageId = existingOrderStageDto.OrderStageId,
+                        OrderId = existingOrderStageDto.OrderId,
+                        OrderStageName = "Purchased",
+                        UpdatedDate = DateTime.UtcNow
+                    };
+
+                    var updateResponse = await _orderStageService.UpdateOrderStageAsync(existingOrderStage);
+                    if (updateResponse.Status != 200)
+                        return BadRequest(updateResponse);
+                }
+                else
+                {
+                    var orderStageDto = new OrderStageCreateDTO
+                    {
+                        OrderId = orderId,
+                        OrderStageName = "Purchased",
+                        UpdatedDate = DateTime.UtcNow
+                    };
+
+                    var createResponse = await _orderStageService.CreateOrderStageAsync(orderStageDto);
+                    if (createResponse.Status != 201)
+                        return BadRequest(response);
+                }
+
+                return Ok(new { message = "MoMo payment processed successfully" });
+            }
+            catch (Exception ex)
+            {
+                return Redirect("https://swd-fe-nine.vercel.app/payment-error?message=" + WebUtility.UrlEncode(ex.Message));
+            }
+        }
 
 
 
